@@ -1,26 +1,21 @@
-export interface userTypes{
+export interface userTypes {
 
     id : number;
-    name: string;
     mail: string;
-    image: string;
-    role: string;
-    description: string;
-}
-
-
-// A VIRER
-export interface User {
-    username: string;
     password: string;
+    zip_code: string;
+    city: string;
+    phone_number: string;
+    is_active: boolean;
+    role: string;
+    // description: string;
+    // image: string;
+
 }
 
-declare global {
-    namespace Express {
-      interface Request {
-        headers?: Headers;
-        body?: Body;
-        user?: User;
-      }
-    }
-  }
+// export interface candidateTypes extends userTypes{
+
+
+
+// }
+

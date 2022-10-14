@@ -1,59 +1,30 @@
 const users = [
   {
-    name: "Alexis",
-    image: "http://www.rien.com",
-    description: "aucune",
-    mail: "test@test.com",
-    role: "candidat"
+    mail: 'luc@f.fr',
+    password: '1234',
+    zip_code: '62200',
+    city: 'Boulogne sur merde',
+    phone_number: '01 23 45 67 89',
+    is_active: true,
+    role: 'candidat'
   },
   {
-    name: "LucF",
-    image: "http://www.rien.com",
-    description: "aucune",
-    mail: "test2@test.com",
-    role: "candidat"
-  },
+    mail: 'remy@c.fr',
+    password: '1234',
+    zip_code: '62200',
+    city: 'Boulogne sur merde',
+    phone_number: '01 23 45 67 89',
+    is_active: true,
+    role: 'entreprise'
+  },  
   {
-    name: "Christophe",
-    image: "http://www.rien.com",
-    description: "aucune",
-    mail: "test3@test.com",
-    role: "candidat"
-  },
-  {
-    name: "LucV",
-    mail: "test4@test.com",
-    image: "http://www.rien.com",
-    description: "aucune",
-    role: "candidat"
-  },
-  {
-    name: "Florent",
-    image: "http://www.rien.com",
-    description: "aucune",
-    mail: "test5@test.com",
-    role: "candidat"
-  },
-  {
-    name: "Remy",
-    image: "http://www.rien.com",
-    description: "aucune",
-    mail: "test6@test.com",
-    role: "candidat"
-  },
-  {
-    name: "Nicolas",
-    image: "http://www.rien.com",
-    description: "aucune",
-    mail: "test7@test.com",
-    role: "candidat"
-  },
-  {
-    name: "Menfou",
-    mail: "manfou@test.com",
-    image: "http://www.rien.com",
-    description: "menfou",
-    role: "candidat"
+    mail: 'ghedeon@n.fr',
+    password: '1234',
+    zip_code: '62200',
+    city: 'Boulogne sur merde',
+    phone_number: '01 23 45 67 89',
+    is_active: false,
+    role: 'candidat'
   },
 ];
 
