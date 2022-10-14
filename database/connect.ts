@@ -13,6 +13,10 @@ import { candidateTypes } from "../types/candidate"
 let candidates = require('../database/mock-candidate')
 const CandidateModel = require('../models/candidates')
 
+import { adminTypes } from "../types/admin"
+let admins = require('../database/mock-admin')
+const AdminModel = require('../models/admins')
+
 const sequelize = new Sequelize (
     'ECLATEEtest',
     'neo',
@@ -35,6 +39,7 @@ sequelize.authenticate()
 const User = UserModel(sequelize, DataTypes)
 const Company = CompanyModel(sequelize, DataTypes)
 const Candidate = CandidateModel(sequelize, DataTypes)
+const Admin = AdminModel(sequelize, DataTypes)
 
 const initDb = () => {
 
@@ -69,6 +74,12 @@ const initDb = () => {
                     birthdate: candidate.birthdate
                 }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
             })
+            admins.map((admin: adminTypes) => {
+                Admin.create({
+                    lastname: admin.lastname,
+                    firstname: admin.firstname,
+                }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
+            })
             console.log('Database successfully initialized.')
     })
 }
@@ -78,5 +89,6 @@ module.exports = {
     initDb, 
     User, 
     Company,
-    Candidate
+    Candidate,
+    Admin
 }

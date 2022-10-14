@@ -59,6 +59,8 @@ require('./routes/companies/findAllCompanies')(app)
 
 require('./routes/candidates/findAllCandidates')(app)
 
+require('./routes/admins/findAllAdmins')(app)
+
 app.use(({res : ApiException}: any) => {
     const message = 'Ressource not found.'
     return ApiException.status(404).json({message})
