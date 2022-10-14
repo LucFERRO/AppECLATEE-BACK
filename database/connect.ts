@@ -5,7 +5,7 @@ const {Sequelize} = require('sequelize')
 const UserModel = require('../models/users')
 
 const sequelize = new Sequelize (
-    'DB NAME',
+    'ECLATEEtest',
     'neo',
     'neoneo',
     {
