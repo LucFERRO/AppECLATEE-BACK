@@ -32,30 +32,26 @@ const { Admin } = require('../../database/connect')
 module.exports = (app: Application) => {
   app.put("/api/admins/:id", async (req, res) => {
     const id = req.params.id;
-    const { lastname, firstname } = req.body
 
-    Admin.update({ 
-        lastname : lastname, 
-        firstname : firstname
-    }, {
-      where: { id: id },
+    Admin.update(req.body, {
+        where: { id: id },
     })
-      .then(() => {
-       return Admin.findByPk(id).then((admin: adminTypes) => {
-          if (admin === null){
-            const message = "Requested admin does not exist."
-            return res.status(404).json({message})
-          }
-            const message = `Admin ${admin.id} successfully updated`;
-            res.json({ message, data: admin });
-          })
-      })
-      .catch((error: ApiException) => {
-        if(error instanceof ValidationError){
-          return res.status(400).json({message: error.message, data : error})
-        }
-        const message = `Could not update the admin.`;
-        res.status(500).json({ message, data: error });
-      });
-  });
-};
+        .then(() => {
+            return Admin.findByPk(id).then((admin: adminTypes) => {
+                if (admin === null){
+                    const message = "Requested admin does not exist."
+                    return res.status(404).json({message})
+                }
+                const message = `Admin ${admin.id} successfully updated`;
+                res.json({ message, data: admin });
+                })
+        })
+        .catch((error: ApiException) => {
+            if(error instanceof ValidationError){
+                return res.status(400).json({message: error.message, data : error})
+            }
+            const message = `Could not update the admin.`;
+            res.status(500).json({ message, data: error });
+        })
+    })
+}

@@ -1,9 +1,9 @@
-import { Application } from "express"
-import { Error } from "sequelize"
-import { ApiException } from "../../types/exception"
-import { userTypes } from "../../types/user"
+import { Application } from "express";
+import { Error } from "sequelize";
+import { ApiException } from "../../types/exception";
+import { userTypes } from "../../types/user";
 
-const { User } = require('../../database/connect')
+const { User } = require("../../database/connect");
 
 /**
  * @openapi
@@ -15,14 +15,14 @@ const { User } = require('../../database/connect')
  *        200:
  *          description: Get the list of all users.
  */
-module.exports = (app : Application) => {
-    app.get('/api/users', (req,res) => {
+module.exports = (app: Application) => {
+    app.get("/api/users", (req, res) => {
         User.findAll()
-        .then((users: userTypes) => {
-            res.status(200).json(users)
-        })
-        .catch((error : ApiException) => {
-            res.status(500).json(error)
-        })
-    })
-}
+            .then((users: userTypes) => {
+                res.status(200).json(users);
+            })
+            .catch((error: ApiException) => {
+                res.status(500).json(error);
+            });
+    });
+};

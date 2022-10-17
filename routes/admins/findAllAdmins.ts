@@ -18,11 +18,11 @@ const { Admin } = require('../../database/connect')
 module.exports = (app : Application) => {
     app.get('/api/admins', (req,res) => {
         Admin.findAll()
-        .then((admins: adminTypes) => {
-            res.status(200).json(admins)
-        })
-        .catch((error : ApiException) => {
-            res.status(500).json(error)
-        })
+            .then((admins: adminTypes) => {
+                res.status(200).json(admins)
+            })
+            .catch((error : ApiException) => {
+                res.status(500).json(error)
+            })
     })
 }
