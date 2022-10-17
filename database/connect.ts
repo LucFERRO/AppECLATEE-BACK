@@ -17,6 +17,10 @@ import { adminTypes } from "../types/admin"
 let admins = require('../database/mock-admin')
 const AdminModel = require('../models/admins')
 
+import { availabilityTypes } from "../types/availability"
+let availabilities = require('../database/mock-availability')
+const AvailabilityModel = require('../models/availabilities')
+
 const sequelize = new Sequelize (
     'ECLATEEtest',
     'neo',
@@ -40,6 +44,7 @@ const User = UserModel(sequelize, DataTypes)
 const Company = CompanyModel(sequelize, DataTypes)
 const Candidate = CandidateModel(sequelize, DataTypes)
 const Admin = AdminModel(sequelize, DataTypes)
+const Availability = AvailabilityModel(sequelize, DataTypes)
 
 const initDb = () => {
 
@@ -81,6 +86,11 @@ const initDb = () => {
                     firstname: admin.firstname,
                 }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
             })
+            availabilities.map((availability: availabilityTypes) => {
+                Availability.create({
+                    availability: availability.availability
+                }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
+            })
             console.log('Database successfully initialized.')
     })
 }
@@ -91,5 +101,6 @@ module.exports = {
     User, 
     Company,
     Candidate,
-    Admin
+    Admin,
+    Availability
 }

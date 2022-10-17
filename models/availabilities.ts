@@ -8,7 +8,6 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
     }
 
     return sequelize.define('Availability', {
-
         id: {
             type: dataTypes.INTEGER,
             autoIncrement: true,
@@ -22,5 +21,8 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
                 notEmpty : { msg : concatRequiredMessage('Availability')}
             }
         }
+    },
+    {
+        timestamps: false
     })
 }

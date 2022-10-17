@@ -1,25 +1,25 @@
 import { Application } from "express"
 import { Error } from "sequelize"
 import { ApiException } from "../../types/exception"
-import { candidateTypes } from "../../types/candidate"
+import { availabilityTypes } from "../../types/availability"
 
-const { Candidate } = require('../../database/connect')
+const { Availability } = require('../../database/connect')
 
 /**
  * @openapi
- * /api/candidates:
+ * /api/availabilities:
  *   get:
- *      tags: [Candidates]
+ *      tags: [Availabilities]
  *      description: Welcome to swagger-jsdoc!
  *      responses:
  *        200:
- *          description: Get the list of all candidates.
+ *          description: Get the list of all availabilities.
  */
 module.exports = (app : Application) => {
-    app.get('/api/candidates', (req,res) => {
-        Candidate.findAll()
-        .then((candidates: candidateTypes) => {
-            res.status(200).json(candidates)
+    app.get('/api/availabilities', (req,res) => {
+        Availability.findAll()
+        .then((availabilities: availabilityTypes) => {
+            res.status(200).json(availabilities)
         })
         .catch((error : ApiException) => {
             res.status(500).json(error)

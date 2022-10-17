@@ -22,6 +22,7 @@ const { User } = require('../../database/connect')
   */
 module.exports = (app :Application) => {
   app.delete('/api/users/:id', (req, res) => {
+
     User.findByPk(req.params.id).then((user: userTypes) => {
       if (user === null){
         const message = "Requested user does not exist."
@@ -41,5 +42,6 @@ module.exports = (app :Application) => {
       const message = `Could not delete user.`;
       res.status(500).json({ message, data: error });
     });
+
   })
 }

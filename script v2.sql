@@ -20,7 +20,7 @@ $$;
 
 DROP TABLE IF EXISTS "user" CASCADE;
 CREATE TABLE "user" (
-    id integer NOT NULL PRIMARY KEY,
+    id SERIAL NOT NULL PRIMARY KEY,
     mail character varying(255) NOT NULL,
     password character varying(255) NOT NULL,
     active boolean NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE "company" (
 
 DROP TABLE IF EXISTS "availability" CASCADE;
 CREATE TABLE "availability" (
-    id INTEGER NOT NULL PRIMARY KEY,
+    id SERIAL NOT NULL PRIMARY KEY,
     availability character varying(255) NOT NULL
 );
 
@@ -92,23 +92,24 @@ CREATE TABLE "token" (
 );
 
 
-INSERT INTO "availability" (id, availability) VALUES (1, 'february');
-INSERT INTO "availability" (id, availability) VALUES (2, 'april');
-INSERT INTO "availability" (id, availability) VALUES (3, 'july');
-INSERT INTO "availability" (id, availability) VALUES (4, 'august');
-INSERT INTO "availability" (id, availability) VALUES (5, 'october');
-INSERT INTO "availability" (id, availability) VALUES (6, 'christmas');
-INSERT INTO "availability" (id, availability) VALUES (7, 'monday');
-INSERT INTO "availability" (id, availability) VALUES (8, 'tuesday');
-INSERT INTO "availability" (id, availability) VALUES (9, 'wednesday');
-INSERT INTO "availability" (id, availability) VALUES (10, 'thursday');
-INSERT INTO "availability" (id, availability) VALUES (11, 'friday');
-INSERT INTO "availability" (id, availability) VALUES (12, 'saturday');
-INSERT INTO "availability" (id, availability) VALUES (13, 'sunday');
+INSERT INTO "availability" (availability) VALUES ('february');
+INSERT INTO "availability" (availability) VALUES ('april');
+INSERT INTO "availability" (availability) VALUES ('july');
+INSERT INTO "availability" (availability) VALUES ('august');
+INSERT INTO "availability" (availability) VALUES ('october');
+INSERT INTO "availability" (availability) VALUES ('christmas');
+INSERT INTO "availability" (availability) VALUES ('monday');
+INSERT INTO "availability" (availability) VALUES ('tuesday');
+INSERT INTO "availability" (availability) VALUES ('wednesday');
+INSERT INTO "availability" (availability) VALUES ('thursday');
+INSERT INTO "availability" (availability) VALUES ('friday');
+INSERT INTO "availability" (availability) VALUES ('saturday');
+INSERT INTO "availability" (availability) VALUES ('sunday');
 
 
-INSERT INTO "user" (id, mail, password, active, role, zip_code, city, phone_number, created_at, updated_at) VALUES (1, 'user1@user.fr', 'user', true, 'candidate', 62200, 'Boulogne sur merde', '0783616435', '2022-10-12', '2022-10-12');
-INSERT INTO "user" (id, mail, password, active, role, zip_code, city, phone_number, created_at, updated_at) VALUES (2, 'user2@user.fr', 'user', false, 'candidate', 62200, 'Boulogne sur merde', '0783616435', '2022-10-12', '2022-10-12');
+INSERT INTO "user" (mail, password, active, role, zip_code, city, phone_number, created_at, updated_at) VALUES ('user1@user.fr', 'user', true, 'candidate', 62200, 'Boulogne sur merde', '0783616435', '2022-10-12', '2022-10-12');
+INSERT INTO "user" (mail, password, active, role, zip_code, city, phone_number, created_at, updated_at) VALUES ('user2@user.fr', 'user', false, 'candidate', 62200, 'Boulogne sur merde', '0783616435', '2022-10-12', '2022-10-12');
+INSERT INTO "user" (mail, password, active, role, zip_code, city, phone_number, created_at, updated_at) VALUES ('comp1@user.fr', 'comp', false, 'company', 62200, 'Boulogne sur merde', '0783616435', '2022-10-12', '2022-10-12');
 
 INSERT INTO "token" (id, token) VALUES (1, 'qsldklqskdazldsqldkqsmd');
 INSERT INTO "token" (id, token) VALUES (2, 'qsldklqskdazldsqlqsdqsddkqsmd');
@@ -121,6 +122,8 @@ INSERT INTO "user_availability" (id_user, id_availability) VALUES (2, 9);
 INSERT INTO "candidate" (id, lastname, firstname, birthdate) VALUES (1, 'Test', 'User', '2000-01-01');
 INSERT INTO "candidate" (id, lastname, firstname, birthdate) VALUES (2, 'Test2', 'User2', '2000-01-01');
 
+INSERT INTO "company" (id, name, siret) VALUES (3, 'Comp', 'Comp1');
+
 INSERT INTO "degree" (id, bafa, bafa_ongoing, internship, bpjeps) VALUES (1, true, false, false, false);
 INSERT INTO "degree" (id, bafa, bafa_ongoing, internship, bpjeps) VALUES (2, false, true, false, false);
 
@@ -128,3 +131,4 @@ INSERT INTO "candidate_degree" (id_candidate, id_degree) VALUES (1, 1);
 INSERT INTO "candidate_degree" (id_candidate, id_degree) VALUES (2, 2);
 
 SELECT find_users_available_on('christmas');
+
