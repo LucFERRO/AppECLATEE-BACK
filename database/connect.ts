@@ -54,6 +54,7 @@ const initDb = () => {
                     mail: user.mail,
                     password: user.password,
                     is_active: user.is_active,
+                    is_pending: user.is_pending,
                     role: user.role,
                     zip_code: user.zip_code,
                     city: user.city,

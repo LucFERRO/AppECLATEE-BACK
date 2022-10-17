@@ -68,6 +68,10 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             type: dataTypes.BOOLEAN,
             allowNull: false
         },
+        is_pending: {
+            type: dataTypes.BOOLEAN,
+            allowNull: false
+        },
         role: {
             type: dataTypes.STRING,
         }

@@ -7,6 +7,7 @@ export interface userTypes {
     city: string;
     phone_number: string;
     is_active: boolean;
+    is_pending: boolean;
     role: string;
     // description: string;
     // image: string;

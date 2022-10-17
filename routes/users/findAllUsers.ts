@@ -10,7 +10,7 @@ const { User } = require('../../database/connect')
  * /api/users:
  *   get:
  *      tags: [Users]
- *      description: Welcome to swagger-jsdoc!
+ *      description: Get the list of all users.
  *      responses:
  *        200:
  *          description: Get the list of all users.

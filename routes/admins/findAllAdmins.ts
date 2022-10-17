@@ -7,9 +7,9 @@ const { Admin } = require('../../database/connect')
 
 /**
  * @openapi
- * /api/candidates:
+ * /api/admins:
  *   get:
- *      tags: [Candidates]
+ *      tags: [Admins]
  *      description: Welcome to swagger-jsdoc!
  *      responses:
  *        200:

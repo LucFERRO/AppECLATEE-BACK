@@ -10,7 +10,7 @@ const { User } = require('../../database/connect')
   * /api/users/{id}:
   *  delete:
   *      tags: [Users]
-  *      description: Delete an template
+  *      description: Delete an user.
   *      parameters:
   *       - name: id
   *         in: path
@@ -28,13 +28,13 @@ module.exports = (app :Application) => {
         return res.status(404).json({message : message})
       }
 
-      const userDeleted = user;
+      const deletedUser = user;
      return  User.destroy({
         where: { id: user.id }
       })
       .then(() => {
-        const message = `User ${userDeleted.id} successfully deleted.`
-        res.json({message, data: userDeleted })
+        const message = `User ${deletedUser.id} successfully deleted.`
+        res.json({message, data: deletedUser })
       })
     })
     .catch((error: ApiException) => {
