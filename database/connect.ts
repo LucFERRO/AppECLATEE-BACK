@@ -53,11 +53,11 @@ const initDb = () => {
                     // name: user.name,
                     mail: user.mail,
                     password: user.password,
+                    is_active: user.is_active,
+                    role: user.role,
                     zip_code: user.zip_code,
                     city: user.city,
-                    phone_number: user.phone_number,
-                    is_active: user.is_active,
-                    role: user.role
+                    phone_number: user.phone_number
 
                 }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
             })
