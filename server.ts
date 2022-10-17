@@ -55,23 +55,23 @@ require('./routes/users/findAllUsers')(app)
 require('./routes/users/updateUser')(app)
 require('./routes/users/deleteUser')(app)
 
-// require('./routes/companies/createCompany')(app)
-// require('./routes/companies/findCompanyByPk')(app)
+require('./routes/companies/createCompany')(app)
+require('./routes/companies/findCompanyByPk')(app)
 require('./routes/companies/findAllCompanies')(app)
-// require('./routes/companies/updateCompany')(app)
+require('./routes/companies/updateCompany')(app)
 require('./routes/companies/deleteCompany')(app)
 
-// require('./routes/candidates/createCandidate')(app)
-// require('./routes/candidates/findCandidateByPk')(app)
+require('./routes/candidates/createCandidate')(app)
+require('./routes/candidates/findCandidateByPk')(app)
 require('./routes/candidates/findAllCandidates')(app)
-// require('./routes/candidates/updateCandidate')(app)
+require('./routes/candidates/updateCandidate')(app)
 require('./routes/candidates/deleteCandidate')(app)
 
-// require('./routes/admins/createAdmin')(app)
-// require('./routes/admins/findAdminByPk')(app)
+require('./routes/admins/createAdmin')(app)
+require('./routes/admins/findAdminByPk')(app)
 require('./routes/admins/findAllAdmins')(app)
-// require('./routes/admins/updateAdmin')(app)
-// require('./routes/admins/deleteAdmin')(app)
+require('./routes/admins/updateAdmin')(app)
+require('./routes/admins/deleteAdmin')(app)
 
 app.use(({res : ApiException}: any) => {
     const message = 'Ressource not found.'

@@ -16,6 +16,7 @@ const { Company } = require('../../database/connect')
   *         in: path
   *         required: true
   *         type: integer
+  *         default: 1
   *      responses:
   *        200:
   *          description: Delete a company. 
