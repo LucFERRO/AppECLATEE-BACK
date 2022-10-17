@@ -1,4 +1,5 @@
 require('dotenv').config()
+require('./database/passport')
 
 const cors = require('cors')
 const express = require("express")
@@ -13,9 +14,10 @@ const swaggerUi = require('swagger-ui-express')
 const sequelize = require('./database/connect')
 
 import {Response, Request} from 'express'
+const passport = require('passport')
 
 app.use(express.json())
-
+app.use(passport.initialize())
 
 // To make database, comment otherwise.
 sequelize.initDb()
@@ -72,6 +74,11 @@ require('./routes/admins/findAdminByPk')(app)
 require('./routes/admins/findAllAdmins')(app)
 require('./routes/admins/updateAdmin')(app)
 require('./routes/admins/deleteAdmin')(app)
+
+require('./routes/availabilities/findAllAvailabilities')(app)
+
+require('./routes/auth/login')(app)
+require('./routes/auth/test')(app)
 
 app.use(({res : ApiException}: any) => {
     const message = 'Ressource not found.'

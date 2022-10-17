@@ -58,12 +58,6 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
                 notEmpty : { msg : concatRequiredMessage('Zip code')}
             }
         },
-        image: {
-            type: dataTypes.STRING,
-            validate : {
-                isUrl:true
-            }
-        }, 
         is_active: {
             type: dataTypes.BOOLEAN,
             allowNull: false

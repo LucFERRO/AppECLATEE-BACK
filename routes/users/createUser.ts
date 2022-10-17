@@ -27,14 +27,14 @@ const { User } = require('../../database/connect')
   *         in: body
   *         required: true
   *         type: object
-  *         default: { "mail": "email@email.fr","password":"string","is_active": "boolean","is_pending": "boolean","zip_code": "string", "city" : "string", "phone_number" : "string" }
+  *         default: { "mail": "email@email.fr","password":"string","is_active": "boolean","is_pending": "boolean","zip_code": "string", "city" : "string", "phone_number" : "string", "role": "string" }
   *      responses:
   *        200:
   *          description: Create a new user.
   */
 module.exports = (app: Application) => {
   app.post("/api/users", async (req, res) => {
-    const { mail, is_active, is_pending, zip_code, city, phone_number } = req.body
+    const { mail, is_active, is_pending, zip_code, city, phone_number, role } = req.body
 
     if (!req.body.password) return res.status(400).json({passwordRequired: true,message : 'Password is required.'})
 
@@ -46,7 +46,8 @@ module.exports = (app: Application) => {
         is_pending : is_pending,
         zip_code : zip_code,
         city : city,
-        phone_number : phone_number
+        phone_number : phone_number,
+        role: role
 
     }).then((user: userTypes) => {
         const message: string = `User ${user.mail} successfully created.`;

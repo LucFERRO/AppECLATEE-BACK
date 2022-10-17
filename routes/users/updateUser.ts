@@ -1,4 +1,5 @@
 import { Application } from "express";
+import { resolve } from "path";
 import { ValidationError } from "sequelize";
 import { ApiException } from "../../types/exception";
 import { userTypes } from "../../types/user";
@@ -24,7 +25,7 @@ const { User } = require('../../database/connect')
   *         in: body
   *         required: true
   *         type: object
-  *         default: { "mail": "email@email.fr","password":"string","is_active": "boolean","zip_code": "string", "city" : "string", "phone_number" : "string" }
+  *         default: { "mail": "email@email.fr","password":"string","is_active": "boolean", "is_pending": "boolean", "zip_code": "string", "city" : "string", "phone_number" : "string", "role" : "string" }
   *      responses:
   *        200:
   *          description: Update user of given id.
@@ -32,7 +33,7 @@ const { User } = require('../../database/connect')
 module.exports = (app: Application) => {
   app.put("/api/users/:id", async (req, res) => {
     const id = req.params.id;
-    const { mail, is_active, zip_code, city, phone_number } = req.body
+    const { mail, is_active, is_pending, zip_code, city, phone_number, role } = req.body
 
     if (!req.body.password) return res.status(400).json({passwordRequired: true,message : 'Password is required.'})
     
@@ -41,9 +42,11 @@ module.exports = (app: Application) => {
         mail : mail, 
         password : hashedPassword,
         is_active : is_active,
+        is_pending: is_pending,
         zip_code : zip_code,
         city : city,
-        phone_number : phone_number
+        phone_number : phone_number,
+        role: role
     }, {
       where: { id: id },
     })
