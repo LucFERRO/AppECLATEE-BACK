@@ -9,7 +9,7 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
 
     return sequelize.define('User', {
 
-        id: {
+        user_id: {
             type: dataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true, 

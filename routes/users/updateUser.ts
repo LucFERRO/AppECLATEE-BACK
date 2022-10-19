@@ -55,7 +55,7 @@ module.exports = (app: Application) => {
                         const message = "Requested user does not exist.";
                         return res.status(404).json({ message });
                     }
-                    const message = `User ${user.id} successfully updated`;
+                    const message = `User ${user.user_id} successfully updated`;
                     res.json({ message, data: user });
                 });
             })

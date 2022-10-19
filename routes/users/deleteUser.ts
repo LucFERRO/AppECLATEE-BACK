@@ -30,9 +30,9 @@ module.exports = (app: Application) => {
 
                 const deletedUser = user;
                 return User.destroy({
-                    where: { id: user.id },
+                    where: { id: user.user_id },
                 }).then(() => {
-                    const message = `User ${deletedUser.id} successfully deleted.`;
+                    const message = `User ${deletedUser.user_id} successfully deleted.`;
                     res.json({ message, data: deletedUser });
                 });
             })

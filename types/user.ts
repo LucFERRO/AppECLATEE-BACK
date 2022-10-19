@@ -1,6 +1,6 @@
 export interface userTypes {
 
-    id : number;
+    user_id : number;
     mail: string;
     password: string;
     zip_code: string;
