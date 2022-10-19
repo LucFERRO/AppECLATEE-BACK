@@ -46,7 +46,7 @@ module.exports = (app: Application) => {
         User.update(
             { ...req.body, password: hashedPassword },
             {
-                where: { id: id },
+                where: { user_id: id },
             }
         )
             .then(() => {
