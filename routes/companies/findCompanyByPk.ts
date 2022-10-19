@@ -2,7 +2,7 @@ import { Application } from "express";
 import { ApiException } from "../../types/exception";
 import { companyTypes } from "../../types/company";
 
-const { Company } = require("../../database/connect");
+const { Company, User } = require("../../database/connect");
 
 /**
  * @openapi
@@ -22,7 +22,7 @@ const { Company } = require("../../database/connect");
  */
 module.exports = (app: Application) => {
     app.get("/api/companies/:id", (req, res) => {
-        Company.findByPk(req.params.id)
+        Company.findByPk(req.params.id,{include: [User]})
             .then((company: companyTypes) => {
                 if (company === null) {
                     const message = "Requested company does not exist.";

@@ -2,7 +2,7 @@ import { Application } from "express";
 import { ApiException } from "../../types/exception";
 import { candidateTypes } from "../../types/candidate";
 
-const { Candidate } = require("../../database/connect");
+const { Candidate, User } = require("../../database/connect");
 
 /**
  * @openapi
@@ -22,7 +22,7 @@ const { Candidate } = require("../../database/connect");
  */
 module.exports = (app: Application) => {
     app.get("/api/candidates/:id", (req, res) => {
-        Candidate.findByPk(req.params.id)
+        Candidate.findByPk(req.params.id,{include: [User]})
             .then((candidate: candidateTypes) => {
                 if (candidate === null) {
                     const message = "Requested candidate does not exist.";
