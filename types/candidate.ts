@@ -4,6 +4,7 @@ export interface candidateTypes {
     lastname: string;
     firstname: string;
     birthdate: string;
+    user_id: number;
 
 }
 

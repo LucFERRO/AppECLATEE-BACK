@@ -48,8 +48,11 @@ const Availability = AvailabilityModel(sequelize, DataTypes)
 
 const initDb = () => {
 
-        // User.hasOne(Candidate , { constraints: false })
-        // Candidate.belongsTo(User, { constraints: false })
+        User.hasOne(Candidate , { foreignKey: 'user_id' })
+        Candidate.belongsTo(User, { foreignKey: 'user_id' })
+
+        User.hasOne(Company , { foreignKey: 'user_id' })
+        Company.belongsTo(User, { foreignKey: 'user_id' })
 
         return sequelize.sync({force: true}).then(()=> {
             
@@ -70,14 +73,16 @@ const initDb = () => {
             companies.map((company: companyTypes) => {
                 Company.create({
                     name: company.name,
-                    siret: company.siret
+                    siret: company.siret,
+                    user_id: company.user_id
                 }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
             })
             candidates.map((candidate: candidateTypes) => {
                 Candidate.create({
                     lastname: candidate.lastname,
                     firstname: candidate.firstname,
-                    birthdate: candidate.birthdate
+                    birthdate: candidate.birthdate,
+                    user_id: candidate.user_id
                 }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
             })
             admins.map((admin: adminTypes) => {

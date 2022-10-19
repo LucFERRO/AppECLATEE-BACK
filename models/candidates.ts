@@ -37,6 +37,12 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
                 notNull: { msg : concatRequiredMessage('Birthdate')},
                 notEmpty : { msg : concatRequiredMessage('Birthdate')}
             }
+        },
+        user_id: {
+            type: dataTypes.INTEGER,
         }
+    },
+    {
+        timestamps: false
     })
 }

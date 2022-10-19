@@ -3,7 +3,7 @@ import { Error } from "sequelize";
 import { ApiException } from "../../types/exception";
 import { candidateTypes } from "../../types/candidate";
 
-const { Candidate } = require("../../database/connect");
+const { Candidate, User } = require("../../database/connect");
 
 /**
  * @openapi
@@ -17,7 +17,7 @@ const { Candidate } = require("../../database/connect");
  */
 module.exports = (app: Application) => {
     app.get("/api/candidates", (req, res) => {
-        Candidate.findAll()
+        Candidate.findAll({include: [User]})
             .then((candidates: candidateTypes) => {
                 res.status(200).json(candidates);
             })
