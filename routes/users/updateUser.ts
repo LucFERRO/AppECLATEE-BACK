@@ -25,29 +25,21 @@ const { User } = require("../../database/connect");
  *         in: body
  *         required: true
  *         type: object
- *         default: { "mail": "email@email.fr","password":"string","is_active": "boolean", "is_pending": "boolean", "zip_code": "string", "city" : "string", "phone_number" : "string", "role" : "string" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "false", "is_pending": "true", "zip_code": "string", "city" : "string", "phone_number" : "string", "role" : "string" }
  *      responses:
  *        200:
  *          description: Update user of given id.
  */
 module.exports = (app: Application) => {
-    app.put("/api/users/:id", async (req, res) => {
+    app.put("/api/users/:id", async (req , res) => {
         const id = req.params.id;
 
-        if (!req.body.password)
-            return res
-                .status(400)
-                .json({
-                    passwordRequired: true,
-                    message: "Password is required.",
-                });
+        if (req.body.password) {
+            let hashedPassword = await bcrypt.hash(req.body.password, 10);
+            req.body = {...req.body, password: hashedPassword}
+        }
 
-        let hashedPassword = await bcrypt.hash(req.body.password, 10);
-        User.update(
-            { ...req.body, password: hashedPassword },
-            {
-                where: { user_id: id },
-            }
+        User.update(req.body , {where: { user_id: id }}
         )
             .then(() => {
                 return User.findByPk(id).then((user: userTypes) => {
