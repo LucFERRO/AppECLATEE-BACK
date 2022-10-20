@@ -17,7 +17,7 @@ const { User } = require("../../database/connect");
  */
 module.exports = (app: Application) => {
     app.get("/api/users", (req, res) => {
-        User.findAll()
+        User.findAll({order: ['user_id']})
             .then((users: userTypes) => {
                 res.status(200).json(users);
             })
