@@ -50,6 +50,14 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
                 notEmpty : { msg : concatRequiredMessage('Zip code')}
             }
         },
+        address: {
+            type: dataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notNull: { msg : concatRequiredMessage('Address')},
+                notEmpty : { msg : concatRequiredMessage('Address')}
+            }
+        },
         phone_number: {
             type: dataTypes.STRING,
             allowNull: false,

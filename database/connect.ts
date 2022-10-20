@@ -66,6 +66,7 @@ const initDb = () => {
                     role: user.role,
                     zip_code: user.zip_code,
                     city: user.city,
+                    address: user.address,
                     phone_number: user.phone_number
 
                 }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))

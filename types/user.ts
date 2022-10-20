@@ -5,6 +5,7 @@ export interface userTypes {
     password: string;
     zip_code: string;
     city: string;
+    address: string;
     phone_number: string;
     is_active: boolean;
     is_pending: boolean;

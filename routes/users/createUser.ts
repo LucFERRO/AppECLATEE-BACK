@@ -27,7 +27,7 @@ const { User } = require("../../database/connect");
  *         in: body
  *         required: true
  *         type: object
- *         default: { "mail": "email@email.fr","password":"string","is_active": "boolean","is_pending": "boolean","zip_code": "string", "city" : "string", "phone_number" : "string", "role": "string" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string" }
  *      responses:
  *        200:
  *          description: Create a new user.
