@@ -57,7 +57,7 @@ const users = [
         address: "9 rue Test de la chaudière",
         is_active: false,
         is_pending: false,
-        role: "candidat",
+        role: "entreprise",
     },
     {
         mail: "test2@n.fr",
@@ -105,7 +105,7 @@ const users = [
         address: "9 rue Test de la chaudière",
         is_active: false,
         is_pending: false,
-        role: "candidat",
+        role: "entreprise",
     },
     {
         mail: "test6@n.fr",
@@ -129,7 +129,7 @@ const users = [
         address: "9 rue Test de la chaudière",
         is_active: false,
         is_pending: false,
-        role: "candidat",
+        role: "entreprise",
     },
     {
         mail: "test8@n.fr",
@@ -153,7 +153,7 @@ const users = [
         address: "9 rue Test de la chaudière",
         is_active: false,
         is_pending: false,
-        role: "candidat",
+        role: "entreprise",
     },
     {
         mail: "test10@n.fr",
