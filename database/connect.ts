@@ -21,19 +21,21 @@ import { availabilityTypes } from "../types/availability"
 let availabilities = require('../database/mock-availability')
 const AvailabilityModel = require('../models/availabilities')
 
-const sequelize = new Sequelize (
-    'ECLATEEtest',
-    'neo',
-    'neoneo',
-    {
-        host:'localhost',
-        dialect:'postgres',
-        port: 5432,
-        dialectOptions: {
-            timezone: 'Etc/GMT-2'
-        }
-    }
-)
+import sequelize from './sequelize'
+
+// export const sequelize = new Sequelize (
+//     'ECLATEEtest',
+//     'neo',
+//     'neoneo',
+//     {
+//         host:'localhost',
+//         dialect:'postgres',
+//         port: 5432,
+//         dialectOptions: {
+//             timezone: 'Etc/GMT-2'
+//         }
+//     }
+// )
 
 sequelize.authenticate()
     .then(() => console.log('Successfully connected to database.'))
@@ -46,13 +48,13 @@ const Candidate = CandidateModel(sequelize, DataTypes)
 const Admin = AdminModel(sequelize, DataTypes)
 const Availability = AvailabilityModel(sequelize, DataTypes)
 
+User.hasOne(Candidate , { foreignKey: 'user_id' })
+Candidate.belongsTo(User, { foreignKey: 'user_id' })
+
+User.hasOne(Company , { foreignKey: 'user_id' })
+Company.belongsTo(User, { foreignKey: 'user_id' })
+
 const initDb = () => {
-
-        User.hasOne(Candidate , { foreignKey: 'user_id' })
-        Candidate.belongsTo(User, { foreignKey: 'user_id' })
-
-        User.hasOne(Company , { foreignKey: 'user_id' })
-        Company.belongsTo(User, { foreignKey: 'user_id' })
 
         return sequelize.sync({force: true}).then(()=> {
             

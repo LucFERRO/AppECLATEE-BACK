@@ -20,7 +20,7 @@ app.use(express.json())
 app.use(passport.initialize())
 
 // To make database, comment otherwise.
-sequelize.initDb()
+// sequelize.initDb()
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {

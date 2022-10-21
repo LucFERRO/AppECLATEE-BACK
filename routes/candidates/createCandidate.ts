@@ -4,22 +4,22 @@ import { ApiException } from "../../types/exception";
 import { candidateTypes } from "../../types/candidate";
 import { userTypes } from "../../types/user";
 
-// import { sequelize } from "../../database/connect";
+import sequelize from "../../database/sequelize";
 
-const { Sequelize } = require('sequelize')
-const sequelize2 = new Sequelize (
-    'ECLATEEtest',
-    'neo',
-    'neoneo',
-    {
-        host:'localhost',
-        dialect:'postgres',
-        port: 5432,
-        dialectOptions: {
-            timezone: 'Etc/GMT-2'
-        }
-    }
-)
+// const { Sequelize } = require('sequelize')
+// const sequelize2 = new Sequelize (
+//     'ECLATEEtest',
+//     'neo',
+//     'neoneo',
+//     {
+//         host:'localhost',
+//         dialect:'postgres',
+//         port: 5432,
+//         dialectOptions: {
+//             timezone: 'Etc/GMT-2'
+//         }
+//     }
+// )
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -53,7 +53,7 @@ const { Candidate, User } = require("../../database/connect");
  */
 module.exports = (app: Application) => {
     app.post("/api/candidates", async (req, res) => {
-        const t = await sequelize2.transaction();
+        const t = await sequelize.transaction();
 
         if (!req.body.password)
             return res.status(400).json({

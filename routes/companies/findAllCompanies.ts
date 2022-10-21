@@ -5,6 +5,8 @@ import { companyTypes } from "../../types/company";
 
 const { Company, User } = require("../../database/connect");
 
+const { DTO } = require("../../services/DTO/DTO")
+
 /**
  * @openapi
  * /api/companies:
@@ -19,7 +21,7 @@ module.exports = (app: Application) => {
     app.get("/api/companies", (req, res) => {
         Company.findAll({include: [User]})
             .then((companies: companyTypes) => {
-                res.status(200).json(companies);
+                res.status(200).json((DTO(companies)));
             })
             .catch((error: ApiException) => {
                 res.status(500).json(error);

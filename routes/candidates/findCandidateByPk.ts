@@ -4,6 +4,8 @@ import { candidateTypes } from "../../types/candidate";
 
 const { Candidate, User } = require("../../database/connect");
 
+const { DTO, DTObyPK } = require("../../services/DTO/DTO")
+
 /**
  * @openapi
  * /api/candidates/{id}:
@@ -22,15 +24,17 @@ const { Candidate, User } = require("../../database/connect");
  */
 module.exports = (app: Application) => {
     app.get("/api/candidates/:id", (req, res) => {
-        Candidate.findByPk(req.params.id,{include: [User]})
+        Candidate.findOne({
+            where: {id : req.params.id}, 
+            include: [User]
+        })
             .then((candidate: candidateTypes) => {
                 if (candidate === null) {
                     const message = "Requested candidate does not exist.";
                     return res.status(404).json({ message });
                 }
 
-                const message: string = "Candidate found.";
-                res.json({ message, data: candidate });
+                res.json(DTObyPK(candidate));
             })
             .catch((error: ApiException) => {
                 const message = "Cannot find candidate.";

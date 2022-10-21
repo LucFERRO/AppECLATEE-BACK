@@ -22,15 +22,17 @@ const { User } = require("../../database/connect");
  */
 module.exports = (app: Application) => {
     app.get("/api/users/:id", (req, res) => {
-        User.findByPk(req.params.id)
+        User.findOne({
+            where: {user_id : req.params.id}, 
+            attributes: ['user_id','mail','city','zip_code','address','phone_number','is_active','is_pending','role','createdAt','updatedAt']
+        })
             .then((user: userTypes) => {
                 if (user === null) {
                     const message = "Requested user does not exist.";
                     return res.status(404).json({ message });
                 }
 
-                const message: string = "User found.";
-                res.json({ message, data: user });
+                res.json(user);
             })
             .catch((error: ApiException) => {
                 const message = "Cannot find user.";

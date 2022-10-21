@@ -4,6 +4,8 @@ import { companyTypes } from "../../types/company";
 
 const { Company, User } = require("../../database/connect");
 
+const { DTO, DTObyPK } = require("../../services/DTO/DTO")
+
 /**
  * @openapi
  * /api/companies/{id}:
@@ -22,7 +24,10 @@ const { Company, User } = require("../../database/connect");
  */
 module.exports = (app: Application) => {
     app.get("/api/companies/:id", (req, res) => {
-        Company.findByPk(req.params.id,{include: [User]})
+        Company.findOne({
+            where: {id : req.params.id}, 
+            include: [User]
+        })
             .then((company: companyTypes) => {
                 if (company === null) {
                     const message = "Requested company does not exist.";
@@ -30,7 +35,7 @@ module.exports = (app: Application) => {
                 }
 
                 const message: string = "Company found.";
-                res.json({ message, data: company });
+                res.json(DTObyPK(company));
             })
             .catch((error: ApiException) => {
                 const message = "Cannot find company.";
