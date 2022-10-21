@@ -4,7 +4,7 @@ import { candidateTypes } from "../../types/candidate";
 
 const { Candidate, User } = require("../../database/connect");
 
-const { DTO, DTObyPK } = require("../../services/DTO/DTO")
+const { DTO } = require("../../services/DTO/DTO")
 
 /**
  * @openapi
@@ -34,7 +34,7 @@ module.exports = (app: Application) => {
                     return res.status(404).json({ message });
                 }
 
-                res.json(DTObyPK(candidate));
+                res.status(200).json(DTO(candidate));
             })
             .catch((error: ApiException) => {
                 const message = "Cannot find candidate.";

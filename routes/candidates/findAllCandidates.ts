@@ -23,7 +23,6 @@ module.exports = (app: Application) => {
             include: [User]
         })
             .then((candidates: candidateTypes) => {
-                console.log('avant DTO:',candidates)
                 res.status(200).json(DTO(candidates));
             })
             .catch((error: ApiException) => {

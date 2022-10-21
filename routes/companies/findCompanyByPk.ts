@@ -4,7 +4,7 @@ import { companyTypes } from "../../types/company";
 
 const { Company, User } = require("../../database/connect");
 
-const { DTO, DTObyPK } = require("../../services/DTO/DTO")
+const { DTO } = require("../../services/DTO/DTO")
 
 /**
  * @openapi
@@ -35,7 +35,7 @@ module.exports = (app: Application) => {
                 }
 
                 const message: string = "Company found.";
-                res.json(DTObyPK(company));
+                res.json(DTO(company));
             })
             .catch((error: ApiException) => {
                 const message = "Cannot find company.";
