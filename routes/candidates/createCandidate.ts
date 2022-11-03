@@ -6,21 +6,6 @@ import { userTypes } from "../../types/user";
 
 import sequelize from "../../database/sequelize";
 
-// const { Sequelize } = require('sequelize')
-// const sequelize2 = new Sequelize (
-//     'ECLATEEtest',
-//     'neo',
-//     'neoneo',
-//     {
-//         host:'localhost',
-//         dialect:'postgres',
-//         port: 5432,
-//         dialectOptions: {
-//             timezone: 'Etc/GMT-2'
-//         }
-//     }
-// )
-
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -53,93 +38,64 @@ const { Candidate, User } = require("../../database/connect");
  */
 module.exports = (app: Application) => {
     app.post("/api/candidates", async (req, res) => {
-        const t = await sequelize.transaction();
 
         if (!req.body.password)
-            return res.status(400).json({
-                passwordRequired: true,
-                message: "Password is required.",
-            });
+        return res.status(400).json({
+            passwordRequired: true,
+            message: "Password is required.",
+        });
+
+        const t = await sequelize.transaction();
+        const { lastname, firstname, birthdate } = req.body
+        const { mail, password, city, zip_code, address, phone_number, is_active, is_pending, role } = req.body
+
+        let candidateInfo = { lastname, firstname, birthdate }
+        let userInfo = { mail, password, city, zip_code, address, phone_number, is_active, is_pending, role }
+
         try {
+            let hashedPassword = await bcrypt.hash(userInfo.password, 10);
 
-            // sequelize.transaction(async (t: any) => {
+            let userId;
 
-                let hashedPassword = await bcrypt.hash(req.body.password, 10);
+            await User.create(
+                { ...userInfo, password: hashedPassword },
+                { transaction: t }
+            )
+                .then((user: userTypes) => {
+                    userId = user.user_id;
+                    candidateInfo = Object.assign(candidateInfo, { user_id: userId });
+                })
+                .catch((error: ApiException) => {
+                    if (error instanceof ValidationError) {
+                        return res
+                            .status(400)
+                            .json({ message: error.message, data: error });
+                    }
+                    const message = `Could not create new user.`;
+                    res.status(500).json({ message, data: error });
+                });
 
-                console.log('avant quoi que ce soit')
-                
-                let userId 
-                let newBody
+            await Candidate.create(candidateInfo, { transaction: t })
+                .then((candidate: candidateTypes) => {
+                    const message: string = `Candidate ${candidate.lastname} successfully created.`;
+                    res.json({ message, data: candidate });
+                })
+                .catch((error: ApiException) => {
+                    if (error instanceof ValidationError) {
+                        return res.status(400).json({
+                            message: error.message,
+                            data: error,
+                        });
+                    }
+                    const message = `Could not create new candidate.`;
+                    res.status(500).json({ message, data: error });
+                });
 
-                await User.create({...req.body,password: hashedPassword},{ transaction: t })
-                    // .then((response : Response) => console.log('dans create user',response))
-                    .then((user: userTypes) => {
-                        userId = user.user_id
-                        newBody = Object.assign(req.body, { user_id: userId })
-                        // const message: string = `User ${user.mail} successfully created.`;
-                        // res.json({ message, data: user });
-                    })
-                    // .catch((error: ApiException) => {
-                    //     if (error instanceof ValidationError) {
-                    //         return res
-                    //             .status(400)
-                    //             .json({ message: error.message, data: error });
-                    //     }
-                    //     const message = `Could not create new user.`;
-                    //     res.status(500).json({ message, data: error });
-                    // });
+            await t.commit();
 
-                console.log(userId)
-                console.log(newBody)
-
-                await Candidate.create(
-                    // Object.assign(req.body, { user_id: userId })
-                    newBody
-                    // req.body
-                    ,{ transaction: t })
-                    //   .then((response : Response) => console.log('dans create candidate',response))
-                    .then((candidate: candidateTypes) => {
-                        const message: string = `Candidate ${candidate.lastname} successfully created.`;
-                        res.json({ message, data: candidate });
-                    })
-                    .catch((error: ApiException) => {
-                        if (error instanceof ValidationError) {
-                            return res.status(400).json({
-                                message: error.message,
-                                data: error,
-                            });
-                        }
-                        const message = `Could not create new candidate.`;
-                        res.status(500).json({ message, data: error });
-                    });
-
-                    // return user
-                    // });
-                    
-                    // If the execution reaches this line, no errors were thrown.
-                    // We commit the transaction.
-                    await t.commit();
-                    // throw new Error()
         } catch (error) {
-            console.log(error)
-            // If the execution reaches this line, an error was thrown.
-            // We rollback the transaction.
+            console.log(error);
             await t.rollback();
         }
-
-        // Candidate.create(req.body)
-        //     .then((candidate: candidateTypes) => {
-        //         const message: string = `Candidate ${candidate.lastname} successfully created.`;
-        //         res.json({ message, data: candidate });
-        //     })
-        //     .catch((error: ApiException) => {
-        //         if (error instanceof ValidationError) {
-        //             return res
-        //                 .status(400)
-        //                 .json({ message: error.message, data: error });
-        //         }
-        //         const message = `Could not create new candidate.`;
-        //         res.status(500).json({ message, data: error });
-        //     });
     });
 };

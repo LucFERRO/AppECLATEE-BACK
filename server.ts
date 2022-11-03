@@ -33,7 +33,7 @@ app.get("/", (req : Request, res : Response) => {
 const swaggerOptions = {
     swaggerDefinition: {
         info: {
-            title: 'TITLE',
+            title: 'TITRE',
             description: 'DESCRIPTION',
             contact: {
                 name: 'Best front-end dev EUW'

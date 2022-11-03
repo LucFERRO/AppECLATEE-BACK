@@ -23,20 +23,6 @@ const AvailabilityModel = require('../models/availabilities')
 
 import sequelize from './sequelize'
 
-// export const sequelize = new Sequelize (
-//     'ECLATEEtest',
-//     'neo',
-//     'neoneo',
-//     {
-//         host:'localhost',
-//         dialect:'postgres',
-//         port: 5432,
-//         dialectOptions: {
-//             timezone: 'Etc/GMT-2'
-//         }
-//     }
-// )
-
 sequelize.authenticate()
     .then(() => console.log('Successfully connected to database.'))
     .catch((error : Error) => console.error(`Could not connect to database: ${error}`)
@@ -56,50 +42,48 @@ Company.belongsTo(User, { foreignKey: 'user_id' })
 
 const initDb = () => {
 
-        return sequelize.sync({force: true}).then(()=> {
-            
-            users.map((user: userTypes) => {
-                User.create({
-                    // name: user.name,
-                    mail: user.mail,
-                    password: user.password,
-                    is_active: user.is_active,
-                    is_pending: user.is_pending,
-                    role: user.role,
-                    zip_code: user.zip_code,
-                    city: user.city,
-                    address: user.address,
-                    phone_number: user.phone_number
-
-                }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
-            })
-            companies.map((company: companyTypes) => {
-                Company.create({
-                    name: company.name,
-                    siret: company.siret,
-                    user_id: company.user_id
-                }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
-            })
-            candidates.map((candidate: candidateTypes) => {
-                Candidate.create({
-                    lastname: candidate.lastname,
-                    firstname: candidate.firstname,
-                    birthdate: candidate.birthdate,
-                    user_id: candidate.user_id
-                }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
-            })
-            admins.map((admin: adminTypes) => {
-                Admin.create({
-                    lastname: admin.lastname,
-                    firstname: admin.firstname,
-                }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
-            })
-            availabilities.map((availability: availabilityTypes) => {
-                Availability.create({
-                    availability: availability.availability
-                }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
-            })
-            console.log('Database successfully initialized.')
+    return sequelize.sync({force: true}).then(()=> {
+        
+        users.map((user: userTypes) => {
+            User.create({
+                mail: user.mail,
+                password: user.password,
+                is_active: user.is_active,
+                is_pending: user.is_pending,
+                role: user.role,
+                zip_code: user.zip_code,
+                city: user.city,
+                address: user.address,
+                phone_number: user.phone_number
+            }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
+        })
+        companies.map((company: companyTypes) => {
+            Company.create({
+                name: company.name,
+                siret: company.siret,
+                user_id: company.user_id
+            }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
+        })
+        candidates.map((candidate: candidateTypes) => {
+            Candidate.create({
+                lastname: candidate.lastname,
+                firstname: candidate.firstname,
+                birthdate: candidate.birthdate,
+                user_id: candidate.user_id
+            }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
+        })
+        admins.map((admin: adminTypes) => {
+            Admin.create({
+                lastname: admin.lastname,
+                firstname: admin.firstname,
+            }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
+        })
+        availabilities.map((availability: availabilityTypes) => {
+            Availability.create({
+                availability: availability.availability
+            }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
+        })
+        console.log('Database successfully initialized.')
     })
 }
 
