@@ -70,9 +70,10 @@ module.exports = (app: Application) => {
         try {
             await Candidate.update(
                 candidateInfo,
-                { where: { id: id } },
-                { transaction: t }
-            );
+                { 
+                    where: { id: id },
+                    transaction: t 
+            });
             // .then(() => {
             //     Candidate.findByPk(id).then((candidate: candidateTypes) => {
             //     console.log('Candidatedsqflmskdlsqjdlqsk',candidate)
@@ -105,8 +106,6 @@ module.exports = (app: Application) => {
                 userInfo,
                 {
                     where: { user_id: 'ccc' },
-                },
-                {
                     transaction: t,
                 }
             ).then((user: userTypes) => {

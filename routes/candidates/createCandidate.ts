@@ -45,57 +45,30 @@ module.exports = (app: Application) => {
             message: "Password is required.",
         });
 
-        const t = await sequelize.transaction();
         const { lastname, firstname, birthdate } = req.body
         const { mail, password, city, zip_code, address, phone_number, is_active, is_pending, role } = req.body
 
         let candidateInfo = { lastname, firstname, birthdate }
         let userInfo = { mail, password, city, zip_code, address, phone_number, is_active, is_pending, role }
 
+        let hashedPassword = await bcrypt.hash(userInfo.password, 10);
+
         try {
-            let hashedPassword = await bcrypt.hash(userInfo.password, 10);
+            await sequelize.transaction(async (t : any) => {
 
-            let userId;
-
-            await User.create(
+            const newUser = await User.create(
                 { ...userInfo, password: hashedPassword },
                 { transaction: t }
             )
-                .then((user: userTypes) => {
-                    userId = user.user_id;
-                    candidateInfo = Object.assign(candidateInfo, { user_id: userId });
-                })
-                .catch((error: ApiException) => {
-                    if (error instanceof ValidationError) {
-                        return res
-                            .status(400)
-                            .json({ message: error.message, data: error });
-                    }
-                    const message = `Could not create new user.`;
-                    res.status(500).json({ message, data: error });
-                });
-
-            await Candidate.create(candidateInfo, { transaction: t })
-                .then((candidate: candidateTypes) => {
-                    const message: string = `Candidate ${candidate.lastname} successfully created.`;
-                    res.json({ message, data: candidate });
-                })
-                .catch((error: ApiException) => {
-                    if (error instanceof ValidationError) {
-                        return res.status(400).json({
-                            message: error.message,
-                            data: error,
-                        });
-                    }
-                    const message = `Could not create new candidate.`;
-                    res.status(500).json({ message, data: error });
-                });
-
-            await t.commit();
+            
+            candidateInfo = Object.assign(candidateInfo, { user_id: newUser.user_id });
+            
+            const newCandidate = await Candidate.create(candidateInfo, { transaction: t })
+            return res.status(200).json(newCandidate)
+            })
 
         } catch (error) {
-            console.log(error);
-            await t.rollback();
+            return res.status(500).json(error)
         }
     });
 };
