@@ -31,7 +31,7 @@ const { Candidate, User } = require("../../database/connect");
  *         in: body
  *         required: true
  *         type: object
- *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "lastname": "string", "firstname": "string", "birthdate": "string" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "lastname": "string", "firstname": "string", "birthdate": "string" }
  *      responses:
  *        200:
  *          description: Create a new candidate.
@@ -45,8 +45,9 @@ module.exports = (app: Application) => {
             message: "Password is required.",
         });
 
-        const { lastname, firstname, birthdate } = req.body
-        const { mail, password, city, zip_code, address, phone_number, is_active, is_pending, role } = req.body
+        const { lastname, firstname, birthdate, password, mail, city, zip_code, address, phone_number, is_active, is_pending } = req.body;
+
+        let role = 'candidat'
 
         let candidateInfo = { lastname, firstname, birthdate }
         let userInfo = { mail, password, city, zip_code, address, phone_number, is_active, is_pending, role }
@@ -62,7 +63,8 @@ module.exports = (app: Application) => {
             )
             
             candidateInfo = Object.assign(candidateInfo, { user_id: newUser.user_id });
-            
+            // Heritage "user_id = id"
+
             const newCandidate = await Candidate.create(candidateInfo, { transaction: t })
             return res.status(200).json(newCandidate)
             })
