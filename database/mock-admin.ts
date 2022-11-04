@@ -1,11 +1,13 @@
 const admins = [
   {
-    lastname: 'FERRO',
-    firstname: 'Luc',
+    lastname: 'admin',
+    firstname: 'admin1',
+    user_id: 2
   },
   {
-    lastname: 'V',
-    firstname: 'Luc',
+    lastname: 'admin',
+    firstname: 'admin2',
+    user_id: 6
   }
 ];
 

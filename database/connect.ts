@@ -40,6 +40,9 @@ Candidate.belongsTo(User, { foreignKey: 'user_id' })
 User.hasOne(Company , { foreignKey: 'user_id' })
 Company.belongsTo(User, { foreignKey: 'user_id' })
 
+User.hasOne(Admin , { foreignKey: 'user_id' })
+Admin.belongsTo(User, { foreignKey: 'user_id' })
+
 const initDb = () => {
 
     return sequelize.sync({force: true}).then(()=> {
@@ -76,6 +79,7 @@ const initDb = () => {
             Admin.create({
                 lastname: admin.lastname,
                 firstname: admin.firstname,
+                user_id: admin.user_id
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
         availabilities.map((availability: availabilityTypes) => {
