@@ -13,17 +13,14 @@ const DTO_ifier = (item : any) => {
 
 const DTO = (data : any) => {
 
-    // Pardon pour ce qui suit
     if ( !data.length ) return DTO_ifier(data)
 
-    let formatedData : any = []
-
-    data.map( (item : any) => {
-        formatedData.push(DTO_ifier(item))
+    return data.map( (item : any) => {
+        return DTO_ifier(item)
     })
-
-    return !formatedData.length ? data : formatedData 
 }
+
+// Faire une fonction pour le all et une pour le singleton
 
 module.exports = {
     DTO
