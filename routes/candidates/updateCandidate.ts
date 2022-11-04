@@ -2,9 +2,13 @@ import { Application } from "express";
 import { ValidationError } from "sequelize";
 import { ApiException } from "../../types/exception";
 import { candidateTypes } from "../../types/candidate";
+import { userTypes } from "../../types/user";
+
+import sequelize from "../../database/sequelize";
+
 const bcrypt = require("bcrypt");
 
-const { Candidate } = require("../../database/connect");
+const { Candidate, User } = require("../../database/connect");
 
 /**
  * @openapi
@@ -24,7 +28,7 @@ const { Candidate } = require("../../database/connect");
  *         in: body
  *         required: true
  *         type: object
- *         default: { "lastname": "string", "firstname": "string", "birthdate": "string" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "lastname": "string", "firstname": "string", "birthdate": "string" }
  *      responses:
  *        200:
  *          description: Update candidate of given id.
@@ -32,37 +36,39 @@ const { Candidate } = require("../../database/connect");
 module.exports = (app: Application) => {
     app.put("/api/candidates/:id", async (req, res) => {
         const id = req.params.id;
-        const { lastname, firstname, birthdate } = req.body;
 
-        Candidate.update(
-            {
-                lastname: lastname,
-                firstname: firstname,
-                birthdate: birthdate,
-            },
-            {
-                where: { id: id },
-            }
-        )
-            .then(() => {
-                return Candidate.findByPk(id).then(
-                    (candidate: candidateTypes) => {
-                        if (candidate === null) {
-                            const message =
-                                "Requested candidate does not exist.";
-                            return res.status(404).json({ message });
-                        }
-                        const message = `Candidate ${candidate.id} successfully updated`;
-                        res.json({ message, data: candidate });
+        const { lastname, firstname, birthdate, mail, city, zip_code, address, phone_number, is_active, is_pending, role } = req.body;
+
+        let candidateInfo = { lastname, firstname, birthdate };
+        let userInfo = { mail, city, zip_code, address, phone_number, is_active, is_pending, role };
+
+        if (req.body.password) {
+            let hashedPassword = await bcrypt.hash(req.body.password, 10);
+            userInfo = Object.assign(userInfo, { password: hashedPassword });
+        }
+
+        try {
+            await sequelize.transaction(async (t : any) => {
+                const updatedCandidate: any = await Candidate.update(
+                    candidateInfo,
+                    {
+                        where: { id: id },
+                        returning: true,
+                        plain: true,
+                        transaction: t,
                     }
                 );
-            })
-            .catch((error: ApiException) => {
-                if (error instanceof ValidationError) {
-                    return res.status(400).json({ message: error.message, data: error });
-                }
-                const message = `Could not update the candidate.`;
-                res.status(500).json({ message, data: error });
+
+                await User.update(userInfo, {
+                    where: { user_id: updatedCandidate[1].user_id },
+                    returning: true,
+                    plain: true,
+                    transaction: t,
+                });
+                return res.status(200).json(updatedCandidate[1]);
             });
+        } catch (error) {
+            return res.status(500).json("ERREUR 500");
+        }
     });
 };
