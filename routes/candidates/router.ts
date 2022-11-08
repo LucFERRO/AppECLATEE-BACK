@@ -80,7 +80,7 @@ candidateRouter.post('/', handlerCandidate.createCandidate)
  *         in: body
  *         required: true
  *         type: object
- *         default: { "lastname": "string", "firstname": "string", "birthdate": "string" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "lastname": "string", "firstname": "string", "birthdate": "string" }
  *      responses:
  *        200:
  *          description: Update candidate of given id.

@@ -16,7 +16,7 @@ export const companyRouter = Router();
  * /api/companies:
  *   get:
  *      tags: [Companies]
- *      description: Welcome to swagger-jsdoc!
+ *      description: Get the list of all companies.
  *      responses:
  *        200:
  *          description: Get the list of all companies.
@@ -28,7 +28,7 @@ companyRouter.get('/', handlerCompany.getAllCompanies)
  * /api/companies/{id}:
  *  get:
  *      tags: [Companies]
- *      description: Get an template by id
+ *      description: Get a company by id
  *      parameters:
  *       - name: id
  *         in: path
@@ -54,7 +54,7 @@ companyRouter.get('/:id', handlerCompany.getCompanyById)
  *         in: body
  *         required: true
  *         type: object
- *         default: { "name": "string","siret": "string" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "name": "string", "siret": "string" }
  *      responses:
  *        200:
  *          description: Create a new company.
@@ -79,7 +79,7 @@ companyRouter.post('/', handlerCompany.createCompany)
  *         in: body
  *         required: true
  *         type: object
- *         default: { "lastname": "string", "firstname": "string", "birthdate": "string" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "name": "string", "siret": "string" }
  *      responses:
  *        200:
  *          description: Update company of given id.
