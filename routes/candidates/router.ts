@@ -104,3 +104,5 @@ candidateRouter.put('/:id', handlerCandidate.updateCandidate)
  *          description: Delete a candidate.
  */
 candidateRouter.delete('/:id', handlerCandidate.deleteCandidate)
+
+candidateRouter.post('/test', handlerCandidate.test)
