@@ -1,5 +1,4 @@
 export interface userTypes {
-
     user_id : number;
     mail: string;
     password: string;
@@ -12,7 +11,6 @@ export interface userTypes {
     role: string;
     // description: string;
     // image: string;
-
 }
 
 // export interface candidateTypes extends userTypes{

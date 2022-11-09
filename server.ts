@@ -46,7 +46,6 @@ const swaggerOptions = {
             contact: {
                 name: 'Best front-end dev EUW'
             },
-            // servers: [{ url: '/api' }]
             servers: [{
                 url:`http://localhost:${port}`,
                 description: 'localhost'
@@ -64,6 +63,19 @@ router.use('/candidates', candidateRouter)
 router.use('/companies', companyRouter)
 router.use('/admins', adminRouter)
 router.use('/auth', authentificationRouter)
+
+
+import { tokenTypes } from "./types/token"
+const { Token } = require("./database/connect")
+app.get('/api/tokens', (req : any, res : any) => {
+    Token.findAll()
+    .then((tokens: tokenTypes) => {
+        res.status(200).json(tokens)
+    })
+    .catch((error : ApiException) => {
+        res.status(500).json(error)
+    })
+})
 
 // require('./routes/availabilities/findAllAvailabilities')(app)
 

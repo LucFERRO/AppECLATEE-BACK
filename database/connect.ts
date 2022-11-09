@@ -49,6 +49,9 @@ Company.belongsTo(User, { foreignKey: 'user_id' })
 User.hasOne(Admin , { foreignKey: 'user_id' })
 Admin.belongsTo(User, { foreignKey: 'user_id' })
 
+User.hasOne(Token , { foreignKey: 'user_id' })
+Token.belongsTo(User, { foreignKey: 'user_id' })
+
 const initDb = () => {
 
     return sequelize.sync({force: true}).then(()=> {
@@ -68,31 +71,30 @@ const initDb = () => {
         })
         companies.map((company : companyTypes) => {
             Company.create({
+                user_id: company.user_id,
                 name: company.name,
-                siret: company.siret,
-                user_id: company.user_id
+                siret: company.siret
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
         candidates.map((candidate : candidateTypes) => {
             Candidate.create({
+                user_id: candidate.user_id,
                 lastname: candidate.lastname,
                 firstname: candidate.firstname,
-                birthdate: candidate.birthdate,
-                user_id: candidate.user_id
+                birthdate: candidate.birthdate
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
         admins.map((admin : adminTypes) => {
             Admin.create({
+                user_id: admin.user_id,
                 lastname: admin.lastname,
-                firstname: admin.firstname,
-                user_id: admin.user_id
+                firstname: admin.firstname
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
         tokens.map((token : tokenTypes) => {
             Token.create({
-                refreshToken: token.refreshToken,
-                mail: token.mail,
-                user_id: token.user_id
+                user_id: token.user_id,
+                refreshToken: token.refreshToken
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
         availabilities.map((availability: availabilityTypes) => {
