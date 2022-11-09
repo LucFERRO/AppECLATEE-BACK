@@ -2,7 +2,7 @@ const users = [
     {
         mail: "luc@f.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
@@ -14,7 +14,7 @@ const users = [
     {
         mail: "remy@c.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
@@ -26,7 +26,7 @@ const users = [
     {
         mail: "pending@n.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
@@ -38,7 +38,7 @@ const users = [
     {
         mail: "ghedeon@n.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
@@ -50,7 +50,7 @@ const users = [
     {
         mail: "test1@n.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
@@ -62,7 +62,7 @@ const users = [
     {
         mail: "test2@n.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
@@ -74,7 +74,7 @@ const users = [
     {
         mail: "test3@n.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
@@ -86,7 +86,7 @@ const users = [
     {
         mail: "test4@n.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
@@ -98,7 +98,7 @@ const users = [
     {
         mail: "test5@n.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
@@ -110,7 +110,7 @@ const users = [
     {
         mail: "test6@n.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
@@ -122,7 +122,7 @@ const users = [
     {
         mail: "test7@n.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
@@ -134,7 +134,7 @@ const users = [
     {
         mail: "test8@n.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
@@ -146,7 +146,7 @@ const users = [
     {
         mail: "test9@n.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
@@ -158,7 +158,7 @@ const users = [
     {
         mail: "test10@n.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
@@ -170,7 +170,7 @@ const users = [
     {
         mail: "test11@n.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
@@ -182,7 +182,7 @@ const users = [
     {
         mail: "test12@n.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
@@ -194,7 +194,7 @@ const users = [
     {
         mail: "test13@n.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
@@ -206,7 +206,7 @@ const users = [
     {
         mail: "test14@n.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
@@ -218,7 +218,7 @@ const users = [
     {
         mail: "test15@n.fr",
         password:
-            "$2b$10$dNBOm5ogx7rFaNDYY.sh2.uLL/9KrG54G5NB.N9t4DfImwwPtRRuK",
+            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",

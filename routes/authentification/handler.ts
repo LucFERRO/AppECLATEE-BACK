@@ -19,7 +19,8 @@ const login = async (req : Request, res : Response) => {
         message = "Aucun utilisateur ne correspond à ce mail.";
         return res.status(400).json({ userFound: false, message: message });
     }
-    if (await !bcrypt.compare(req.body.password, user.password)) {
+
+    if (!await bcrypt.compare(req.body.password, user.password)) {
         message = "Identifiants incorrects.";
         return res.status(401).json({ successfullLogin: false, message: message });
     } else {
