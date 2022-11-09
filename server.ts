@@ -15,10 +15,10 @@ const swaggerUi = require('swagger-ui-express')
 const sequelize = require('./database/connect')
 
 import {Response, Request} from 'express'
-const passport = require('passport')
+// const passport = require('passport')
 
 app.use(express.json())
-app.use(passport.initialize())
+// app.use(passport.initialize())
 app.use('/api', router)
 
 import { candidateRouter } from './routes/candidates/router'
@@ -28,7 +28,6 @@ import { adminRouter } from './routes/admins/router'
 
 // To make database, comment otherwise.
 // sequelize.initDb()
-
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {
@@ -63,15 +62,6 @@ router.use('/users', userRouter)
 router.use('/candidates', candidateRouter)
 router.use('/companies', companyRouter)
 router.use('/admins', adminRouter)
-
-
-// app.post("/api/candidates/test", (req : Request, res : Response) => {
-//     console.log(req.body)
-
-
-
-//     res.send('OK')
-// })
 
 // require('./routes/availabilities/findAllAvailabilities')(app)
 
