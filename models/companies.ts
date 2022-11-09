@@ -8,11 +8,9 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
     }
 
     return sequelize.define('Company', {
-
-        id: {
+        user_id: {
             type: dataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true, 
+            primaryKey: true
         },
         name: {
             type: dataTypes.STRING,
@@ -30,9 +28,7 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
                 notEmpty : { msg : concatRequiredMessage('SIRET')}
             }
         },
-        user_id: {
-            type: dataTypes.INTEGER,
-        }
+
     },
     {
         timestamps: false

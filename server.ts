@@ -46,7 +46,6 @@ const swaggerOptions = {
             contact: {
                 name: 'Best front-end dev EUW'
             },
-            // servers: [{ url: '/api' }]
             servers: [{
                 url:`http://localhost:${port}`,
                 description: 'localhost'

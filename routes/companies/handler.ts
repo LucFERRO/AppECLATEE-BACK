@@ -60,7 +60,6 @@ const createCompany = async (req : Request, res : Response) => {
         )
 
         companyInfo = Object.assign(companyInfo, { user_id: newUser.user_id });
-        // Heritage "user_id = id"
 
         const newCompany = await Company.create(companyInfo, { transaction: t })
         return res.status(200).json(newCompany)
@@ -118,9 +117,9 @@ const deleteCompany = (req : Request, res : Response) => {
 
             const deletedCompany = company;
             return Company.destroy({
-                where: { id: company.id },
+                where: { id: company.user_id },
             }).then(() => {
-                const message = `Company ${deletedCompany.id} successfully deleted.`;
+                const message = `Company ${deletedCompany.user_id} successfully deleted.`;
                 res.json({ message, data: deletedCompany });
             });
         })

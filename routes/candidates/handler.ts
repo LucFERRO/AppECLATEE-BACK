@@ -60,7 +60,6 @@ const createCandidate = async (req : Request, res : Response) => {
         )
 
         candidateInfo = Object.assign(candidateInfo, { user_id: newUser.user_id });
-        // Heritage "user_id = id"
 
         const newCandidate = await Candidate.create(candidateInfo, { transaction: t })
         return res.status(200).json(newCandidate)
@@ -118,9 +117,9 @@ const deleteCandidate = (req : Request, res : Response) => {
 
             const deletedCandidate = candidate;
             return Candidate.destroy({
-                where: { id: candidate.id },
+                where: { user_id: candidate.user_id },
             }).then(() => {
-                const message = `Candidate ${deletedCandidate.id} successfully deleted.`;
+                const message = `Candidate ${deletedCandidate.user_id} successfully deleted.`;
                 res.json({ message, data: deletedCandidate });
             });
         })

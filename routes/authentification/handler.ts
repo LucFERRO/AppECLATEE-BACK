@@ -20,10 +20,9 @@ const login = (req : Request, res : Response) => {
             return res.status(400).json({ userFound: false, message: message });
         }
         if (await !bcrypt.compare(req.body.password, user.password)) {
-            message = "Wrong password for this mail.";
+            message = "Identifiants incorrects.";
             return res.status(401).json({ successfullLogin: false, message: message });
         } else {
-            message = "Good";
             const accessToken = jwt.sign(
                 { name: user.mail },
                 process.env.ACCESS_TOKEN_SECRET,
@@ -33,47 +32,19 @@ const login = (req : Request, res : Response) => {
                 { name: user.mail },
                 process.env.REFRESH_TOKEN_SECRET
             );
-            return res.status(200).json({accessToken: accessToken, refreshToken: refreshToken})
 
-            // Token.findOne({ where: { mail: user.mail } }).then(
-            //     (token: tokenTypes) => {
-            //         if (token !== null) {
-            //             // Token.destroy({where: { mail: user.mail },})
-            //             Token.destroy({where: { userId: user.id },})
-            //             // .then(() => {
-            //                 // const message = `Token successfully DELETED.`;
-            //                 // res.json({message, data: token })
-            //                 // return res
-            //                 //     .status(200)
-            //                 //     .json({
-            //                 //         successfullLogin: true,
-            //                 //         userId: user.id,
-            //                 //         accessToken: accessToken,
-            //                 //         refreshToken: refreshToken,
-            //                 //     });
-            //             // });
-            //             // const message = "Requested token does not exist.";
-            //             // return res.status(404).json({ message });
-            //         }
 
-            //         Token.create({
-            //             refreshToken : refreshToken,
-            //             mail : user.mail,
-            //             userId : user.id
-            //         }).then((token: tokenTypes) => {
-            //             const message: string = `Refresh token successfully replaced.`;
-            //             // res.json({ message, data: token });
-            //             return res
-            //             .status(200)
-            //             .json({
-            //                 successfullLogin: true,
-            //                 userId: user.id,
-            //                 accessToken: accessToken,
-            //                 refreshToken: refreshToken,
-            //                 message: message,
-            //                 oldToken: token,
-            //             });
-            //         })
+            Token.findOne({ where: { mail: user.mail } })
+            .then((token: tokenTypes) => {
+                    if (token !== null) Token.destroy({where: { user_id: user.user_id }})
+
+                    Token.create({
+                        refreshToken : refreshToken,
+                        user_id : user.user_id
+                    }).then((token: tokenTypes) => {
+                        return res.status(200).json({successfullLogin: true,userId: user.user_id,accessToken: accessToken,refreshToken: refreshToken,message: message,oldToken: token,});
+                    })
+                })
                     // A VOIR ?
 
                     // //   User.update({
@@ -97,15 +68,16 @@ const login = (req : Request, res : Response) => {
                     //     });
             //     }
             // );
+            
+            return res.status(200).json({accessToken: accessToken, refreshToken: refreshToken})
         }
     })
 };
 
-
 const refreshToken = (req : Request, res : Response) => {
 
     const refreshToken = req.body.token
-    if (refreshToken == null) return res.sendStatus(401)
+    if (refreshToken == null) return res.sendStatus(400)
 
     Token.findAll()
     .then((tokens: any) => {
@@ -119,13 +91,11 @@ const refreshToken = (req : Request, res : Response) => {
         if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
         jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err : Error, user : any) => {
             if (err) return res.sendStatus(403)
-            const accessToken = jwt.sign({name: user.username}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15s'})
+            const accessToken = jwt.sign({name: user.mail}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15s'})
             res.json({accessToken: accessToken})
             })
         })
 };
-
-
 
 export const handlerAuthentification = {
     login,

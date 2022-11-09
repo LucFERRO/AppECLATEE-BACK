@@ -1,10 +1,7 @@
 export interface adminTypes {
-
-    id : number;
+    user_id: number;
     lastname: string;
     firstname: string;
-    user_id: number;
-
 }
 
 

@@ -9,10 +9,8 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
     }
 
     return sequelize.define('Token', {
-
-        id: {
+        user_id: {
             type: dataTypes.INTEGER,
-            autoIncrement: true,
             primaryKey: true, 
         },
         refreshToken: {
@@ -23,20 +21,5 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
                 notEmpty : { msg : concatRequiredMessage('Token')}
             }
         },
-        mail: {
-            type: dataTypes.STRING,
-            allowNull: false,
-            unique: true,
-            validate : {
-                isEmail: true, 
-                notNull: { msg : concatRequiredMessage('Mail')},
-                notEmpty: { msg : concatRequiredMessage('mail')}
-
-
-            }
-        },
-        user_id: {
-            type: dataTypes.INTEGER,
-        }
     })
 }

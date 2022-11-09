@@ -60,7 +60,6 @@ const createAdmin = async (req : Request, res : Response) => {
         )
 
         adminInfo = Object.assign(adminInfo, { user_id: newUser.user_id });
-        // Heritage "user_id = id"
 
         const newAdmin = await Admin.create(adminInfo, { transaction: t })
         return res.status(200).json(newAdmin)
@@ -118,9 +117,9 @@ const deleteAdmin = (req : Request, res : Response) => {
 
             const deletedAdmin = admin;
             return Admin.destroy({
-                where: { id: admin.id },
+                where: { id: admin.user_id },
             }).then(() => {
-                const message = `Admin ${deletedAdmin.id} successfully deleted.`;
+                const message = `Admin ${deletedAdmin.user_id} successfully deleted.`;
                 res.json({ message, data: deletedAdmin });
             });
         })
