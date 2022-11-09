@@ -2,28 +2,28 @@ import { DataTypes } from "sequelize"
 const { Sequelize } = require('sequelize')
 
 import { userTypes } from "../types/user"
-let users = require('../database/mock-user')
+let users = require('../database/mocks/mock-user')
 const UserModel = require('../models/users')
 
 import { companyTypes } from "../types/company"
-let companies = require('../database/mock-company')
+let companies = require('../database/mocks/mock-company')
 const CompanyModel = require('../models/companies')
 
 import { candidateTypes } from "../types/candidate"
-let candidates = require('../database/mock-candidate')
+let candidates = require('../database/mocks/mock-candidate')
 const CandidateModel = require('../models/candidates')
 
 import { adminTypes } from "../types/admin"
-let admins = require('../database/mock-admin')
+let admins = require('../database/mocks/mock-admin')
 const AdminModel = require('../models/admins')
 
 import { tokenTypes } from "../types/token"
-let tokens = require('../database/mock-token')
+let tokens = require('../database/mocks/mock-token')
 const TokenModel = require('../models/tokens')
 
 
 import { availabilityTypes } from "../types/availability"
-let availabilities = require('../database/mock-availability')
+let availabilities = require('../database/mocks/mock-availability')
 const AvailabilityModel = require('../models/availabilities')
 
 import sequelize from './sequelize'
