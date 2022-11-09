@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 
 const { User, Token } = require("../../database/connect");
 
-const { DTO } = require("../../services/DTO/DTO")
+const { DTO_login } = require("../../services/DTO/DTO")
 
 const login = async (req : Request, res : Response) => {
     const user = await User.findOne({where: {mail : req.body.mail}})
@@ -43,7 +43,7 @@ const login = async (req : Request, res : Response) => {
             refreshToken : refreshToken
         })
 
-        return res.status(200).json({accessToken: accessToken, refreshToken: refreshToken, user: user})
+        return res.status(200).json(DTO_login({accessToken: accessToken, refreshToken: refreshToken, user: user}))
     }
 };
 

@@ -20,7 +20,7 @@ const getAllAdmins = (req : Request, res : Response) => {
 
 const getAdminById = async (req : Request, res : Response) => {
     Admin.findOne({
-        where: {id : req.params.id}, 
+        where: {user_id : req.params.id}, 
         include: [User]
     })
         .then((admin: adminTypes) => {

@@ -20,7 +20,7 @@ const getAllCompanies = (req : Request, res : Response) => {
 
 const getCompanyById = async (req : Request, res : Response) => {
     Company.findOne({
-        where: {id : req.params.id}, 
+        where: {user_id : req.params.id}, 
         include: [User]
     })
         .then((company: companyTypes) => {
