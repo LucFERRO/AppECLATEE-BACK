@@ -34,41 +34,15 @@ const login = (req : Request, res : Response) => {
             );
 
 
-            Token.findOne({ where: { mail: user.mail } })
+            Token.findOne({ where: { user_id: user.user_id } })
             .then((token: tokenTypes) => {
                     if (token !== null) Token.destroy({where: { user_id: user.user_id }})
 
                     Token.create({
                         refreshToken : refreshToken,
                         user_id : user.user_id
-                    }).then((token: tokenTypes) => {
-                        return res.status(200).json({successfullLogin: true,userId: user.user_id,accessToken: accessToken,refreshToken: refreshToken,message: message,oldToken: token,});
                     })
                 })
-                    // A VOIR ?
-
-                    // //   User.update({
-                    // //     tokenId : truc
-                    // // }, {
-                    // //   where: { id: user.id },
-                    // // })
-
-                    // //TEJ LE VIEUX
-                    // //REMPLACER PAR NOUVEAU TOKEN REFRESH
-                    // // })
-                    // // .catch((error : ApiException ) => {
-                    // //   const message = "Cannot find token."
-                    // //   res.status(500).json({message, data: error})
-                    // // })
-                    // return res.status(200).json({ successfullLogin : true, userId : user.id , accessToken : accessToken, refreshToken : refreshToken })
-                    // })
-                    // .catch((error : ApiException) => {
-                    //         const message = `Could not get users list.`
-                    //         res.status(500).json({message : message, data : error})
-                    //     });
-            //     }
-            // );
-            
             return res.status(200).json({accessToken: accessToken, refreshToken: refreshToken})
         }
     })
