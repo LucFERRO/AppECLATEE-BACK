@@ -1,11 +1,8 @@
 export interface candidateTypes {
-
-    id : number;
+    user_id: number;
     lastname: string;
     firstname: string;
     birthdate: string;
-    user_id: number;
-
 }
 
 

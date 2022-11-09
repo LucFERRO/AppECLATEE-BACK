@@ -8,10 +8,8 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
     }
 
     return sequelize.define('Admin', {
-
-        id: {
+        user_id: {
             type: dataTypes.INTEGER,
-            autoIncrement: true,
             primaryKey: true, 
         },
         lastname: {
@@ -29,6 +27,6 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
                 notNull: { msg : concatRequiredMessage('Firstname')},
                 notEmpty : { msg : concatRequiredMessage('Firstname')}
             }
-        }
+        },        
     })
 }

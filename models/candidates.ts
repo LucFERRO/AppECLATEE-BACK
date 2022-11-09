@@ -8,11 +8,9 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
     }
 
     return sequelize.define('Candidate', {
-
-        id: {
+        user_id: {
             type: dataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true, 
+            primaryKey: true
         },
         lastname: {
             type: dataTypes.STRING,
@@ -37,9 +35,6 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
                 notNull: { msg : concatRequiredMessage('Birthdate')},
                 notEmpty : { msg : concatRequiredMessage('Birthdate')}
             }
-        },
-        user_id: {
-            type: dataTypes.INTEGER,
         }
     },
     {
