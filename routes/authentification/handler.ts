@@ -43,7 +43,7 @@ const login = async (req : Request, res : Response) => {
             refreshToken : refreshToken
         })
 
-        return res.status(200).json({accessToken: accessToken, refreshToken: refreshToken})
+        return res.status(200).json({accessToken: accessToken, refreshToken: refreshToken, user: user})
     }
 };
 
