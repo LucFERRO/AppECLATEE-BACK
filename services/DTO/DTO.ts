@@ -22,7 +22,7 @@ const DTO = (data : any) => {
 
 const DTO_login = (data : any) => {
 
-    const formatedData = Object.assign(data, {user_id: data.user.user_id, role: data.user.role})
+    const formatedData = Object.assign(data, {user_id: data.user.user_id})
     delete data['user']
 
     return formatedData
