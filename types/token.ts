@@ -2,6 +2,7 @@ export interface tokenTypes{
 
     id : number;
     refreshToken : string;
-    username : string;
-    userId : number;
+    // A virer?
+    mail : string;
+    user_id : number;
 }

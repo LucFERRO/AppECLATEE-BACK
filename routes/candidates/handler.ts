@@ -130,16 +130,10 @@ const deleteCandidate = (req : Request, res : Response) => {
         });
 }
 
-const test = (req : Request, res : Response) => {
-    console.log(req.body)
-    res.send("ok")
-}
-
 export const handlerCandidate = {
     getAllCandidates,
     getCandidateById,
     createCandidate,
     updateCandidate,
-    deleteCandidate,
-    test
+    deleteCandidate
 }

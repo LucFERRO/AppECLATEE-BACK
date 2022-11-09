@@ -17,6 +17,11 @@ import { adminTypes } from "../types/admin"
 let admins = require('../database/mock-admin')
 const AdminModel = require('../models/admins')
 
+import { tokenTypes } from "../types/token"
+let tokens = require('../database/mock-token')
+const TokenModel = require('../models/tokens')
+
+
 import { availabilityTypes } from "../types/availability"
 let availabilities = require('../database/mock-availability')
 const AvailabilityModel = require('../models/availabilities')
@@ -32,6 +37,7 @@ const User = UserModel(sequelize, DataTypes)
 const Company = CompanyModel(sequelize, DataTypes)
 const Candidate = CandidateModel(sequelize, DataTypes)
 const Admin = AdminModel(sequelize, DataTypes)
+const Token = TokenModel(sequelize, DataTypes)
 const Availability = AvailabilityModel(sequelize, DataTypes)
 
 User.hasOne(Candidate , { foreignKey: 'user_id' })
@@ -47,7 +53,7 @@ const initDb = () => {
 
     return sequelize.sync({force: true}).then(()=> {
         
-        users.map((user: userTypes) => {
+        users.map((user : userTypes) => {
             User.create({
                 mail: user.mail,
                 password: user.password,
@@ -60,14 +66,14 @@ const initDb = () => {
                 phone_number: user.phone_number
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
-        companies.map((company: companyTypes) => {
+        companies.map((company : companyTypes) => {
             Company.create({
                 name: company.name,
                 siret: company.siret,
                 user_id: company.user_id
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
-        candidates.map((candidate: candidateTypes) => {
+        candidates.map((candidate : candidateTypes) => {
             Candidate.create({
                 lastname: candidate.lastname,
                 firstname: candidate.firstname,
@@ -75,11 +81,18 @@ const initDb = () => {
                 user_id: candidate.user_id
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
-        admins.map((admin: adminTypes) => {
+        admins.map((admin : adminTypes) => {
             Admin.create({
                 lastname: admin.lastname,
                 firstname: admin.firstname,
                 user_id: admin.user_id
+            }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
+        })
+        tokens.map((token : tokenTypes) => {
+            Token.create({
+                refreshToken: token.refreshToken,
+                mail: token.mail,
+                user_id: token.user_id
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
         availabilities.map((availability: availabilityTypes) => {
@@ -97,5 +110,6 @@ module.exports = {
     Company,
     Candidate,
     Admin,
+    Token,
     Availability
 }

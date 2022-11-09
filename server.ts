@@ -25,6 +25,7 @@ import { candidateRouter } from './routes/candidates/router'
 import { userRouter } from './routes/users/router'
 import { companyRouter } from './routes/companies/router'
 import { adminRouter } from './routes/admins/router'
+import { authentificationRouter } from './routes/authentification/router'
 
 // To make database, comment otherwise.
 // sequelize.initDb()
@@ -62,6 +63,7 @@ router.use('/users', userRouter)
 router.use('/candidates', candidateRouter)
 router.use('/companies', companyRouter)
 router.use('/admins', adminRouter)
+router.use('/auth', authentificationRouter)
 
 // require('./routes/availabilities/findAllAvailabilities')(app)
 
