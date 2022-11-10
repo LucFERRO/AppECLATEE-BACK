@@ -1,9 +1,9 @@
 
-import {  DataTypes, Sequelize } from "sequelize"
+import { DataTypes, Sequelize } from "sequelize"
 
-module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
+module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
 
-    const concatRequiredMessage = (data : string) => {
+    const concatRequiredMessage = (data: string) => {
         return `${data} is required`
     }
 
@@ -12,16 +12,16 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
         user_id: {
             type: dataTypes.INTEGER,
             autoIncrement: true,
-            primaryKey: true, 
+            primaryKey: true,
         },
         mail: {
             type: dataTypes.STRING,
             allowNull: false,
             unique: true,
-            validate : {
-                isEmail: true, 
-                notNull: { msg : concatRequiredMessage('Mail')},
-                notEmpty: { msg : concatRequiredMessage('Mail')}
+            validate: {
+                isEmail: true,
+                notNull: { msg: concatRequiredMessage('Mail') },
+                notEmpty: { msg: concatRequiredMessage('Mail') }
 
 
             }
@@ -30,40 +30,40 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Password')},
-                notEmpty : { msg : concatRequiredMessage('Password')}
+                notNull: { msg: concatRequiredMessage('Password') },
+                notEmpty: { msg: concatRequiredMessage('Password') }
             }
         },
         city: {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Zip code')},
-                notEmpty : { msg : concatRequiredMessage('Zip code')}
+                notNull: { msg: concatRequiredMessage('Zip code') },
+                notEmpty: { msg: concatRequiredMessage('Zip code') }
             }
         },
         zip_code: {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Zip code')},
-                notEmpty : { msg : concatRequiredMessage('Zip code')}
+                notNull: { msg: concatRequiredMessage('Zip code') },
+                notEmpty: { msg: concatRequiredMessage('Zip code') }
             }
         },
         address: {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Address')},
-                notEmpty : { msg : concatRequiredMessage('Address')}
+                notNull: { msg: concatRequiredMessage('Address') },
+                notEmpty: { msg: concatRequiredMessage('Address') }
             }
         },
         phone_number: {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Zip code')},
-                notEmpty : { msg : concatRequiredMessage('Zip code')}
+                notNull: { msg: concatRequiredMessage('Zip code') },
+                notEmpty: { msg: concatRequiredMessage('Zip code') }
             }
         },
         is_active: {
@@ -87,8 +87,8 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Avatar')},
-                notEmpty : { msg : concatRequiredMessage('Avatar')}
+                notNull: { msg: concatRequiredMessage('Avatar') },
+                notEmpty: { msg: concatRequiredMessage('Avatar') }
             }
         },
     })

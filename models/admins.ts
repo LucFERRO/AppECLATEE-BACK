@@ -1,32 +1,32 @@
 
-import {  DataTypes, Sequelize } from "sequelize"
+import { DataTypes, Sequelize } from "sequelize"
 
-module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
+module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
 
-    const concatRequiredMessage = (data : string) => {
+    const concatRequiredMessage = (data: string) => {
         return `${data} is required`
     }
 
     return sequelize.define('Admin', {
         user_id: {
             type: dataTypes.INTEGER,
-            primaryKey: true, 
+            primaryKey: true,
         },
         lastname: {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Lastname')},
-                notEmpty : { msg : concatRequiredMessage('Lastname')}
+                notNull: { msg: concatRequiredMessage('Lastname') },
+                notEmpty: { msg: concatRequiredMessage('Lastname') }
             }
         },
         firstname: {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Firstname')},
-                notEmpty : { msg : concatRequiredMessage('Firstname')}
+                notNull: { msg: concatRequiredMessage('Firstname') },
+                notEmpty: { msg: concatRequiredMessage('Firstname') }
             }
-        },        
+        },
     })
 }

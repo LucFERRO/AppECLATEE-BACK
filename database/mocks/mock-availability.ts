@@ -1,45 +1,44 @@
 const availabilities = [
     {
-      availability: 'February',
+        availability: 'February',
     },
     {
-      availability: 'April',
+        availability: 'April',
     },
     {
-      availability: 'July',
+        availability: 'July',
     },
     {
-      availability: 'August',
+        availability: 'August',
     },
     {
-      availability: 'October',
+        availability: 'October',
     },
     {
-      availability: 'Christmas',
+        availability: 'Christmas',
     },
     {
-      availability: 'Monday',
+        availability: 'Monday',
     },
     {
-      availability: 'Tuesday',
+        availability: 'Tuesday',
     },
     {
-      availability: 'Wednesday',
+        availability: 'Wednesday',
     },
     {
-      availability: 'Thursday',
+        availability: 'Thursday',
     },
     {
-      availability: 'Friday',
+        availability: 'Friday',
     },
     {
-      availability: 'Saturday',
+        availability: 'Saturday',
     },
     {
-      availability: 'Sunday',
+        availability: 'Sunday',
     },
 
-  ];
-  
-  module.exports = availabilities;
-  
+];
+
+module.exports = availabilities;

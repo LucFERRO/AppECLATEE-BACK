@@ -8,19 +8,19 @@ const { Company, User } = require("../../database/connect");
 
 const { DTO } = require("../../services/DTO/DTO")
 
-const getAllCompanies = (req : Request, res : Response) => {
-    Company.findAll({include: [User]})
-    .then((companies: companyTypes) => {
-        res.status(200).json((DTO(companies)));
-    })
-    .catch((error: ApiException) => {
-        res.status(500).json(error);
-    });
+const getAllCompanies = (req: Request, res: Response) => {
+    Company.findAll({ include: [User] })
+        .then((companies: companyTypes) => {
+            res.status(200).json((DTO(companies)));
+        })
+        .catch((error: ApiException) => {
+            res.status(500).json(error);
+        });
 }
 
-const getCompanyById = async (req : Request, res : Response) => {
+const getCompanyById = async (req: Request, res: Response) => {
     Company.findOne({
-        where: {user_id : req.params.id}, 
+        where: { user_id: req.params.id },
         include: [User]
     })
         .then((company: companyTypes) => {
@@ -37,13 +37,13 @@ const getCompanyById = async (req : Request, res : Response) => {
         });
 };
 
-const createCompany = async (req : Request, res : Response) => {
+const createCompany = async (req: Request, res: Response) => {
 
     if (!req.body.password)
-    return res.status(400).json({
-        passwordRequired: true,
-        message: "Password is required.",
-    });
+        return res.status(400).json({
+            passwordRequired: true,
+            message: "Password is required.",
+        });
 
     const { name, siret, password, mail, city, zip_code, address, phone_number, is_active, is_pending } = req.body;
 
@@ -53,23 +53,23 @@ const createCompany = async (req : Request, res : Response) => {
     let userInfo = { mail, password, city, zip_code, address, phone_number, is_active, is_pending, role }
     let hashedPassword = await bcrypt.hash(userInfo.password, 10);
     try {
-        await sequelize.transaction(async (t : any) => {
-        const newUser = await User.create(
-            { ...userInfo, password: hashedPassword },
-            { transaction: t }
-        )
+        await sequelize.transaction(async (t: any) => {
+            const newUser = await User.create(
+                { ...userInfo, password: hashedPassword },
+                { transaction: t }
+            )
 
-        companyInfo = Object.assign(companyInfo, { user_id: newUser.user_id });
+            companyInfo = Object.assign(companyInfo, { user_id: newUser.user_id });
 
-        const newCompany = await Company.create(companyInfo, { transaction: t })
-        return res.status(200).json(newCompany)
+            const newCompany = await Company.create(companyInfo, { transaction: t })
+            return res.status(200).json(newCompany)
         })
     } catch (error) {
         res.status(500).json('ERROR 500')
     }
 }
 
-const updateCompany = async (req : Request, res : Response) => {
+const updateCompany = async (req: Request, res: Response) => {
     const id = req.params.id;
 
     const { name, siret, mail, city, zip_code, address, phone_number, is_active, is_pending, role } = req.body;
@@ -83,7 +83,7 @@ const updateCompany = async (req : Request, res : Response) => {
     }
 
     try {
-        await sequelize.transaction(async (t : any) => {
+        await sequelize.transaction(async (t: any) => {
             const updatedCompany: any = await Company.update(
                 companyInfo,
                 {
@@ -107,7 +107,7 @@ const updateCompany = async (req : Request, res : Response) => {
     }
 }
 
-const deleteCompany = (req : Request, res : Response) => {
+const deleteCompany = (req: Request, res: Response) => {
     Company.findByPk(req.params.id)
         .then((company: companyTypes) => {
             if (company === null) {

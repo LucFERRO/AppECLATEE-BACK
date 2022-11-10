@@ -1,24 +1,24 @@
 
-import {  DataTypes, Sequelize, STRING } from "sequelize"
+import { DataTypes, Sequelize, STRING } from "sequelize"
 
 
-module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
+module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
 
-    const concatRequiredMessage = (data : string) => {
+    const concatRequiredMessage = (data: string) => {
         return `${data} is required`
     }
 
     return sequelize.define('Token', {
         user_id: {
             type: dataTypes.INTEGER,
-            primaryKey: true, 
+            primaryKey: true,
         },
         refreshToken: {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Token')},
-                notEmpty : { msg : concatRequiredMessage('Token')}
+                notNull: { msg: concatRequiredMessage('Token') },
+                notEmpty: { msg: concatRequiredMessage('Token') }
             }
         },
     })

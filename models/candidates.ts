@@ -1,9 +1,9 @@
 
-import {  DataTypes, Sequelize } from "sequelize"
+import { DataTypes, Sequelize } from "sequelize"
 
-module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
+module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
 
-    const concatRequiredMessage = (data : string) => {
+    const concatRequiredMessage = (data: string) => {
         return `${data} is required`
     }
 
@@ -16,28 +16,28 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Lastname')},
-                notEmpty : { msg : concatRequiredMessage('Lastname')}
+                notNull: { msg: concatRequiredMessage('Lastname') },
+                notEmpty: { msg: concatRequiredMessage('Lastname') }
             }
         },
         firstname: {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Firstname')},
-                notEmpty : { msg : concatRequiredMessage('Firstname')}
+                notNull: { msg: concatRequiredMessage('Firstname') },
+                notEmpty: { msg: concatRequiredMessage('Firstname') }
             }
         },
         birthdate: {
             type: dataTypes.DATE,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Birthdate')},
-                notEmpty : { msg : concatRequiredMessage('Birthdate')}
+                notNull: { msg: concatRequiredMessage('Birthdate') },
+                notEmpty: { msg: concatRequiredMessage('Birthdate') }
             }
         }
     },
-    {
-        timestamps: false
-    })
+        {
+            timestamps: false
+        })
 }

@@ -14,7 +14,7 @@ const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 const sequelize = require('./database/connect')
 
-import {Response, Request} from 'express'
+import { Response, Request } from 'express'
 // const passport = require('passport')
 
 app.use(express.json())
@@ -35,7 +35,7 @@ app.listen(port, () => {
     console.log(`Listening to port ${port}...`)
 })
 
-app.get("/", (req : Request, res : Response) => {
+app.get("/", (req: Request, res: Response) => {
     res.send("SWAGGER : /api/docs")
 })
 const swaggerOptions = {
@@ -47,7 +47,7 @@ const swaggerOptions = {
                 name: 'Best front-end dev EUW'
             },
             servers: [{
-                url:`http://localhost:${port}`,
+                url: `http://localhost:${port}`,
                 description: 'localhost'
             },],
         },
@@ -67,14 +67,14 @@ router.use('/auth', authentificationRouter)
 
 import { tokenTypes } from "./types/token"
 const { Token } = require("./database/connect")
-app.get('/api/tokens', (req : any, res : any) => {
+app.get('/api/tokens', (req: any, res: any) => {
     Token.findAll()
-    .then((tokens: tokenTypes) => {
-        res.status(200).json(tokens)
-    })
-    .catch((error : ApiException) => {
-        res.status(500).json(error)
-    })
+        .then((tokens: tokenTypes) => {
+            res.status(200).json(tokens)
+        })
+        .catch((error: ApiException) => {
+            res.status(500).json(error)
+        })
 })
 
 // require('./routes/availabilities/findAllAvailabilities')(app)
@@ -82,7 +82,7 @@ app.get('/api/tokens', (req : any, res : any) => {
 // require('./routes/auth/login')(app)
 // require('./routes/auth/test')(app)
 
-app.use(({res : ApiException}: any) => {
+app.use(({ res: ApiException }: any) => {
     const message = 'Ressource not found.'
-    return ApiException.status(404).json({message})
+    return ApiException.status(404).json({ message })
 })
