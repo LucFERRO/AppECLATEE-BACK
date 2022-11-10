@@ -84,7 +84,7 @@ adminRouter.post('/', handlerAdmin.createAdmin)
     *         in: body
     *         required: true
     *         type: object
-    *         default: { "lastname": "string","firstname": "string" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "lastname": "string", "firstname": "string", "description" : "", avatar: "Oui" }
     *      responses:
     *        200:
     *          description: Update admin of given id.
