@@ -60,10 +60,8 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
         },
         phone_number: {
             type: dataTypes.STRING,
-            allowNull: false,
             validate: {
-                notNull: { msg: concatRequiredMessage('Zip code') },
-                notEmpty: { msg: concatRequiredMessage('Zip code') }
+                isNumeric: { msg: 'Format de numéro de téléphone invalide.'}
             }
         },
         is_active: {

@@ -65,7 +65,7 @@ const createCompany = async (req: Request, res: Response) => {
             return res.status(200).json(newCompany)
         })
     } catch (error) {
-        res.status(500).json('ERROR 500')
+        res.status(500).json(error)
     }
 }
 

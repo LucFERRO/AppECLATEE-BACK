@@ -25,12 +25,12 @@ const login = async (req: Request, res: Response) => {
         return res.status(401).json({ successfullLogin: false, message: message });
     } else {
         const accessToken = jwt.sign(
-            { name: user.mail },
+            { id: user.user_id, name: user.mail, role: user.role },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: "15s" }
+            { expiresIn: "300s" }
         );
         const refreshToken = jwt.sign(
-            { name: user.mail },
+            { id: user.user_id, name: user.mail, role: user.role },
             process.env.REFRESH_TOKEN_SECRET
         );
 

@@ -45,12 +45,15 @@ const createAdmin = async (req: Request, res: Response) => {
             message: "Password is required.",
         });
 
-    const { lastname, firstname, password, mail, city, zip_code, address, phone_number, is_active, is_pending } = req.body;
+    const { lastname, firstname, password, mail, city, zip_code, address, phone_number, is_active, is_pending, description, avatar } = req.body;
 
     let role = 'admin'
 
     let adminInfo = { lastname, firstname }
-    let userInfo = { mail, password, city, zip_code, address, phone_number, is_active, is_pending, role }
+    let userInfo = { mail, password, city, zip_code, address, phone_number, is_active, is_pending, role, avatar }
+
+    if (description) Object.assign(userInfo, {description: description})
+
     let hashedPassword = await bcrypt.hash(userInfo.password, 10);
     try {
         await sequelize.transaction(async (t: any) => {
@@ -65,17 +68,21 @@ const createAdmin = async (req: Request, res: Response) => {
             return res.status(200).json(newAdmin)
         })
     } catch (error) {
-        res.status(500).json('ERROR 500')
+        res.status(500).json({message:'ERROR 500', error: error})
     }
 }
 
 const updateAdmin = async (req: Request, res: Response) => {
     const id = req.params.id;
 
-    const { lastname, firstname, mail, city, zip_code, address, phone_number, is_active, is_pending, role } = req.body;
+    const { lastname, firstname, mail, city, zip_code, address, phone_number, is_active, is_pending, description, avatar } = req.body;
+
+    let role = 'admin'
 
     let adminInfo = { lastname, firstname };
-    let userInfo = { mail, city, zip_code, address, phone_number, is_active, is_pending, role };
+    let userInfo = { mail, city, zip_code, address, phone_number, is_active, is_pending, role, avatar };
+
+    if (description) Object.assign(userInfo, {description: description})
 
     if (req.body.password) {
         let hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -87,7 +94,7 @@ const updateAdmin = async (req: Request, res: Response) => {
             const updatedAdmin: any = await Admin.update(
                 adminInfo,
                 {
-                    where: { id: id },
+                    where: { user_id: id },
                     returning: true,
                     plain: true,
                     transaction: t,
@@ -103,7 +110,7 @@ const updateAdmin = async (req: Request, res: Response) => {
             return res.status(200).json(updatedAdmin[1]);
         });
     } catch (error) {
-        return res.status(500).json("ERROR 500");
+        return res.status(500).json({message:"ERROR 500", error: error});
     }
 }
 
@@ -125,7 +132,7 @@ const deleteAdmin = (req: Request, res: Response) => {
         })
         .catch((error: ApiException) => {
             const message = `Could not delete admin.`;
-            res.status(500).json({ message, data: error });
+            res.status(500).json({ msg: message, data: error });
         });
 }
 
