@@ -49,7 +49,7 @@ module.exports = (app: Application) => {
                             const message = `Incorrect password.`;
                             return res
                                 .status(401)
-                                .json({ message, success : false });
+                                .json({ message, success: false });
                         }
                         // JWT
 
@@ -66,7 +66,7 @@ module.exports = (app: Application) => {
                             succes: true,
                             message: "Logged in successfully",
                             token: "Bearer " + token,
-                            data : user
+                            data: user
                         });
                     })
                     .catch((err: Error) => {

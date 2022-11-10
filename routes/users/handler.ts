@@ -8,11 +8,11 @@ const { User } = require("../../database/connect");
 
 const { DTO } = require("../../services/DTO/DTO")
 
-const getAllUsers = (req : Request, res : Response) => {
+const getAllUsers = (req: Request, res: Response) => {
     User.findAll({
-        order: ['user_id'], 
-        attributes: ['user_id','mail','city','zip_code','address','phone_number','is_active','is_pending','role','createdAt','updatedAt']
-})
+        order: ['user_id'],
+        attributes: ['user_id', 'mail', 'city', 'zip_code', 'address', 'phone_number', 'is_active', 'is_pending', 'role', 'createdAt', 'updatedAt']
+    })
         .then((users: userTypes) => {
             res.status(200).json(DTO(users));
         })
@@ -21,10 +21,10 @@ const getAllUsers = (req : Request, res : Response) => {
         });
 }
 
-const getUserById = (req : Request, res : Response) => {
+const getUserById = (req: Request, res: Response) => {
     User.findOne({
-        where: {user_id : req.params.id}, 
-        attributes: ['user_id','mail','city','zip_code','address','phone_number','is_active','is_pending','role','createdAt','updatedAt']
+        where: { user_id: req.params.id },
+        attributes: ['user_id', 'mail', 'city', 'zip_code', 'address', 'phone_number', 'is_active', 'is_pending', 'role', 'createdAt', 'updatedAt']
     })
         .then((user: userTypes) => {
             if (user === null) {
@@ -40,7 +40,7 @@ const getUserById = (req : Request, res : Response) => {
         });
 };
 
-const createUser = async (req : Request, res : Response) => {
+const createUser = async (req: Request, res: Response) => {
     if (!req.body.password)
         return res.status(400).json({
             passwordRequired: true,
@@ -64,15 +64,15 @@ const createUser = async (req : Request, res : Response) => {
         });
 };
 
-const updateUser = async (req : Request , res : Response) => {
+const updateUser = async (req: Request, res: Response) => {
     const id = req.params.id;
 
     if (req.body.password) {
         let hashedPassword = await bcrypt.hash(req.body.password, 10);
-        req.body = {...req.body, password: hashedPassword}
+        req.body = { ...req.body, password: hashedPassword }
     }
 
-    User.update(req.body , {where: { user_id: id }}
+    User.update(req.body, { where: { user_id: id } }
     )
         .then(() => {
             return User.findByPk(id).then((user: userTypes) => {
@@ -95,7 +95,7 @@ const updateUser = async (req : Request , res : Response) => {
         });
 };
 
-const deleteUser = (req : Request, res : Response) => {
+const deleteUser = (req: Request, res: Response) => {
     User.findByPk(req.params.id)
         .then((user: userTypes) => {
             if (user === null) {

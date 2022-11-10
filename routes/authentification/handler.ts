@@ -10,8 +10,8 @@ const { User, Token } = require("../../database/connect");
 
 const { DTO_login } = require("../../services/DTO/DTO")
 
-const login = async (req : Request, res : Response) => {
-    const user = await User.findOne({where: {mail : req.body.mail}})
+const login = async (req: Request, res: Response) => {
+    const user = await User.findOne({ where: { mail: req.body.mail } })
 
     let message: string = "";
 
@@ -36,36 +36,36 @@ const login = async (req : Request, res : Response) => {
 
         const token = await Token.findOne({ where: { user_id: user.user_id } })
 
-        if (token !== null) Token.destroy({where: { user_id: user.user_id }})
+        if (token !== null) Token.destroy({ where: { user_id: user.user_id } })
 
         Token.create({
-            user_id : user.user_id,
-            refreshToken : refreshToken
+            user_id: user.user_id,
+            refreshToken: refreshToken
         })
 
-        return res.status(200).json(DTO_login({accessToken: accessToken, refreshToken: refreshToken, user: user}))
+        return res.status(200).json(DTO_login({ accessToken: accessToken, refreshToken: refreshToken, user: user }))
     }
 };
 
-const refreshToken = async (req : Request, res : Response) => {
+const refreshToken = async (req: Request, res: Response) => {
 
     const refreshToken = req.body.token
     if (refreshToken == null) return res.sendStatus(400)
 
     const tokens = await Token.findAll()
 
-    let refreshTokens : any = []
+    let refreshTokens: any = []
 
-    tokens.map((token : tokenTypes) => {
+    tokens.map((token: tokenTypes) => {
         refreshTokens.push(token.refreshToken)
     })
 
     if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
 
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err : Error, user : userTypes) => {
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err: Error, user: userTypes) => {
         if (err) return res.sendStatus(403)
-        const accessToken = jwt.sign({name: user.mail}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15s'})
-        res.json({accessToken: accessToken})
+        const accessToken = jwt.sign({ name: user.mail }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
+        res.json({ accessToken: accessToken })
     })
 };
 

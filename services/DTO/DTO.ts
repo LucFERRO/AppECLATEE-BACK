@@ -1,4 +1,4 @@
-const DTO_ifier = (item : any) => {
+const DTO_ifier = (item: any) => {
     if (!item.User) {
         return item
     }
@@ -11,18 +11,18 @@ const DTO_ifier = (item : any) => {
     return newItem
 }
 
-const DTO = (data : any) => {
+const DTO = (data: any) => {
 
-    if ( !data.length ) return DTO_ifier(data)
+    if (!data.length) return DTO_ifier(data)
 
-    return data.map( (item : any) => {
+    return data.map((item: any) => {
         return DTO_ifier(item)
     })
 }
 
-const DTO_login = (data : any) => {
+const DTO_login = (data: any) => {
 
-    const formatedData = Object.assign(data, {user_id: data.user.user_id})
+    const formatedData = Object.assign(data, { user_id: data.user.user_id })
     delete data['user']
 
     return formatedData

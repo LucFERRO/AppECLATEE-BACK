@@ -30,7 +30,7 @@ import sequelize from './sequelize'
 
 sequelize.authenticate()
     .then(() => console.log('Successfully connected to database.'))
-    .catch((error : Error) => console.error(`Could not connect to database: ${error}`)
+    .catch((error: Error) => console.error(`Could not connect to database: ${error}`)
     )
 
 const User = UserModel(sequelize, DataTypes)
@@ -40,23 +40,23 @@ const Admin = AdminModel(sequelize, DataTypes)
 const Token = TokenModel(sequelize, DataTypes)
 const Availability = AvailabilityModel(sequelize, DataTypes)
 
-User.hasOne(Candidate , { foreignKey: 'user_id' })
+User.hasOne(Candidate, { foreignKey: 'user_id' })
 Candidate.belongsTo(User, { foreignKey: 'user_id' })
 
-User.hasOne(Company , { foreignKey: 'user_id' })
+User.hasOne(Company, { foreignKey: 'user_id' })
 Company.belongsTo(User, { foreignKey: 'user_id' })
 
-User.hasOne(Admin , { foreignKey: 'user_id' })
+User.hasOne(Admin, { foreignKey: 'user_id' })
 Admin.belongsTo(User, { foreignKey: 'user_id' })
 
-User.hasOne(Token , { foreignKey: 'user_id' })
+User.hasOne(Token, { foreignKey: 'user_id' })
 Token.belongsTo(User, { foreignKey: 'user_id' })
 
 const initDb = () => {
 
-    return sequelize.sync({force: true}).then(()=> {
-        
-        users.map((user : userTypes) => {
+    return sequelize.sync({ force: true }).then(() => {
+
+        users.map((user: userTypes) => {
             User.create({
                 mail: user.mail,
                 password: user.password,
@@ -71,14 +71,14 @@ const initDb = () => {
                 avatar: user.avatar
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
-        companies.map((company : companyTypes) => {
+        companies.map((company: companyTypes) => {
             Company.create({
                 user_id: company.user_id,
                 name: company.name,
                 siret: company.siret
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
-        candidates.map((candidate : candidateTypes) => {
+        candidates.map((candidate: candidateTypes) => {
             Candidate.create({
                 user_id: candidate.user_id,
                 lastname: candidate.lastname,
@@ -86,14 +86,14 @@ const initDb = () => {
                 birthdate: candidate.birthdate
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
-        admins.map((admin : adminTypes) => {
+        admins.map((admin: adminTypes) => {
             Admin.create({
                 user_id: admin.user_id,
                 lastname: admin.lastname,
                 firstname: admin.firstname
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
-        tokens.map((token : tokenTypes) => {
+        tokens.map((token: tokenTypes) => {
             Token.create({
                 user_id: token.user_id,
                 refreshToken: token.refreshToken
@@ -109,8 +109,8 @@ const initDb = () => {
 }
 
 module.exports = {
-    initDb, 
-    User, 
+    initDb,
+    User,
     Company,
     Candidate,
     Admin,

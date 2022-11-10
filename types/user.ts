@@ -1,5 +1,5 @@
 export interface userTypes {
-    user_id : number;
+    user_id: number;
     mail: string;
     password: string;
     zip_code: string;
@@ -15,7 +15,4 @@ export interface userTypes {
 
 // export interface candidateTypes extends userTypes{
 
-
-
 // }
-

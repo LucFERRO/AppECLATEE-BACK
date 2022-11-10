@@ -1,4 +1,4 @@
-export interface tokenTypes{
-    user_id : number;
-    refreshToken : string;
+export interface tokenTypes {
+    user_id: number;
+    refreshToken: string;
 }

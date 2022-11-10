@@ -3,5 +3,3 @@ export interface companyTypes {
     name: string;
     siret: string;
 }
-
-

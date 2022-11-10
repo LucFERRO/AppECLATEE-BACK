@@ -4,5 +4,3 @@ export interface candidateTypes {
     firstname: string;
     birthdate: Date;
 }
-
-

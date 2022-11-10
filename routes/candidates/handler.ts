@@ -8,8 +8,8 @@ const { Candidate, User } = require("../../database/connect");
 
 const { DTO } = require("../../services/DTO/DTO")
 
-const getAllCandidates = (req : Request, res : Response) => {
-    Candidate.findAll({include: [User]})
+const getAllCandidates = (req: Request, res: Response) => {
+    Candidate.findAll({ include: [User] })
         .then((candidates: candidateTypes) => {
             res.status(200).json(DTO(candidates));
         })
@@ -18,9 +18,9 @@ const getAllCandidates = (req : Request, res : Response) => {
         });
 };
 
-const getCandidateById = async (req : Request, res : Response) => {
+const getCandidateById = async (req: Request, res: Response) => {
     Candidate.findOne({
-        where: {user_id : req.params.id}, 
+        where: { user_id: req.params.id },
         include: [User]
     })
         .then((candidate: candidateTypes) => {
@@ -37,13 +37,13 @@ const getCandidateById = async (req : Request, res : Response) => {
         });
 };
 
-const createCandidate = async (req : Request, res : Response) => {
+const createCandidate = async (req: Request, res: Response) => {
 
     if (!req.body.password)
-    return res.status(400).json({
-        passwordRequired: true,
-        message: "Password is required.",
-    });
+        return res.status(400).json({
+            passwordRequired: true,
+            message: "Password is required.",
+        });
 
     const { lastname, firstname, birthdate, password, mail, city, zip_code, address, phone_number, is_active, is_pending } = req.body;
 
@@ -53,23 +53,23 @@ const createCandidate = async (req : Request, res : Response) => {
     let userInfo = { mail, password, city, zip_code, address, phone_number, is_active, is_pending, role }
     let hashedPassword = await bcrypt.hash(userInfo.password, 10);
     try {
-        await sequelize.transaction(async (t : any) => {
-        const newUser = await User.create(
-            { ...userInfo, password: hashedPassword },
-            { transaction: t }
-        )
+        await sequelize.transaction(async (t: any) => {
+            const newUser = await User.create(
+                { ...userInfo, password: hashedPassword },
+                { transaction: t }
+            )
 
-        candidateInfo = Object.assign(candidateInfo, { user_id: newUser.user_id });
+            candidateInfo = Object.assign(candidateInfo, { user_id: newUser.user_id });
 
-        const newCandidate = await Candidate.create(candidateInfo, { transaction: t })
-        return res.status(200).json(newCandidate)
+            const newCandidate = await Candidate.create(candidateInfo, { transaction: t })
+            return res.status(200).json(newCandidate)
         })
     } catch (error) {
         res.status(500).json('ERROR 500')
     }
 }
 
-const updateCandidate = async (req : Request, res : Response) => {
+const updateCandidate = async (req: Request, res: Response) => {
     const id = req.params.id;
 
     const { lastname, firstname, birthdate, mail, city, zip_code, address, phone_number, is_active, is_pending, role } = req.body;
@@ -83,7 +83,7 @@ const updateCandidate = async (req : Request, res : Response) => {
     }
 
     try {
-        await sequelize.transaction(async (t : any) => {
+        await sequelize.transaction(async (t: any) => {
             const updatedCandidate: any = await Candidate.update(
                 candidateInfo,
                 {
@@ -107,7 +107,7 @@ const updateCandidate = async (req : Request, res : Response) => {
     }
 }
 
-const deleteCandidate = (req : Request, res : Response) => {
+const deleteCandidate = (req: Request, res: Response) => {
     Candidate.findByPk(req.params.id)
         .then((candidate: candidateTypes) => {
             if (candidate === null) {
