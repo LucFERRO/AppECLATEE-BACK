@@ -1,5 +1,4 @@
 require('dotenv').config()
-require('./database/passport')
 
 const cors = require('cors')
 const express = require("express")
@@ -15,10 +14,8 @@ const swaggerUi = require('swagger-ui-express')
 const sequelize = require('./database/connect')
 
 import { Response, Request } from 'express'
-// const passport = require('passport')
 
 app.use(express.json())
-// app.use(passport.initialize())
 app.use('/api', router)
 
 import { candidateRouter } from './routes/candidates/router'
@@ -39,18 +36,32 @@ app.get("/", (req: Request, res: Response) => {
     res.send("SWAGGER : /api/docs")
 })
 const swaggerOptions = {
+    openapi: "3.0.1",
     swaggerDefinition: {
         info: {
-            title: 'TITRE',
-            description: 'DESCRIPTION',
+            title: 'A-P-P ECLATEE',
+            description: 'Trop bien cette a-p-p',
             contact: {
-                name: 'Best front-end dev EUW'
+                name: 'Best front-end dev & best back-end EUW'
             },
             servers: [{
                 url: `http://localhost:${port}`,
                 description: 'localhost'
             },],
         },
+        securityDefinitions: {
+            bearerAuth: {
+                type: 'apiKey',
+                name: 'Authorization',
+                scheme: 'bearer',
+                in: 'header',
+            },
+        },
+        security: [
+            {
+                bearerAuth: []
+            }
+        ],
     },
     apis: [`./routes/*/router.ts`]
 }
@@ -58,10 +69,14 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
 router.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
+import { authenticateToken } from './middleware/authenticate'
+
 router.use('/users', userRouter)
 router.use('/candidates', candidateRouter)
 router.use('/companies', companyRouter)
-router.use('/admins', adminRouter)
+router.use('/admins', 
+// authenticateToken, 
+adminRouter)
 router.use('/auth', authentificationRouter)
 
 

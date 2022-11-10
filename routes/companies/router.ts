@@ -1,6 +1,7 @@
 const { Router } = require('express')
 
 import { handlerCompany } from './handler'
+import { authenticateToken } from '../../middleware/authenticate'
 
 export const companyRouter = Router();
 
@@ -39,7 +40,9 @@ companyRouter.get('/', handlerCompany.getAllCompanies)
  *        200:
  *          description: Get company of given id.
  */
-companyRouter.get('/:id', handlerCompany.getCompanyById)
+companyRouter.get('/:id'
+// , authenticateToken
+, handlerCompany.getCompanyById)
 
 /**
  * @openapi
@@ -84,7 +87,7 @@ companyRouter.post('/', handlerCompany.createCompany)
  *        200:
  *          description: Update company of given id.
  */
-companyRouter.put('/:id', handlerCompany.updateCompany)
+companyRouter.put('/:id', authenticateToken, handlerCompany.updateCompany)
 
 /**
  * @openapi
@@ -102,4 +105,4 @@ companyRouter.put('/:id', handlerCompany.updateCompany)
  *        200:
  *          description: Delete a company.
  */
-companyRouter.delete('/:id', handlerCompany.deleteCompany)
+companyRouter.delete('/:id', authenticateToken, handlerCompany.deleteCompany)

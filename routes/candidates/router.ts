@@ -1,6 +1,7 @@
 const { Router } = require('express')
 
 import { handlerCandidate } from './handler'
+import { authenticateToken } from '../../middleware/authenticate'
 
 export const candidateRouter = Router();
 
@@ -40,7 +41,9 @@ candidateRouter.get('/', handlerCandidate.getAllCandidates)
  *        200:
  *          description: Get candidate of given id.
  */
-candidateRouter.get('/:id', handlerCandidate.getCandidateById)
+candidateRouter.get('/:id'
+// , authenticateToken
+, handlerCandidate.getCandidateById)
 
 /**
  * @openapi
@@ -85,7 +88,7 @@ candidateRouter.post('/', handlerCandidate.createCandidate)
  *        200:
  *          description: Update candidate of given id.
  */
-candidateRouter.put('/:id', handlerCandidate.updateCandidate)
+candidateRouter.put('/:id', authenticateToken, handlerCandidate.updateCandidate)
 
 /**
  * @openapi
@@ -103,4 +106,4 @@ candidateRouter.put('/:id', handlerCandidate.updateCandidate)
  *        200:
  *          description: Delete a candidate.
  */
-candidateRouter.delete('/:id', handlerCandidate.deleteCandidate)
+candidateRouter.delete('/:id', authenticateToken, handlerCandidate.deleteCandidate)

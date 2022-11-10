@@ -1,6 +1,7 @@
 const { Router } = require('express')
 
 import { handlerAdmin } from './handler'
+import { authorization } from '../../middleware/authorizations'
 
 export const adminRouter = Router();
 
@@ -21,7 +22,9 @@ export const adminRouter = Router();
  *        200:
  *          description: Get the list of all candidates.
  */
-adminRouter.get('/', handlerAdmin.getAllAdmins)
+adminRouter.get('/'
+// , authorization
+, handlerAdmin.getAllAdmins)
 
 /**
     * @openapi
@@ -54,7 +57,7 @@ adminRouter.get('/:id', handlerAdmin.getAdminById)
  *         in: body
  *         required: true
  *         type: object
- *         default: { "lastname": "string","firstname":"string" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "lastname": "string", "firstname": "string", "description" : "", avatar: "Oui" }
  *      responses:
  *        200:
  *          description: Create a new admin.
@@ -79,7 +82,7 @@ adminRouter.post('/', handlerAdmin.createAdmin)
     *         in: body
     *         required: true
     *         type: object
-    *         default: { "lastname": "string","firstname": "string" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "lastname": "string", "firstname": "string", "description" : "", avatar: "Oui" }
     *      responses:
     *        200:
     *          description: Update admin of given id.

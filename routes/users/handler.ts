@@ -35,8 +35,7 @@ const getUserById = (req: Request, res: Response) => {
             res.json(user);
         })
         .catch((error: ApiException) => {
-            const message = "Cannot find user.";
-            res.status(500).json({ message, data: error });
+            res.status(500).json(error);
         });
 };
 
@@ -50,8 +49,7 @@ const createUser = async (req: Request, res: Response) => {
     let hashedPassword = await bcrypt.hash(req.body.password, 10);
     User.create({ ...req.body, password: hashedPassword })
         .then((user: userTypes) => {
-            const message: string = `User ${user.mail} successfully created.`;
-            res.json({ message, data: user });
+            res.json(user);
         })
         .catch((error: ApiException) => {
             if (error instanceof ValidationError) {
@@ -59,8 +57,7 @@ const createUser = async (req: Request, res: Response) => {
                     .status(400)
                     .json({ message: error.message, data: error });
             }
-            const message = `Could not create new user.`;
-            res.status(500).json({ message, data: error });
+            res.status(500).json(error);
         });
 };
 

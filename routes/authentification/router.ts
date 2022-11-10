@@ -24,7 +24,7 @@ export const authentificationRouter = Router();
  *         in: body
  *         required: true
  *         type: object
- *         default: {"mail": "email@email.fr", "password": "string"}
+ *         default: {"mail": "remy@c.fr", "password": "1234"}
  *      responses:
  *        200:
  *          description: Login. Returns tokens if successful login.

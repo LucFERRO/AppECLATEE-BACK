@@ -65,7 +65,7 @@ const createCandidate = async (req: Request, res: Response) => {
             return res.status(200).json(newCandidate)
         })
     } catch (error) {
-        res.status(500).json('ERROR 500')
+        res.status(500).json({msg:'ERROR 500', error})
     }
 }
 
