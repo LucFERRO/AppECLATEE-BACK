@@ -10,6 +10,8 @@ const users = [
         is_active: true,
         is_pending: false,
         role: "candidat",
+        description: 'best front-end EUW',
+        avatar: '///'
     },
     {
         mail: "remy@c.fr",
@@ -22,6 +24,8 @@ const users = [
         is_active: true,
         is_pending: false,
         role: "admin",
+        description: 'best back-end EUW',
+        avatar: '///'
     },
     {
         mail: "pending@n.fr",
@@ -34,6 +38,7 @@ const users = [
         is_active: false,
         is_pending: true,
         role: "candidat",
+        avatar: '///'
     },
     {
         mail: "ghedeon@n.fr",
@@ -46,6 +51,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        avatar: '///'
     },
     {
         mail: "test1@n.fr",
@@ -82,6 +88,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        avatar: '///'
     },
     {
         mail: "test4@n.fr",
@@ -94,6 +101,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        avatar: '///'
     },
     {
         mail: "test5@n.fr",
@@ -118,6 +126,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        avatar: '///'
     },
     {
         mail: "test7@n.fr",
@@ -142,6 +151,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        avatar: '///'
     },
     {
         mail: "test9@n.fr",
@@ -166,6 +176,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        avatar: '///'
     },
     {
         mail: "test11@n.fr",
@@ -178,6 +189,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        avatar: '///'
     },
     {
         mail: "test12@n.fr",
@@ -190,6 +202,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        avatar: '///'
     },
     {
         mail: "test13@n.fr",
@@ -202,6 +215,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        avatar: '///'
     },
     {
         mail: "test14@n.fr",
@@ -214,6 +228,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        avatar: '///'
     },
     {
         mail: "test15@n.fr",
@@ -226,6 +241,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        avatar: '///'
     },
 ];
 

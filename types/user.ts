@@ -9,8 +9,8 @@ export interface userTypes {
     is_active: boolean;
     is_pending: boolean;
     role: string;
-    // description: string;
-    // image: string;
+    description: string;
+    avatar: string;
 }
 
 // export interface candidateTypes extends userTypes{

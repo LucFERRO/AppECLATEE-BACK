@@ -21,7 +21,7 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             validate : {
                 isEmail: true, 
                 notNull: { msg : concatRequiredMessage('Mail')},
-                notEmpty: { msg : concatRequiredMessage('mail')}
+                notEmpty: { msg : concatRequiredMessage('Mail')}
 
 
             }
@@ -78,6 +78,18 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
         },
         role: {
             type: dataTypes.STRING,
-        }
+        },
+        description: {
+            type: dataTypes.STRING,
+            allowNull: true,
+        },
+        avatar: {
+            type: dataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notNull: { msg : concatRequiredMessage('Avatar')},
+                notEmpty : { msg : concatRequiredMessage('Avatar')}
+            }
+        },
     })
 }
