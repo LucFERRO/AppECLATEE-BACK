@@ -20,8 +20,17 @@ const DTO = (data : any) => {
     })
 }
 
+const DTO_login = (data : any) => {
+
+    const formatedData = Object.assign(data, {user_id: data.user.user_id})
+    delete data['user']
+
+    return formatedData
+}
+
 // Faire une fonction pour le all et une pour le singleton
 
 module.exports = {
-    DTO
+    DTO,
+    DTO_login
 }

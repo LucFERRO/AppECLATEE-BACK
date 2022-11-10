@@ -20,7 +20,7 @@ const getAllCandidates = (req : Request, res : Response) => {
 
 const getCandidateById = async (req : Request, res : Response) => {
     Candidate.findOne({
-        where: {id : req.params.id}, 
+        where: {user_id : req.params.id}, 
         include: [User]
     })
         .then((candidate: candidateTypes) => {
