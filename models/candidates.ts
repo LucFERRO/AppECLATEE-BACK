@@ -29,7 +29,7 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             }
         },
         birthdate: {
-            type: dataTypes.STRING,
+            type: dataTypes.DATE,
             allowNull: false,
             validate: {
                 notNull: { msg : concatRequiredMessage('Birthdate')},
