@@ -74,7 +74,9 @@ import { authenticateToken } from './middleware/authenticate'
 router.use('/users', userRouter)
 router.use('/candidates', candidateRouter)
 router.use('/companies', companyRouter)
-router.use('/admins', authenticateToken, adminRouter)
+router.use('/admins', 
+// authenticateToken, 
+adminRouter)
 router.use('/auth', authentificationRouter)
 
 

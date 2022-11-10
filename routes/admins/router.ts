@@ -23,7 +23,7 @@ export const adminRouter = Router();
  *          description: Get the list of all candidates.
  */
 adminRouter.get('/'
-, authorization
+// , authorization
 , handlerAdmin.getAllAdmins)
 
 /**
@@ -42,9 +42,7 @@ adminRouter.get('/'
     *        200:
     *          description: Get admin of given id.
     */
-adminRouter.get('/:id'
-// , authenticateToken
-, handlerAdmin.getAdminById)
+adminRouter.get('/:id', handlerAdmin.getAdminById)
 
 /**
  * @openapi
