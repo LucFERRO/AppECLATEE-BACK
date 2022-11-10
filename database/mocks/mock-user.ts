@@ -74,7 +74,7 @@ const users = [
         city: "Boulogne sur merde",
         phone_number: "01 23 45 67 89",
         address: "9 rue Test de la chaudière",
-        is_active: false,
+        is_active: true,
         is_pending: false,
         role: "admin",
         avatar: '///'
