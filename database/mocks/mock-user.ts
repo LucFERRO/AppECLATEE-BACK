@@ -64,6 +64,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "entreprise",
+        avatar: '///'
     },
     {
         mail: "test2@n.fr",
@@ -76,6 +77,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "admin",
+        avatar: '///'
     },
     {
         mail: "test3@n.fr",
@@ -114,6 +116,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "entreprise",
+        avatar: '///'
     },
     {
         mail: "test6@n.fr",
@@ -139,6 +142,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "entreprise",
+        avatar: '///'
     },
     {
         mail: "test8@n.fr",
@@ -164,6 +168,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "entreprise",
+        avatar: '///'
     },
     {
         mail: "test10@n.fr",

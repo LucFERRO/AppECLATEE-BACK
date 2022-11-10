@@ -66,7 +66,9 @@ const initDb = () => {
                 zip_code: user.zip_code,
                 city: user.city,
                 address: user.address,
-                phone_number: user.phone_number
+                phone_number: user.phone_number,
+                description: user.description,
+                avatar: user.avatar
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
         companies.map((company : companyTypes) => {
