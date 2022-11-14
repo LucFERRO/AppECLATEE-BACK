@@ -64,6 +64,8 @@ const initDb = () => {
                 is_pending: user.is_pending,
                 is_to_be_completed: user.is_to_be_completed,
                 role: user.role,
+                availabilities: user.availabilities,
+                degrees: user.degrees,
                 zip_code: user.zip_code,
                 city: user.city,
                 address: user.address,

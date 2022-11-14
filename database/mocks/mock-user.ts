@@ -10,6 +10,8 @@ const users = [
         is_active: true,
         is_pending: false,
         role: "candidat",
+        availabilities: ['Noël', 'Juillet', 'Août'],
+        degrees: ['DEV WEB LOL'],
         description: 'best front-end EUW',
         avatar: '///'
     },
@@ -24,6 +26,7 @@ const users = [
         is_active: true,
         is_pending: false,
         role: "admin",
+        availabilities: ['Noël'],
         description: 'best back-end EUW',
         avatar: '///'
     },
@@ -38,6 +41,7 @@ const users = [
         is_active: false,
         is_pending: true,
         role: "candidat",
+        availabilities: ['Noël'],
         avatar: '///'
     },
     {
@@ -52,6 +56,7 @@ const users = [
         is_pending: false,
         is_to_be_completed: true,
         role: "candidat",
+        availabilities: ['Noël'],
         avatar: '///'
     },
     {
@@ -65,6 +70,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "entreprise",
+        availabilities: ['Noël'],
         avatar: '///'
     },
     {
@@ -78,6 +84,7 @@ const users = [
         is_active: true,
         is_pending: false,
         role: "admin",
+        availabilities: ['Noël'],
         avatar: '///'
     },
     {
@@ -91,6 +98,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        availabilities: ['Noël'],
         avatar: '///'
     },
     {
@@ -104,6 +112,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        availabilities: ['Noël'],
         avatar: '///'
     },
     {
@@ -117,6 +126,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "entreprise",
+        availabilities: ['Noël'],
         avatar: '///'
     },
     {
@@ -130,6 +140,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        availabilities: ['Noël'],
         avatar: '///'
     },
     {
@@ -143,6 +154,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "entreprise",
+        availabilities: ['Noël'],
         avatar: '///'
     },
     {
@@ -156,6 +168,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        availabilities: ['Noël'],
         avatar: '///'
     },
     {
@@ -169,6 +182,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "entreprise",
+        availabilities: ['Noël'],
         avatar: '///'
     },
     {
@@ -182,6 +196,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        availabilities: ['Noël'],
         avatar: '///'
     },
     {
@@ -195,6 +210,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        availabilities: ['Noël'],
         avatar: '///'
     },
     {
@@ -208,6 +224,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        availabilities: ['Noël'],
         avatar: '///'
     },
     {
@@ -221,6 +238,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        availabilities: ['Noël'],
         avatar: '///'
     },
     {
@@ -234,6 +252,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        availabilities: ['Noël'],
         avatar: '///'
     },
     {
@@ -247,6 +266,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
+        availabilities: ['Noël'],
         avatar: '///'
     },
 ];
