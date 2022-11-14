@@ -49,7 +49,7 @@ const users = [
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: false,
-        is_pending: true,
+        is_pending: false,
         is_to_be_completed: true,
         role: "candidat",
         avatar: '///'
