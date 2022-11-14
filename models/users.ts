@@ -60,9 +60,9 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
         },
         phone_number: {
             type: dataTypes.STRING,
-            validate: {
-                isNumeric: { msg: 'Format de numéro de téléphone invalide.'}
-            }
+            // validate: {
+            //     isNumeric: { msg: 'Format de numéro de téléphone invalide.'}
+            // }
         },
         is_active: {
             type: dataTypes.BOOLEAN,
@@ -78,14 +78,6 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
             type: dataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false
-        },
-        availabilities: {
-            type: dataTypes.ARRAY(DataTypes.STRING),
-            allowNull: false
-        },
-        degrees: {
-            type: dataTypes.ARRAY(DataTypes.STRING),
-            allowNull: true
         },
         role: {
             type: dataTypes.STRING,

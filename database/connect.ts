@@ -64,8 +64,6 @@ const initDb = () => {
                 is_pending: user.is_pending,
                 is_to_be_completed: user.is_to_be_completed,
                 role: user.role,
-                availabilities: user.availabilities,
-                degrees: user.degrees,
                 zip_code: user.zip_code,
                 city: user.city,
                 address: user.address,
@@ -78,7 +76,8 @@ const initDb = () => {
             Company.create({
                 user_id: company.user_id,
                 name: company.name,
-                siret: company.siret
+                siret: company.siret,
+                availabilities: company.availabilities,
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
         candidates.map((candidate: candidateTypes) => {
@@ -86,7 +85,9 @@ const initDb = () => {
                 user_id: candidate.user_id,
                 lastname: candidate.lastname,
                 firstname: candidate.firstname,
-                birthdate: candidate.birthdate
+                birthdate: candidate.birthdate,
+                availabilities: candidate.availabilities,
+                degrees: candidate.degrees,
             }).then((response: { toJSON: () => string }) => console.log(response.toJSON()))
         })
         admins.map((admin: adminTypes) => {

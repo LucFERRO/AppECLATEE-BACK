@@ -44,7 +44,7 @@ const createAdmin = async (req: Request, res: Response) => {
             message: "Veuillez renseigner un mot de passe.",
         });
 
-    const { lastname, firstname, password, mail, city, zip_code, address, phone_number, is_active, is_pending, description, avatar } = req.body;
+    const { lastname, firstname, password, mail, city, zip_code, address, phone_number, is_active, is_pending, avatar, description } = req.body;
 
     let role = 'admin'
 

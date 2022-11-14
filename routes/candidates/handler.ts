@@ -32,7 +32,7 @@ const getCandidateById = async (req: Request, res: Response) => {
             res.status(200).json(DTO(candidate));
         })
         .catch((error: ApiException) => {
-            res.status(500).json({ message: 'ERROR 500', data: error});
+            res.status(500).json({ message: 'ERROR 500', data: error });
         });
 };
 
@@ -44,13 +44,16 @@ const createCandidate = async (req: Request, res: Response) => {
             message: "Veuillez renseigner un mot de passe.",
         });
 
-    const { lastname, firstname, birthdate, password, mail, city, zip_code, address, phone_number, is_active, is_pending } = req.body;
+    const { lastname, firstname, birthdate, password, mail, city, zip_code, address, avatar, description, availabilities, degrees, phone_number, is_active, is_pending } = req.body;
 
     let role = 'candidat'
 
-    let candidateInfo = { lastname, firstname, birthdate }
-    let userInfo = { mail, password, city, zip_code, address, phone_number, is_active, is_pending, role }
+    let candidateInfo = { lastname, firstname, birthdate, availabilities, degrees }
+    let userInfo = { mail, password, city, zip_code, address, avatar, phone_number, is_active, is_pending, role }
     let hashedPassword = await bcrypt.hash(userInfo.password, 10);
+
+    if (description) Object.assign(userInfo, { description: description })
+
     try {
         await sequelize.transaction(async (t: any) => {
             const newUser = await User.create(
@@ -64,17 +67,19 @@ const createCandidate = async (req: Request, res: Response) => {
             return res.status(200).json(newCandidate)
         })
     } catch (error) {
-        res.status(500).json({msg:'ERROR 500', error})
+        res.status(500).json({ msg: 'ERROR 500', error: error })
     }
 }
 
 const updateCandidate = async (req: Request, res: Response) => {
     const id = req.params.id;
 
-    const { lastname, firstname, birthdate, mail, city, zip_code, address, phone_number, is_active, is_pending, role } = req.body;
+    const { lastname, firstname, birthdate, mail, city, zip_code, address, avatar, description, availabilities, degrees, phone_number, is_active, is_pending, role } = req.body;
 
-    let candidateInfo = { lastname, firstname, birthdate };
-    let userInfo = { mail, city, zip_code, address, phone_number, is_active, is_pending, role };
+    let candidateInfo = { lastname, firstname, birthdate, availabilities, degrees };
+    let userInfo = { mail, city, zip_code, address, avatar, phone_number, is_active, is_pending, role };
+
+    if (description) Object.assign(userInfo, { description: description })
 
     if (req.body.password) {
         let hashedPassword = await bcrypt.hash(req.body.password, 10);

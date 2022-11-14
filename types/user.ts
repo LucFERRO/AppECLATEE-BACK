@@ -9,8 +9,6 @@ export interface userTypes {
     is_active: boolean;
     is_pending: boolean;
     is_to_be_completed: boolean;
-    availabilities: any;
-    degrees: any,
     role: string;
     description: string;
     avatar: string;

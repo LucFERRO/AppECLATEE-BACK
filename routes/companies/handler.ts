@@ -44,12 +44,14 @@ const createCompany = async (req: Request, res: Response) => {
             message: "Veuillez renseigner un mot de passe.",
         });
 
-    const { name, siret, password, mail, city, zip_code, address, phone_number, is_active, is_pending } = req.body;
+    const { name, siret, password, mail, city, zip_code, address, avatar, description, availabilities, degrees, phone_number, is_active, is_pending } = req.body;
 
     let role = 'entreprise'
 
-    let companyInfo = { name, siret }
-    let userInfo = { mail, password, city, zip_code, address, phone_number, is_active, is_pending, role }
+    let companyInfo = { name, siret, availabilities, degrees }
+    let userInfo = { mail, password, city, zip_code, address, avatar, phone_number, is_active, is_pending, role }
+    if (description) Object.assign(userInfo, { description: description })
+
     let hashedPassword = await bcrypt.hash(userInfo.password, 10);
     try {
         await sequelize.transaction(async (t: any) => {
@@ -71,10 +73,12 @@ const createCompany = async (req: Request, res: Response) => {
 const updateCompany = async (req: Request, res: Response) => {
     const id = req.params.id;
 
-    const { name, siret, mail, city, zip_code, address, phone_number, is_active, is_pending, role } = req.body;
+    const { name, siret, mail, city, zip_code, address, avatar, description, availabilities, degrees, phone_number, is_active, is_pending, role } = req.body;
 
-    let companyInfo = { name, siret };
-    let userInfo = { mail, city, zip_code, address, phone_number, is_active, is_pending, role };
+    let companyInfo = { name, siret, availabilities, degrees };
+    let userInfo = { mail, city, zip_code, address, avatar, phone_number, is_active, is_pending, role };
+
+    if (description) Object.assign(userInfo, { description: description })
 
     if (req.body.password) {
         let hashedPassword = await bcrypt.hash(req.body.password, 10);

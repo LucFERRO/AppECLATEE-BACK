@@ -35,7 +35,15 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
                 notNull: { msg: concatRequiredMessage('Birthdate') },
                 notEmpty: { msg: concatRequiredMessage('Birthdate') }
             }
-        }
+        },        
+        availabilities: {
+            type: dataTypes.ARRAY(DataTypes.STRING),
+            allowNull: false
+        },
+        degrees: {
+            type: dataTypes.ARRAY(DataTypes.STRING),
+            allowNull: true
+        },
     },
         {
             timestamps: false

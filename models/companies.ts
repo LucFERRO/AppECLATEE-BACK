@@ -28,7 +28,10 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
                 notEmpty: { msg: concatRequiredMessage('SIRET') }
             }
         },
-
+        availabilities: {
+            type: dataTypes.ARRAY(DataTypes.STRING),
+            allowNull: false
+        }
     },
         {
             timestamps: false
