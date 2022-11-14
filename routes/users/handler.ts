@@ -11,10 +11,10 @@ const { DTO } = require("../../services/DTO/DTO")
 const getAllUsers = (req: Request, res: Response) => {
     User.findAll({
         order: ['user_id'],
-        attributes: ['user_id', 'mail', 'city', 'zip_code', 'address', 'phone_number', 'is_active', 'is_pending', 'role', 'createdAt', 'updatedAt']
+        attributes: ['user_id', 'mail', 'city', 'zip_code', 'address', 'phone_number', 'is_active', 'is_pending', 'is_to_be_completed', 'role', 'createdAt', 'updatedAt']
     })
         .then((users: userTypes) => {
-            res.status(200).json(DTO(users));
+            res.status(200).json((users));
         })
         .catch((error: ApiException) => {
             res.status(500).json(error);
@@ -24,7 +24,7 @@ const getAllUsers = (req: Request, res: Response) => {
 const getUserById = (req: Request, res: Response) => {
     User.findOne({
         where: { user_id: req.params.id },
-        attributes: ['user_id', 'mail', 'city', 'zip_code', 'address', 'phone_number', 'is_active', 'is_pending', 'role', 'createdAt', 'updatedAt']
+        attributes: ['user_id', 'mail', 'city', 'zip_code', 'address', 'phone_number', 'is_active', 'is_pending', 'is_to_be_completed', 'role', 'createdAt', 'updatedAt']
     })
         .then((user: userTypes) => {
             if (user === null) {

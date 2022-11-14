@@ -41,7 +41,7 @@ userRouter.get('/', handlerUser.getAllUsers)
  *          description: Get user of given id.
  */
 userRouter.get('/:id'
-// , authenticateToken
+, authenticateToken
 , handlerUser.getUserById)
 
 /**

@@ -8,6 +8,7 @@ export interface userTypes {
     phone_number: string;
     is_active: boolean;
     is_pending: boolean;
+    is_to_be_completed: boolean;
     role: string;
     description: string;
     avatar: string;

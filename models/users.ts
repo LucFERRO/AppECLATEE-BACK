@@ -74,6 +74,11 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
             allowNull: false,
             defaultValue: true
         },
+        is_to_be_completed: {
+            type: dataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        },
         role: {
             type: dataTypes.STRING,
         },
