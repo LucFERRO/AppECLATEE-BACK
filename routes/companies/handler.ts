@@ -41,7 +41,7 @@ const createCompany = async (req: Request, res: Response) => {
     if (!req.body.password)
         return res.status(400).json({
             passwordRequired: true,
-            message: "Password is required.",
+            message: "Veuillez renseigner un mot de passe.",
         });
 
     const { name, siret, password, mail, city, zip_code, address, phone_number, is_active, is_pending } = req.body;

@@ -41,8 +41,7 @@ const createAdmin = async (req: Request, res: Response) => {
     if (!req.body.password)
         return res.status(400).json({
             passwordRequired: true,
-            //Mettre en fr et changer dans dashboard Login()
-            message: "Password is required.",
+            message: "Veuillez renseigner un mot de passe.",
         });
 
     const { lastname, firstname, password, mail, city, zip_code, address, phone_number, is_active, is_pending, description, avatar } = req.body;
