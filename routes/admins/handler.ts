@@ -14,7 +14,7 @@ const getAllAdmins = (req: Request, res: Response) => {
             res.status(200).json((DTO(admins)));
         })
         .catch((error: ApiException) => {
-            res.status(500).json(error);
+            res.status(500).json({ message: 'ERROR 500', data: error });
         });
 }
 
@@ -25,15 +25,14 @@ const getAdminById = async (req: Request, res: Response) => {
     })
         .then((admin: adminTypes) => {
             if (admin === null) {
-                const message = "Requested admin does not exist.";
+                const message = "Aucun administrateur trouvé.";
                 return res.status(404).json({ message });
             }
 
             res.status(200).json(DTO(admin));
         })
         .catch((error: ApiException) => {
-            const message = "Cannot find admin.";
-            res.status(500).json({ message, data: error });
+            res.status(500).json({ message: 'ERROR 500' });
         });
 };
 
@@ -42,6 +41,7 @@ const createAdmin = async (req: Request, res: Response) => {
     if (!req.body.password)
         return res.status(400).json({
             passwordRequired: true,
+            //Mettre en fr et changer dans dashboard Login()
             message: "Password is required.",
         });
 
@@ -52,7 +52,7 @@ const createAdmin = async (req: Request, res: Response) => {
     let adminInfo = { lastname, firstname }
     let userInfo = { mail, password, city, zip_code, address, phone_number, is_active, is_pending, role, avatar }
 
-    if (description) Object.assign(userInfo, {description: description})
+    if (description) Object.assign(userInfo, { description: description })
 
     let hashedPassword = await bcrypt.hash(userInfo.password, 10);
     try {
@@ -68,7 +68,7 @@ const createAdmin = async (req: Request, res: Response) => {
             return res.status(200).json(newAdmin)
         })
     } catch (error) {
-        res.status(500).json({message:'ERROR 500', error: error})
+        res.status(500).json({ message: 'ERROR 500', error: error })
     }
 }
 
@@ -82,7 +82,7 @@ const updateAdmin = async (req: Request, res: Response) => {
     let adminInfo = { lastname, firstname };
     let userInfo = { mail, city, zip_code, address, phone_number, is_active, is_pending, role, avatar };
 
-    if (description) Object.assign(userInfo, {description: description})
+    if (description) Object.assign(userInfo, { description: description })
 
     if (req.body.password) {
         let hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -110,7 +110,7 @@ const updateAdmin = async (req: Request, res: Response) => {
             return res.status(200).json(updatedAdmin[1]);
         });
     } catch (error) {
-        return res.status(500).json({message:"ERROR 500", error: error});
+        return res.status(500).json({ message: "ERROR 500", error: error });
     }
 }
 
@@ -118,7 +118,7 @@ const deleteAdmin = (req: Request, res: Response) => {
     Admin.findByPk(req.params.id)
         .then((admin: adminTypes) => {
             if (admin === null) {
-                const message = "Requested user does not exist.";
+                const message = "Aucun administrateur trouvé.";
                 return res.status(404).json({ message: message });
             }
 
@@ -126,13 +126,12 @@ const deleteAdmin = (req: Request, res: Response) => {
             return Admin.destroy({
                 where: { id: admin.user_id },
             }).then(() => {
-                const message = `Admin ${deletedAdmin.user_id} successfully deleted.`;
-                res.json({ message, data: deletedAdmin });
+                const message = `L'administrateur ${deletedAdmin.user_id} a bien été supprimé.`;
+                res.json({ message: message, data: deletedAdmin });
             });
         })
         .catch((error: ApiException) => {
-            const message = `Could not delete admin.`;
-            res.status(500).json({ msg: message, data: error });
+            res.status(500).json({ message: 'ERROR 500', data: error });
         });
 }
 

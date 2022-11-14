@@ -13,7 +13,3 @@ export interface userTypes {
     description: string;
     avatar: string;
 }
-
-// export interface candidateTypes extends userTypes{
-
-// }

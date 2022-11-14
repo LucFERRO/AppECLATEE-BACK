@@ -92,7 +92,7 @@ app.get('/api/tokens', (req: any, res: any) => {
         })
 })
 
-// require('./routes/availabilities/findAllAvailabilities')(app)
+require('./routes/availabilities/findAllAvailabilities')(app)
 
 // require('./routes/auth/login')(app)
 // require('./routes/auth/test')(app)

@@ -9,7 +9,7 @@ export function authenticateToken(req : Request, res : Response, next : NextFunc
     if (token == null) return res.status(401).json('Veuillez vous connecter.')
     
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err : Error) => {
-        if (err) return res.status(403).json(err)
+        if (err) return res.status(401).json(err)
         next()
     })
 }

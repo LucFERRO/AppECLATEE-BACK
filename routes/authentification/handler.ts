@@ -27,7 +27,7 @@ const login = async (req: Request, res: Response) => {
         const accessToken = jwt.sign(
             { id: user.user_id, name: user.mail, role: user.role },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: "300s" }
+            { expiresIn: "3600s" }
         );
         const refreshToken = jwt.sign(
             { id: user.user_id, name: user.mail, role: user.role },
@@ -64,7 +64,10 @@ const refreshToken = async (req: Request, res: Response) => {
 
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err: Error, user: userTypes) => {
         if (err) return res.sendStatus(403)
-        const accessToken = jwt.sign({ name: user.mail }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '15s' })
+        const accessToken = jwt.sign(
+            { id: user.user_id, name: user.mail, role: user.role },
+            process.env.ACCESS_TOKEN_SECRET,
+            { expiresIn: "3600s" })
         res.json({ accessToken: accessToken })
     })
 };

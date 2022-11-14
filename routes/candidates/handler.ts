@@ -25,15 +25,14 @@ const getCandidateById = async (req: Request, res: Response) => {
     })
         .then((candidate: candidateTypes) => {
             if (candidate === null) {
-                const message = "Requested candidate does not exist.";
+                const message = "Aucun candidat trouvé.";
                 return res.status(404).json({ message });
             }
 
             res.status(200).json(DTO(candidate));
         })
         .catch((error: ApiException) => {
-            const message = "Cannot find candidate.";
-            res.status(500).json({ message, data: error });
+            res.status(500).json({ message: 'ERROR 500', data: error});
         });
 };
 
@@ -111,7 +110,7 @@ const deleteCandidate = (req: Request, res: Response) => {
     Candidate.findByPk(req.params.id)
         .then((candidate: candidateTypes) => {
             if (candidate === null) {
-                const message = "Requested user does not exist.";
+                const message = "Aucun candidat trouvé.";
                 return res.status(404).json({ message: message });
             }
 
@@ -119,13 +118,12 @@ const deleteCandidate = (req: Request, res: Response) => {
             return Candidate.destroy({
                 where: { user_id: candidate.user_id },
             }).then(() => {
-                const message = `Candidate ${deletedCandidate.user_id} successfully deleted.`;
+                const message = `Le candidat ${deletedCandidate.user_id} a bien été supprimé.`;
                 res.json({ message, data: deletedCandidate });
             });
         })
         .catch((error: ApiException) => {
-            const message = `Could not delete candidate.`;
-            res.status(500).json({ message, data: error });
+            res.status(500).json({ message: 'ERROR 500', data: error });
         });
 }
 

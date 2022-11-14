@@ -25,15 +25,14 @@ const getCompanyById = async (req: Request, res: Response) => {
     })
         .then((company: companyTypes) => {
             if (company === null) {
-                const message = "Requested company does not exist.";
+                const message = "Aucun recruteur trouvé.";
                 return res.status(404).json({ message });
             }
 
             res.status(200).json(DTO(company));
         })
         .catch((error: ApiException) => {
-            const message = "Cannot find company.";
-            res.status(500).json({ message, data: error });
+            res.status(500).json({ message: 'ERROR 500', data: error });
         });
 };
 
@@ -111,7 +110,7 @@ const deleteCompany = (req: Request, res: Response) => {
     Company.findByPk(req.params.id)
         .then((company: companyTypes) => {
             if (company === null) {
-                const message = "Requested user does not exist.";
+                const message = "Aucun recruteur trouvé.";
                 return res.status(404).json({ message: message });
             }
 
@@ -119,13 +118,12 @@ const deleteCompany = (req: Request, res: Response) => {
             return Company.destroy({
                 where: { id: company.user_id },
             }).then(() => {
-                const message = `Company ${deletedCompany.user_id} successfully deleted.`;
+                const message = `Le recruteur ${deletedCompany.user_id} a bien été supprimé.`;
                 res.json({ message, data: deletedCompany });
             });
         })
         .catch((error: ApiException) => {
-            const message = `Could not delete company.`;
-            res.status(500).json({ message, data: error });
+            res.status(500).json({ message: 'ERROR 500', data: error });
         });
 }
 

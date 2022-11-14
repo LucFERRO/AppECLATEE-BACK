@@ -28,7 +28,7 @@ const DTO_login = (data: any) => {
     return formatedData
 }
 
-// Faire une fonction pour le all et une pour le singleton
+// Faire une fonction pour le all et une pour le singleton ?
 
 module.exports = {
     DTO,

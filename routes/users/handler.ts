@@ -60,7 +60,6 @@ const createUser = async (req: Request, res: Response) => {
             res.status(500).json(error);
         });
 };
-
 const updateUser = async (req: Request, res: Response) => {
     const id = req.params.id;
 
