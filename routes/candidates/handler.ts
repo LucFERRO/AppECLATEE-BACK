@@ -32,7 +32,7 @@ const getCandidateById = async (req: Request, res: Response) => {
             res.status(200).json(DTO(candidate));
         })
         .catch((error: ApiException) => {
-            res.status(500).json({ message: 'ERROR 500', data: error });
+            res.status(500).json({ message: 'ERROR 500', error });
         });
 };
 
@@ -67,7 +67,7 @@ const createCandidate = async (req: Request, res: Response) => {
             return res.status(200).json(newCandidate)
         })
     } catch (error) {
-        res.status(500).json({ msg: 'ERROR 500', error: error })
+        res.status(500).json({ message: 'ERROR 500', error })
     }
 }
 
@@ -107,7 +107,7 @@ const updateCandidate = async (req: Request, res: Response) => {
             return res.status(200).json(updatedCandidate[1]);
         });
     } catch (error) {
-        return res.status(500).json("ERROR 500");
+        return res.status(500).json({ message: 'ERROR 500', error });
     }
 }
 
@@ -128,7 +128,7 @@ const deleteCandidate = (req: Request, res: Response) => {
             });
         })
         .catch((error: ApiException) => {
-            res.status(500).json({ message: 'ERROR 500', data: error });
+            res.status(500).json({ message: 'ERROR 500', error });
         });
 }
 
