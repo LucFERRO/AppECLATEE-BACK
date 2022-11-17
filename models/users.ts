@@ -88,11 +88,6 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
         },
         avatar: {
             type: dataTypes.STRING,
-            allowNull: false,
-            validate: {
-                notNull: { msg: concatRequiredMessage('Image de profil') },
-                notEmpty: { msg: concatRequiredMessage('Image de profil') }
-            }
         },
     })
 }
