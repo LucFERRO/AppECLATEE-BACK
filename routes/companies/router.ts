@@ -2,6 +2,7 @@ const { Router } = require('express')
 
 import { handlerCompany } from './handler'
 import { authenticateToken } from '../../middleware/authenticate'
+import { authorization } from '../../middleware/authorizations';
 
 export const companyRouter = Router();
 
@@ -22,7 +23,7 @@ export const companyRouter = Router();
  *        200:
  *          description: Get the list of all companies.
  */
-companyRouter.get('/', handlerCompany.getAllCompanies)
+companyRouter.get('/', authenticateToken, handlerCompany.getAllCompanies)
 
 /**
  * @openapi
@@ -40,9 +41,7 @@ companyRouter.get('/', handlerCompany.getAllCompanies)
  *        200:
  *          description: Get company of given id.
  */
-companyRouter.get('/:id'
-// , authenticateToken
-, handlerCompany.getCompanyById)
+companyRouter.get('/:id', authenticateToken, handlerCompany.getCompanyById)
 
 /**
  * @openapi
@@ -87,7 +86,7 @@ companyRouter.post('/', handlerCompany.createCompany)
  *        200:
  *          description: Update company of given id.
  */
-companyRouter.put('/:id', authenticateToken, handlerCompany.updateCompany)
+companyRouter.put('/:id', authenticateToken, authorization, handlerCompany.updateCompany)
 
 /**
  * @openapi
@@ -105,4 +104,4 @@ companyRouter.put('/:id', authenticateToken, handlerCompany.updateCompany)
  *        200:
  *          description: Delete a company.
  */
-companyRouter.delete('/:id', authenticateToken, handlerCompany.deleteCompany)
+companyRouter.delete('/:id', authenticateToken, authorization, handlerCompany.deleteCompany)

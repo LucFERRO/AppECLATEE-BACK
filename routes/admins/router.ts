@@ -1,7 +1,6 @@
 const { Router } = require('express')
 
 import { handlerAdmin } from './handler'
-import { authorization } from '../../middleware/authorizations'
 
 export const adminRouter = Router();
 
@@ -22,9 +21,7 @@ export const adminRouter = Router();
  *        200:
  *          description: Get the list of all candidates.
  */
-adminRouter.get('/'
-// , authorization
-, handlerAdmin.getAllAdmins)
+adminRouter.get('/', handlerAdmin.getAllAdmins)
 
 /**
     * @openapi

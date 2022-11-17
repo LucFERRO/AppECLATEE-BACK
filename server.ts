@@ -25,7 +25,7 @@ import { adminRouter } from './routes/admins/router'
 import { authentificationRouter } from './routes/authentification/router'
 
 // To make database, comment otherwise.
-// sequelize.initDb()
+sequelize.initDb()
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {
@@ -39,10 +39,10 @@ const swaggerOptions = {
     openapi: "3.0.1",
     swaggerDefinition: {
         info: {
-            title: 'A-P-P ECLATEE',
-            description: 'Trop bien cette a-p-p',
+            title: 'API APP CSE',
+            description: 'SWAGGER',
             contact: {
-                name: 'Best front-end dev & best back-end EUW'
+                name: ''
             },
             servers: [{
                 url: `http://localhost:${port}`,
@@ -70,13 +70,12 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions)
 router.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
 import { authenticateToken } from './middleware/authenticate'
+import { authorization } from './middleware/authorizations'
 
 router.use('/users', userRouter)
 router.use('/candidates', candidateRouter)
 router.use('/companies', companyRouter)
-router.use('/admins', 
-// authenticateToken, 
-adminRouter)
+router.use('/admins', authenticateToken, authorization, adminRouter)
 router.use('/auth', authentificationRouter)
 
 
