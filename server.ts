@@ -24,8 +24,8 @@ import { companyRouter } from './routes/companies/router'
 import { adminRouter } from './routes/admins/router'
 import { authentificationRouter } from './routes/authentification/router'
 
-// To make database, comment otherwise.
-sequelize.initDb()
+// To reset database, comment otherwise.
+// sequelize.initDb()
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {
