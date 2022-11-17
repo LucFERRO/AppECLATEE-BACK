@@ -14,7 +14,7 @@ const getAllAdmins = (req: Request, res: Response) => {
             res.status(200).json((DTO(admins)));
         })
         .catch((error: ApiException) => {
-            res.status(500).json({ message: 'ERROR 500', data: error });
+            res.status(500).json({ message: 'ERROR 500', error });
         });
 }
 
@@ -32,7 +32,7 @@ const getAdminById = async (req: Request, res: Response) => {
             res.status(200).json(DTO(admin));
         })
         .catch((error: ApiException) => {
-            res.status(500).json({ message: 'ERROR 500' });
+            res.status(500).json({ message: 'ERROR 500', error });
         });
 };
 
@@ -67,7 +67,7 @@ const createAdmin = async (req: Request, res: Response) => {
             return res.status(200).json(newAdmin)
         })
     } catch (error) {
-        res.status(500).json({ message: 'ERROR 500', error: error })
+        res.status(500).json({ message: 'ERROR 500', error })
     }
 }
 
@@ -109,7 +109,7 @@ const updateAdmin = async (req: Request, res: Response) => {
             return res.status(200).json(updatedAdmin[1]);
         });
     } catch (error) {
-        return res.status(500).json({ message: "ERROR 500", error: error });
+        return res.status(500).json({ message: "ERROR 500", error });
     }
 }
 
@@ -130,7 +130,7 @@ const deleteAdmin = (req: Request, res: Response) => {
             });
         })
         .catch((error: ApiException) => {
-            res.status(500).json({ message: 'ERROR 500', data: error });
+            res.status(500).json({ message: 'ERROR 500', error });
         });
 }
 

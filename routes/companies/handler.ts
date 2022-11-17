@@ -32,7 +32,7 @@ const getCompanyById = async (req: Request, res: Response) => {
             res.status(200).json(DTO(company));
         })
         .catch((error: ApiException) => {
-            res.status(500).json({ message: 'ERROR 500', data: error });
+            res.status(500).json({ message: 'ERROR 500', error });
         });
 };
 
