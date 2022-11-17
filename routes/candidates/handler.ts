@@ -76,10 +76,12 @@ const updateCandidate = async (req: Request, res: Response) => {
 
     const { lastname, firstname, birthdate, mail, city, zip_code, address, avatar, description, availabilities, degrees, phone_number, is_active, is_pending, role } = req.body;
 
-    let candidateInfo = { lastname, firstname, birthdate, availabilities, degrees };
+    let candidateInfo = { lastname, firstname, birthdate };
     let userInfo = { mail, city, zip_code, address, avatar, phone_number, is_active, is_pending, role };
 
     if (description) Object.assign(userInfo, { description: description })
+    if (availabilities) Object.assign(candidateInfo, { availabilities: availabilities })
+    if (degrees) Object.assign(candidateInfo, { degrees: degrees })
 
     if (req.body.password) {
         let hashedPassword = await bcrypt.hash(req.body.password, 10);

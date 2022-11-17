@@ -73,12 +73,13 @@ const createCompany = async (req: Request, res: Response) => {
 const updateCompany = async (req: Request, res: Response) => {
     const id = req.params.id;
 
-    const { name, siret, mail, city, zip_code, address, avatar, description, availabilities, degrees, phone_number, is_active, is_pending, role } = req.body;
+    const { name, siret, mail, city, zip_code, address, avatar, description, availabilities, phone_number, is_active, is_pending, role } = req.body;
 
-    let companyInfo = { name, siret, availabilities, degrees };
+    let companyInfo = { name, siret, availabilities };
     let userInfo = { mail, city, zip_code, address, avatar, phone_number, is_active, is_pending, role };
 
     if (description) Object.assign(userInfo, { description: description })
+    if (availabilities) Object.assign(companyInfo, { availabilities: availabilities })
 
     if (req.body.password) {
         let hashedPassword = await bcrypt.hash(req.body.password, 10);
