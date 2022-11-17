@@ -2,6 +2,7 @@ const { Router } = require('express')
 
 import { handlerUser } from './handler'
 import { authenticateToken } from '../../middleware/authenticate'
+import { authorization } from '../../middleware/authorizations';
 
 export const userRouter = Router();
 
@@ -87,7 +88,7 @@ userRouter.post('/', handlerUser.createUser)
  *        200:
  *          description: Update user of given id.
  */
-userRouter.put('/:id', authenticateToken, handlerUser.updateUser)
+userRouter.put('/:id', authenticateToken, authorization, handlerUser.updateUser)
 
 /**
  * @openapi
@@ -104,4 +105,4 @@ userRouter.put('/:id', authenticateToken, handlerUser.updateUser)
  *        200:
  *          description: Delete an user.
  */
-userRouter.delete('/:id', authenticateToken, handlerUser.deleteUser)
+userRouter.delete('/:id', authenticateToken, authorization, handlerUser.deleteUser)

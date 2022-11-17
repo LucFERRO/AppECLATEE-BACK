@@ -2,6 +2,7 @@ const { Router } = require('express')
 
 import { handlerCandidate } from './handler'
 import { authenticateToken } from '../../middleware/authenticate'
+import { authorization } from '../../middleware/authorizations';
 
 export const candidateRouter = Router();
 
@@ -23,7 +24,7 @@ export const candidateRouter = Router();
  *        200:
  *          description: Get the list of all candidates.
  */
-candidateRouter.get('/', handlerCandidate.getAllCandidates)
+candidateRouter.get('/', authenticateToken, handlerCandidate.getAllCandidates)
 
 /**
  * @openapi
@@ -41,9 +42,7 @@ candidateRouter.get('/', handlerCandidate.getAllCandidates)
  *        200:
  *          description: Get candidate of given id.
  */
-candidateRouter.get('/:id'
-// , authenticateToken
-, handlerCandidate.getCandidateById)
+candidateRouter.get('/:id', authenticateToken, handlerCandidate.getCandidateById)
 
 /**
  * @openapi
@@ -88,7 +87,7 @@ candidateRouter.post('/', handlerCandidate.createCandidate)
  *        200:
  *          description: Update candidate of given id.
  */
-candidateRouter.put('/:id', authenticateToken, handlerCandidate.updateCandidate)
+candidateRouter.put('/:id', authenticateToken, authorization, handlerCandidate.updateCandidate)
 
 /**
  * @openapi
@@ -106,4 +105,4 @@ candidateRouter.put('/:id', authenticateToken, handlerCandidate.updateCandidate)
  *        200:
  *          description: Delete a candidate.
  */
-candidateRouter.delete('/:id', authenticateToken, handlerCandidate.deleteCandidate)
+candidateRouter.delete('/:id', authenticateToken, authorization, handlerCandidate.deleteCandidate)
