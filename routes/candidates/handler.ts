@@ -91,7 +91,7 @@ const updateCandidate = async (req: Request, res: Response) => {
             const updatedCandidate: any = await Candidate.update(
                 candidateInfo,
                 {
-                    where: { id: id },
+                    where: { user_id: id },
                     returning: true,
                     plain: true,
                     transaction: t,
@@ -105,6 +105,7 @@ const updateCandidate = async (req: Request, res: Response) => {
                 transaction: t,
             });
             return res.status(200).json(updatedCandidate[1]);
+
         });
     } catch (error) {
         return res.status(500).json({ message: 'ERROR 500', error });

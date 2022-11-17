@@ -90,7 +90,7 @@ const updateCompany = async (req: Request, res: Response) => {
             const updatedCompany: any = await Company.update(
                 companyInfo,
                 {
-                    where: { id: id },
+                    where: { user_id : id },
                     returning: true,
                     plain: true,
                     transaction: t,
@@ -98,7 +98,7 @@ const updateCompany = async (req: Request, res: Response) => {
             );
 
             await User.update(userInfo, {
-                where: { user_id: updatedCompany[1].user_id },
+                where: { user_id : updatedCompany[1].user_id },
                 returning: true,
                 plain: true,
                 transaction: t,
@@ -120,7 +120,7 @@ const deleteCompany = (req: Request, res: Response) => {
 
             const deletedCompany = company;
             return Company.destroy({
-                where: { id: company.user_id },
+                where: { user_id: company.user_id },
             }).then(() => {
                 const message = `Le recruteur ${deletedCompany.user_id} a bien été supprimé.`;
                 res.json({ message, data: deletedCompany });

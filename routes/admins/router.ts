@@ -54,7 +54,7 @@ adminRouter.get('/:id', handlerAdmin.getAdminById)
  *         in: body
  *         required: true
  *         type: object
- *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "lastname": "string", "firstname": "string", "description" : "", avatar: "Oui" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "0123456789", "role": "string", "lastname": "string", "firstname": "string", "description" : "", avatar: "Oui" }
  *      responses:
  *        200:
  *          description: Create a new admin.
@@ -79,7 +79,7 @@ adminRouter.post('/', handlerAdmin.createAdmin)
     *         in: body
     *         required: true
     *         type: object
- *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "lastname": "string", "firstname": "string", "description" : "", avatar: "Oui" }
+    *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "0123456789", "role": "string", "lastname": "string", "firstname": "string", "description" : "", avatar: "Oui" }
     *      responses:
     *        200:
     *          description: Update admin of given id.

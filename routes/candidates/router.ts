@@ -57,7 +57,7 @@ candidateRouter.get('/:id', authenticateToken, handlerCandidate.getCandidateById
  *         in: body
  *         required: true
  *         type: object
- *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "lastname": "string", "firstname": "string", "birthdate": "string" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "0123465789", "role": "string", "lastname": "string", "firstname": "string", "birthdate": "01-01-2000", "description": "description", "avatar" : "Oui", "availabilities" : ['Test'], "degrees" : ['BAC'] }
  *      responses:
  *        200:
  *          description: Create a new candidate.
@@ -82,7 +82,7 @@ candidateRouter.post('/', handlerCandidate.createCandidate)
  *         in: body
  *         required: true
  *         type: object
- *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "lastname": "string", "firstname": "string", "birthdate": "string" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "0123465789", "role": "string", "lastname": "string", "firstname": "string", "birthdate": "01-01-2000", "description": "description", "avatar" : "Oui", "availabilities" : ['Test'], "degrees" : ['BAC'] }
  *      responses:
  *        200:
  *          description: Update candidate of given id.

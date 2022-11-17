@@ -56,7 +56,7 @@ companyRouter.get('/:id', authenticateToken, handlerCompany.getCompanyById)
  *         in: body
  *         required: true
  *         type: object
- *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "name": "string", "siret": "string" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "name": "string", "siret": "string", "description": "description", "avatar": "Oui" }
  *      responses:
  *        200:
  *          description: Create a new company.
@@ -81,7 +81,7 @@ companyRouter.post('/', handlerCompany.createCompany)
  *         in: body
  *         required: true
  *         type: object
- *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "name": "string", "siret": "string" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "name": "string", "siret": "string", "description": "description", "avatar": "Oui" }
  *      responses:
  *        200:
  *          description: Update company of given id.
