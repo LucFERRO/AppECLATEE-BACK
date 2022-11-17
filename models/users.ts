@@ -1,10 +1,10 @@
 
-import {  DataTypes, Sequelize } from "sequelize"
+import { DataTypes, Sequelize } from "sequelize"
 
-module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
+module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
 
-    const concatRequiredMessage = (data : string) => {
-        return `${data} is required`
+    const concatRequiredMessage = (data: string) => {
+        return `Le champ ${data} est requis.`
     }
 
     return sequelize.define('User', {
@@ -12,16 +12,16 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
         user_id: {
             type: dataTypes.INTEGER,
             autoIncrement: true,
-            primaryKey: true, 
+            primaryKey: true,
         },
         mail: {
             type: dataTypes.STRING,
             allowNull: false,
             unique: true,
-            validate : {
-                isEmail: true, 
-                notNull: { msg : concatRequiredMessage('Mail')},
-                notEmpty: { msg : concatRequiredMessage('mail')}
+            validate: {
+                isEmail: true,
+                notNull: { msg: concatRequiredMessage('Email') },
+                notEmpty: { msg: concatRequiredMessage('Email') }
 
 
             }
@@ -30,40 +30,38 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Password')},
-                notEmpty : { msg : concatRequiredMessage('Password')}
+                notNull: { msg: concatRequiredMessage('Mot de passe') },
+                notEmpty: { msg: concatRequiredMessage('Mot de passe') }
             }
         },
         city: {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Zip code')},
-                notEmpty : { msg : concatRequiredMessage('Zip code')}
+                notNull: { msg: concatRequiredMessage('Ville') },
+                notEmpty: { msg: concatRequiredMessage('Ville') }
             }
         },
         zip_code: {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Zip code')},
-                notEmpty : { msg : concatRequiredMessage('Zip code')}
+                notNull: { msg: concatRequiredMessage('Code postal') },
+                notEmpty: { msg: concatRequiredMessage('Code postal') }
             }
         },
         address: {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Address')},
-                notEmpty : { msg : concatRequiredMessage('Address')}
+                notNull: { msg: concatRequiredMessage('Adresse') },
+                notEmpty: { msg: concatRequiredMessage('Adresse') }
             }
         },
         phone_number: {
             type: dataTypes.STRING,
-            allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Zip code')},
-                notEmpty : { msg : concatRequiredMessage('Zip code')}
+                isNumeric: { msg: 'Format de numéro de téléphone invalide.' }
             }
         },
         is_active: {
@@ -76,8 +74,25 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             allowNull: false,
             defaultValue: true
         },
+        is_to_be_completed: {
+            type: dataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        },
         role: {
             type: dataTypes.STRING,
-        }
+        },
+        description: {
+            type: dataTypes.STRING,
+            allowNull: true,
+        },
+        avatar: {
+            type: dataTypes.STRING,
+            allowNull: false,
+            validate: {
+                notNull: { msg: concatRequiredMessage('Image de profil') },
+                notEmpty: { msg: concatRequiredMessage('Image de profil') }
+            }
+        },
     })
 }

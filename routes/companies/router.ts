@@ -1,6 +1,8 @@
 const { Router } = require('express')
 
 import { handlerCompany } from './handler'
+import { authenticateToken } from '../../middleware/authenticate'
+import { authorization } from '../../middleware/authorizations';
 
 export const companyRouter = Router();
 
@@ -21,7 +23,7 @@ export const companyRouter = Router();
  *        200:
  *          description: Get the list of all companies.
  */
-companyRouter.get('/', handlerCompany.getAllCompanies)
+companyRouter.get('/', authenticateToken, handlerCompany.getAllCompanies)
 
 /**
  * @openapi
@@ -39,7 +41,7 @@ companyRouter.get('/', handlerCompany.getAllCompanies)
  *        200:
  *          description: Get company of given id.
  */
-companyRouter.get('/:id', handlerCompany.getCompanyById)
+companyRouter.get('/:id', authenticateToken, handlerCompany.getCompanyById)
 
 /**
  * @openapi
@@ -54,7 +56,7 @@ companyRouter.get('/:id', handlerCompany.getCompanyById)
  *         in: body
  *         required: true
  *         type: object
- *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "name": "string", "siret": "string" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "0123456789", "role": "string", "name": "string", "siret": "01234567899", "description": "description", "avatar": "Oui", "availabilities": ['Test'] }
  *      responses:
  *        200:
  *          description: Create a new company.
@@ -79,12 +81,12 @@ companyRouter.post('/', handlerCompany.createCompany)
  *         in: body
  *         required: true
  *         type: object
- *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "name": "string", "siret": "string" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "0123456789", "role": "string", "name": "string", "siret": "01234567899", "description": "description", "avatar": "Oui", "availabilities": ['Test'] }
  *      responses:
  *        200:
  *          description: Update company of given id.
  */
-companyRouter.put('/:id', handlerCompany.updateCompany)
+companyRouter.put('/:id', authenticateToken, authorization, handlerCompany.updateCompany)
 
 /**
  * @openapi
@@ -102,4 +104,4 @@ companyRouter.put('/:id', handlerCompany.updateCompany)
  *        200:
  *          description: Delete a company.
  */
-companyRouter.delete('/:id', handlerCompany.deleteCompany)
+companyRouter.delete('/:id', authenticateToken, authorization, handlerCompany.deleteCompany)

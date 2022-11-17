@@ -1,9 +1,9 @@
 
-import {  DataTypes, Sequelize } from "sequelize"
+import { DataTypes, Sequelize } from "sequelize"
 
-module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
+module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
 
-    const concatRequiredMessage = (data : string) => {
+    const concatRequiredMessage = (data: string) => {
         return `${data} is required`
     }
 
@@ -11,18 +11,18 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
         id: {
             type: dataTypes.INTEGER,
             autoIncrement: true,
-            primaryKey: true, 
+            primaryKey: true,
         },
         availability: {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Availability')},
-                notEmpty : { msg : concatRequiredMessage('Availability')}
+                notNull: { msg: concatRequiredMessage('Availability') },
+                notEmpty: { msg: concatRequiredMessage('Availability') }
             }
         }
     },
-    {
-        timestamps: false
-    })
+        {
+            timestamps: false
+        })
 }

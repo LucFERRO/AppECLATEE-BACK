@@ -8,8 +8,8 @@ const { Candidate, User } = require("../../database/connect");
 
 const { DTO } = require("../../services/DTO/DTO")
 
-const getAllCandidates = (req : Request, res : Response) => {
-    Candidate.findAll({include: [User]})
+const getAllCandidates = (req: Request, res: Response) => {
+    Candidate.findAll({ include: [User] })
         .then((candidates: candidateTypes) => {
             res.status(200).json(DTO(candidates));
         })
@@ -18,64 +18,70 @@ const getAllCandidates = (req : Request, res : Response) => {
         });
 };
 
-const getCandidateById = async (req : Request, res : Response) => {
+const getCandidateById = async (req: Request, res: Response) => {
     Candidate.findOne({
-        where: {id : req.params.id}, 
+        where: { user_id: req.params.id },
         include: [User]
     })
         .then((candidate: candidateTypes) => {
             if (candidate === null) {
-                const message = "Requested candidate does not exist.";
+                const message = "Aucun candidat trouvé.";
                 return res.status(404).json({ message });
             }
 
             res.status(200).json(DTO(candidate));
         })
         .catch((error: ApiException) => {
-            const message = "Cannot find candidate.";
-            res.status(500).json({ message, data: error });
+            res.status(500).json({ message: 'ERROR 500', error });
         });
 };
 
-const createCandidate = async (req : Request, res : Response) => {
+const createCandidate = async (req: Request, res: Response) => {
 
     if (!req.body.password)
-    return res.status(400).json({
-        passwordRequired: true,
-        message: "Password is required.",
-    });
+        return res.status(400).json({
+            passwordRequired: true,
+            message: "Veuillez renseigner un mot de passe.",
+        });
 
-    const { lastname, firstname, birthdate, password, mail, city, zip_code, address, phone_number, is_active, is_pending } = req.body;
+    const { lastname, firstname, birthdate, password, mail, city, zip_code, address, avatar, description, availabilities, degrees, phone_number, is_active, is_pending } = req.body;
 
     let role = 'candidat'
 
-    let candidateInfo = { lastname, firstname, birthdate }
-    let userInfo = { mail, password, city, zip_code, address, phone_number, is_active, is_pending, role }
+    let candidateInfo = { lastname, firstname, birthdate, availabilities, degrees }
+    let userInfo = { mail, password, city, zip_code, address, avatar, phone_number, is_active, is_pending, role }
     let hashedPassword = await bcrypt.hash(userInfo.password, 10);
+
+    if (description) Object.assign(userInfo, { description: description })
+
     try {
-        await sequelize.transaction(async (t : any) => {
-        const newUser = await User.create(
-            { ...userInfo, password: hashedPassword },
-            { transaction: t }
-        )
+        await sequelize.transaction(async (t: any) => {
+            const newUser = await User.create(
+                { ...userInfo, password: hashedPassword },
+                { transaction: t }
+            )
 
-        candidateInfo = Object.assign(candidateInfo, { user_id: newUser.user_id });
+            candidateInfo = Object.assign(candidateInfo, { user_id: newUser.user_id });
 
-        const newCandidate = await Candidate.create(candidateInfo, { transaction: t })
-        return res.status(200).json(newCandidate)
+            const newCandidate = await Candidate.create(candidateInfo, { transaction: t })
+            return res.status(200).json(newCandidate)
         })
     } catch (error) {
-        res.status(500).json('ERROR 500')
+        res.status(500).json({ message: 'ERROR 500', error })
     }
 }
 
-const updateCandidate = async (req : Request, res : Response) => {
+const updateCandidate = async (req: Request, res: Response) => {
     const id = req.params.id;
 
-    const { lastname, firstname, birthdate, mail, city, zip_code, address, phone_number, is_active, is_pending, role } = req.body;
+    const { lastname, firstname, birthdate, mail, city, zip_code, address, avatar, description, availabilities, degrees, phone_number, is_active, is_pending, role } = req.body;
 
     let candidateInfo = { lastname, firstname, birthdate };
-    let userInfo = { mail, city, zip_code, address, phone_number, is_active, is_pending, role };
+    let userInfo = { mail, city, zip_code, address, avatar, phone_number, is_active, is_pending, role };
+
+    if (description) Object.assign(userInfo, { description: description })
+    if (availabilities) Object.assign(candidateInfo, { availabilities: availabilities })
+    if (degrees) Object.assign(candidateInfo, { degrees: degrees })
 
     if (req.body.password) {
         let hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -83,11 +89,11 @@ const updateCandidate = async (req : Request, res : Response) => {
     }
 
     try {
-        await sequelize.transaction(async (t : any) => {
+        await sequelize.transaction(async (t: any) => {
             const updatedCandidate: any = await Candidate.update(
                 candidateInfo,
                 {
-                    where: { id: id },
+                    where: { user_id: id },
                     returning: true,
                     plain: true,
                     transaction: t,
@@ -101,17 +107,18 @@ const updateCandidate = async (req : Request, res : Response) => {
                 transaction: t,
             });
             return res.status(200).json(updatedCandidate[1]);
+
         });
     } catch (error) {
-        return res.status(500).json("ERROR 500");
+        return res.status(500).json({ message: 'ERROR 500', error });
     }
 }
 
-const deleteCandidate = (req : Request, res : Response) => {
+const deleteCandidate = (req: Request, res: Response) => {
     Candidate.findByPk(req.params.id)
         .then((candidate: candidateTypes) => {
             if (candidate === null) {
-                const message = "Requested user does not exist.";
+                const message = "Aucun candidat trouvé.";
                 return res.status(404).json({ message: message });
             }
 
@@ -119,13 +126,12 @@ const deleteCandidate = (req : Request, res : Response) => {
             return Candidate.destroy({
                 where: { user_id: candidate.user_id },
             }).then(() => {
-                const message = `Candidate ${deletedCandidate.user_id} successfully deleted.`;
+                const message = `Le candidat ${deletedCandidate.user_id} a bien été supprimé.`;
                 res.json({ message, data: deletedCandidate });
             });
         })
         .catch((error: ApiException) => {
-            const message = `Could not delete candidate.`;
-            res.status(500).json({ message, data: error });
+            res.status(500).json({ message: 'ERROR 500', error });
         });
 }
 

@@ -8,10 +8,10 @@ const jwt = require("jsonwebtoken");
 
 const { User, Token } = require("../../database/connect");
 
-const { DTO } = require("../../services/DTO/DTO")
+const { DTO_login } = require("../../services/DTO/DTO")
 
-const login = async (req : Request, res : Response) => {
-    const user = await User.findOne({where: {mail : req.body.mail}})
+const login = async (req: Request, res: Response) => {
+    const user = await User.findOne({ where: { mail: req.body.mail } })
 
     let message: string = "";
 
@@ -19,52 +19,56 @@ const login = async (req : Request, res : Response) => {
         message = "Aucun utilisateur ne correspond à ce mail.";
         return res.status(400).json({ userFound: false, message: message });
     }
-    if (await !bcrypt.compare(req.body.password, user.password)) {
+
+    if (!await bcrypt.compare(req.body.password, user.password)) {
         message = "Identifiants incorrects.";
         return res.status(401).json({ successfullLogin: false, message: message });
     } else {
         const accessToken = jwt.sign(
-            { name: user.mail },
+            { id: user.user_id, name: user.mail, role: user.role },
             process.env.ACCESS_TOKEN_SECRET,
-            { expiresIn: "15s" }
+            { expiresIn: "3600s" }
         );
         const refreshToken = jwt.sign(
-            { name: user.mail },
+            { id: user.user_id, name: user.mail, role: user.role },
             process.env.REFRESH_TOKEN_SECRET
         );
 
         const token = await Token.findOne({ where: { user_id: user.user_id } })
 
-        if (token !== null) Token.destroy({where: { user_id: user.user_id }})
+        if (token !== null) Token.destroy({ where: { user_id: user.user_id } })
 
         Token.create({
-            user_id : user.user_id,
-            refreshToken : refreshToken
+            user_id: user.user_id,
+            refreshToken: refreshToken
         })
 
-        return res.status(200).json({accessToken: accessToken, refreshToken: refreshToken})
+        return res.status(200).json(DTO_login({ accessToken: accessToken, refreshToken: refreshToken, user: user }))
     }
 };
 
-const refreshToken = async (req : Request, res : Response) => {
+const refreshToken = async (req: Request, res: Response) => {
 
     const refreshToken = req.body.token
     if (refreshToken == null) return res.sendStatus(400)
 
     const tokens = await Token.findAll()
 
-    let refreshTokens : any = []
+    let refreshTokens: any = []
 
-    tokens.map((token : tokenTypes) => {
+    tokens.map((token: tokenTypes) => {
         refreshTokens.push(token.refreshToken)
     })
 
     if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403)
 
-    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err : Error, user : userTypes) => {
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err: Error, user: userTypes) => {
         if (err) return res.sendStatus(403)
-        const accessToken = jwt.sign({name: user.mail}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15s'})
-        res.json({accessToken: accessToken})
+        const accessToken = jwt.sign(
+            { id: user.user_id, name: user.mail, role: user.role },
+            process.env.ACCESS_TOKEN_SECRET,
+            { expiresIn: "3600s" })
+        res.json({ accessToken: accessToken })
     })
 };
 

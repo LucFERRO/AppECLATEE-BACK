@@ -3,5 +3,3 @@ export interface adminTypes {
     lastname: string;
     firstname: string;
 }
-
-

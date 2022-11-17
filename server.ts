@@ -1,5 +1,4 @@
 require('dotenv').config()
-require('./database/passport')
 
 const cors = require('cors')
 const express = require("express")
@@ -14,11 +13,9 @@ const swaggerJsDoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 const sequelize = require('./database/connect')
 
-import {Response, Request} from 'express'
-// const passport = require('passport')
+import { Response, Request } from 'express'
 
 app.use(express.json())
-// app.use(passport.initialize())
 app.use('/api', router)
 
 import { candidateRouter } from './routes/candidates/router'
@@ -27,7 +24,7 @@ import { companyRouter } from './routes/companies/router'
 import { adminRouter } from './routes/admins/router'
 import { authentificationRouter } from './routes/authentification/router'
 
-// To make database, comment otherwise.
+// To reset database, comment otherwise.
 // sequelize.initDb()
 
 const port = process.env.PORT || 5000
@@ -35,22 +32,36 @@ app.listen(port, () => {
     console.log(`Listening to port ${port}...`)
 })
 
-app.get("/", (req : Request, res : Response) => {
+app.get("/", (req: Request, res: Response) => {
     res.send("SWAGGER : /api/docs")
 })
 const swaggerOptions = {
+    openapi: "3.0.1",
     swaggerDefinition: {
         info: {
-            title: 'TITRE',
-            description: 'DESCRIPTION',
+            title: 'API APP CSE',
+            description: 'SWAGGER',
             contact: {
-                name: 'Best front-end dev EUW'
+                name: ''
             },
             servers: [{
-                url:`http://localhost:${port}`,
+                url: `http://localhost:${port}`,
                 description: 'localhost'
             },],
         },
+        securityDefinitions: {
+            bearerAuth: {
+                type: 'apiKey',
+                name: 'Authorization',
+                scheme: 'bearer',
+                in: 'header',
+            },
+        },
+        security: [
+            {
+                bearerAuth: []
+            }
+        ],
     },
     apis: [`./routes/*/router.ts`]
 }
@@ -58,31 +69,34 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJsDoc(swaggerOptions)
 router.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 
+import { authenticateToken } from './middleware/authenticate'
+import { authorization } from './middleware/authorizations'
+
 router.use('/users', userRouter)
 router.use('/candidates', candidateRouter)
 router.use('/companies', companyRouter)
-router.use('/admins', adminRouter)
+router.use('/admins', authenticateToken, authorization, adminRouter)
 router.use('/auth', authentificationRouter)
 
 
 import { tokenTypes } from "./types/token"
 const { Token } = require("./database/connect")
-app.get('/api/tokens', (req : any, res : any) => {
+app.get('/api/tokens', (req: any, res: any) => {
     Token.findAll()
-    .then((tokens: tokenTypes) => {
-        res.status(200).json(tokens)
-    })
-    .catch((error : ApiException) => {
-        res.status(500).json(error)
-    })
+        .then((tokens: tokenTypes) => {
+            res.status(200).json(tokens)
+        })
+        .catch((error: ApiException) => {
+            res.status(500).json(error)
+        })
 })
 
-// require('./routes/availabilities/findAllAvailabilities')(app)
+require('./routes/availabilities/findAllAvailabilities')(app)
 
 // require('./routes/auth/login')(app)
 // require('./routes/auth/test')(app)
 
-app.use(({res : ApiException}: any) => {
+app.use(({ res: ApiException }: any) => {
     const message = 'Ressource not found.'
-    return ApiException.status(404).json({message})
+    return ApiException.status(404).json({ message })
 })

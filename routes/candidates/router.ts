@@ -1,6 +1,8 @@
 const { Router } = require('express')
 
 import { handlerCandidate } from './handler'
+import { authenticateToken } from '../../middleware/authenticate'
+import { authorization } from '../../middleware/authorizations';
 
 export const candidateRouter = Router();
 
@@ -22,7 +24,7 @@ export const candidateRouter = Router();
  *        200:
  *          description: Get the list of all candidates.
  */
-candidateRouter.get('/', handlerCandidate.getAllCandidates)
+candidateRouter.get('/', authenticateToken, handlerCandidate.getAllCandidates)
 
 /**
  * @openapi
@@ -40,7 +42,7 @@ candidateRouter.get('/', handlerCandidate.getAllCandidates)
  *        200:
  *          description: Get candidate of given id.
  */
-candidateRouter.get('/:id', handlerCandidate.getCandidateById)
+candidateRouter.get('/:id', authenticateToken, handlerCandidate.getCandidateById)
 
 /**
  * @openapi
@@ -55,7 +57,7 @@ candidateRouter.get('/:id', handlerCandidate.getCandidateById)
  *         in: body
  *         required: true
  *         type: object
- *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "lastname": "string", "firstname": "string", "birthdate": "string" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "0123465789", "role": "string", "lastname": "string", "firstname": "string", "birthdate": "01-01-2000", "description": "description", "avatar" : "Oui", "availabilities" : ['Test'], "degrees" : ['BAC'] }
  *      responses:
  *        200:
  *          description: Create a new candidate.
@@ -80,12 +82,12 @@ candidateRouter.post('/', handlerCandidate.createCandidate)
  *         in: body
  *         required: true
  *         type: object
- *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "string", "role": "string", "lastname": "string", "firstname": "string", "birthdate": "string" }
+ *         default: { "mail": "email@email.fr","password":"string","is_active": "true","is_pending": "false","zip_code": "string", "city" : "string", "address" : "string", "phone_number" : "0123465789", "role": "string", "lastname": "string", "firstname": "string", "birthdate": "01-01-2000", "description": "description", "avatar" : "Oui", "availabilities" : ['Test'], "degrees" : ['BAC'] }
  *      responses:
  *        200:
  *          description: Update candidate of given id.
  */
-candidateRouter.put('/:id', handlerCandidate.updateCandidate)
+candidateRouter.put('/:id', authenticateToken, authorization, handlerCandidate.updateCandidate)
 
 /**
  * @openapi
@@ -103,4 +105,4 @@ candidateRouter.put('/:id', handlerCandidate.updateCandidate)
  *        200:
  *          description: Delete a candidate.
  */
-candidateRouter.delete('/:id', handlerCandidate.deleteCandidate)
+candidateRouter.delete('/:id', authenticateToken, authorization, handlerCandidate.deleteCandidate)

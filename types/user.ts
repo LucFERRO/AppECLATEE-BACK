@@ -1,5 +1,5 @@
 export interface userTypes {
-    user_id : number;
+    user_id: number;
     mail: string;
     password: string;
     zip_code: string;
@@ -8,14 +8,8 @@ export interface userTypes {
     phone_number: string;
     is_active: boolean;
     is_pending: boolean;
+    is_to_be_completed: boolean;
     role: string;
-    // description: string;
-    // image: string;
+    description: string;
+    avatar: string;
 }
-
-// export interface candidateTypes extends userTypes{
-
-
-
-// }
-

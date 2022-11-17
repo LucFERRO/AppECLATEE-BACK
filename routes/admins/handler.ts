@@ -8,74 +8,80 @@ const { Admin, User } = require("../../database/connect");
 
 const { DTO } = require("../../services/DTO/DTO")
 
-const getAllAdmins = (req : Request, res : Response) => {
-    Admin.findAll({include: [User]})
-    .then((admins: adminTypes) => {
-        res.status(200).json((DTO(admins)));
-    })
-    .catch((error: ApiException) => {
-        res.status(500).json(error);
-    });
+const getAllAdmins = (req: Request, res: Response) => {
+    Admin.findAll({ include: [User] })
+        .then((admins: adminTypes) => {
+            res.status(200).json((DTO(admins)));
+        })
+        .catch((error: ApiException) => {
+            res.status(500).json({ message: 'ERROR 500', error });
+        });
 }
 
-const getAdminById = async (req : Request, res : Response) => {
+const getAdminById = async (req: Request, res: Response) => {
     Admin.findOne({
-        where: {id : req.params.id}, 
+        where: { user_id: req.params.id },
         include: [User]
     })
         .then((admin: adminTypes) => {
             if (admin === null) {
-                const message = "Requested admin does not exist.";
+                const message = "Aucun administrateur trouvé.";
                 return res.status(404).json({ message });
             }
 
             res.status(200).json(DTO(admin));
         })
         .catch((error: ApiException) => {
-            const message = "Cannot find admin.";
-            res.status(500).json({ message, data: error });
+            res.status(500).json({ message: 'ERROR 500', error });
         });
 };
 
-const createAdmin = async (req : Request, res : Response) => {
+const createAdmin = async (req: Request, res: Response) => {
 
     if (!req.body.password)
-    return res.status(400).json({
-        passwordRequired: true,
-        message: "Password is required.",
-    });
+        return res.status(400).json({
+            passwordRequired: true,
+            message: "Veuillez renseigner un mot de passe.",
+        });
 
-    const { lastname, firstname, password, mail, city, zip_code, address, phone_number, is_active, is_pending } = req.body;
+    const { lastname, firstname, password, mail, city, zip_code, address, phone_number, is_active, is_pending, avatar, description } = req.body;
 
     let role = 'admin'
 
     let adminInfo = { lastname, firstname }
-    let userInfo = { mail, password, city, zip_code, address, phone_number, is_active, is_pending, role }
+    let userInfo = { mail, password, city, zip_code, address, phone_number, is_active, is_pending, role, avatar }
+
+    if (description) Object.assign(userInfo, { description: description })
+
     let hashedPassword = await bcrypt.hash(userInfo.password, 10);
     try {
-        await sequelize.transaction(async (t : any) => {
-        const newUser = await User.create(
-            { ...userInfo, password: hashedPassword },
-            { transaction: t }
-        )
+        await sequelize.transaction(async (t: any) => {
+            const newUser = await User.create(
+                { ...userInfo, password: hashedPassword },
+                { transaction: t }
+            )
 
-        adminInfo = Object.assign(adminInfo, { user_id: newUser.user_id });
+            adminInfo = Object.assign(adminInfo, { user_id: newUser.user_id });
 
-        const newAdmin = await Admin.create(adminInfo, { transaction: t })
-        return res.status(200).json(newAdmin)
+            const newAdmin = await Admin.create(adminInfo, { transaction: t })
+            return res.status(200).json(newAdmin)
         })
     } catch (error) {
-        res.status(500).json('ERROR 500')
+        res.status(500).json({ message: 'ERROR 500', error })
     }
 }
 
-const updateAdmin = async (req : Request, res : Response) => {
+const updateAdmin = async (req: Request, res: Response) => {
     const id = req.params.id;
 
-    const { lastname, firstname, mail, city, zip_code, address, phone_number, is_active, is_pending, role } = req.body;
+    const { lastname, firstname, mail, city, zip_code, address, phone_number, is_active, is_pending, description, avatar } = req.body;
+
+    let role = 'admin'
 
     let adminInfo = { lastname, firstname };
-    let userInfo = { mail, city, zip_code, address, phone_number, is_active, is_pending, role };
+    let userInfo = { mail, city, zip_code, address, phone_number, is_active, is_pending, role, avatar };
+
+    if (description) Object.assign(userInfo, { description: description })
 
     if (req.body.password) {
         let hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -83,11 +89,11 @@ const updateAdmin = async (req : Request, res : Response) => {
     }
 
     try {
-        await sequelize.transaction(async (t : any) => {
+        await sequelize.transaction(async (t: any) => {
             const updatedAdmin: any = await Admin.update(
                 adminInfo,
                 {
-                    where: { id: id },
+                    where: { user_id: id },
                     returning: true,
                     plain: true,
                     transaction: t,
@@ -103,15 +109,15 @@ const updateAdmin = async (req : Request, res : Response) => {
             return res.status(200).json(updatedAdmin[1]);
         });
     } catch (error) {
-        return res.status(500).json("ERROR 500");
+        return res.status(500).json({ message: "ERROR 500", error });
     }
 }
 
-const deleteAdmin = (req : Request, res : Response) => {
+const deleteAdmin = (req: Request, res: Response) => {
     Admin.findByPk(req.params.id)
         .then((admin: adminTypes) => {
             if (admin === null) {
-                const message = "Requested user does not exist.";
+                const message = "Aucun administrateur trouvé.";
                 return res.status(404).json({ message: message });
             }
 
@@ -119,13 +125,12 @@ const deleteAdmin = (req : Request, res : Response) => {
             return Admin.destroy({
                 where: { id: admin.user_id },
             }).then(() => {
-                const message = `Admin ${deletedAdmin.user_id} successfully deleted.`;
-                res.json({ message, data: deletedAdmin });
+                const message = `L'administrateur ${deletedAdmin.user_id} a bien été supprimé.`;
+                res.json({ message: message, data: deletedAdmin });
             });
         })
         .catch((error: ApiException) => {
-            const message = `Could not delete admin.`;
-            res.status(500).json({ message, data: error });
+            res.status(500).json({ message: 'ERROR 500', error });
         });
 }
 

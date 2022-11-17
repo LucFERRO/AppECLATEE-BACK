@@ -1,10 +1,10 @@
 
-import {  DataTypes, Sequelize } from "sequelize"
+import { DataTypes, Sequelize } from "sequelize"
 
-module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
+module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
 
-    const concatRequiredMessage = (data : string) => {
-        return `${data} is required`
+    const concatRequiredMessage = (data: string) => {
+        return `Le champ ${data} est requis.`
     }
 
     return sequelize.define('Candidate', {
@@ -16,28 +16,36 @@ module.exports = (sequelize : Sequelize, dataTypes : typeof DataTypes) => {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Lastname')},
-                notEmpty : { msg : concatRequiredMessage('Lastname')}
+                notNull: { msg: concatRequiredMessage('Nom') },
+                notEmpty: { msg: concatRequiredMessage('Nom') }
             }
         },
         firstname: {
             type: dataTypes.STRING,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Firstname')},
-                notEmpty : { msg : concatRequiredMessage('Firstname')}
+                notNull: { msg: concatRequiredMessage('Prénom') },
+                notEmpty: { msg: concatRequiredMessage('Prénom') }
             }
         },
         birthdate: {
-            type: dataTypes.STRING,
+            type: dataTypes.DATE,
             allowNull: false,
             validate: {
-                notNull: { msg : concatRequiredMessage('Birthdate')},
-                notEmpty : { msg : concatRequiredMessage('Birthdate')}
+                notNull: { msg: concatRequiredMessage('Date de naissance') },
+                notEmpty: { msg: concatRequiredMessage('Date de naissance') }
             }
-        }
+        },
+        availabilities: {
+            type: dataTypes.ARRAY(DataTypes.STRING),
+            allowNull: false
+        },
+        degrees: {
+            type: dataTypes.ARRAY(DataTypes.STRING),
+            allowNull: true
+        },
     },
-    {
-        timestamps: false
-    })
+        {
+            timestamps: false
+        })
 }

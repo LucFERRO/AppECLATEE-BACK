@@ -8,23 +8,23 @@ const { User } = require("../../database/connect");
 
 const { DTO } = require("../../services/DTO/DTO")
 
-const getAllUsers = (req : Request, res : Response) => {
+const getAllUsers = (req: Request, res: Response) => {
     User.findAll({
-        order: ['user_id'], 
-        attributes: ['user_id','mail','city','zip_code','address','phone_number','is_active','is_pending','role','createdAt','updatedAt']
-})
+        order: ['user_id'],
+        attributes: ['user_id', 'mail', 'city', 'zip_code', 'address', 'phone_number', 'is_active', 'is_pending', 'is_to_be_completed', 'role', 'createdAt', 'updatedAt']
+    })
         .then((users: userTypes) => {
-            res.status(200).json(DTO(users));
+            res.status(200).json((users));
         })
         .catch((error: ApiException) => {
             res.status(500).json(error);
         });
 }
 
-const getUserById = (req : Request, res : Response) => {
+const getUserById = (req: Request, res: Response) => {
     User.findOne({
-        where: {user_id : req.params.id}, 
-        attributes: ['user_id','mail','city','zip_code','address','phone_number','is_active','is_pending','role','createdAt','updatedAt']
+        where: { user_id: req.params.id },
+        attributes: ['user_id', 'mail', 'city', 'zip_code', 'address', 'phone_number', 'is_active', 'is_pending', 'is_to_be_completed', 'role', 'createdAt', 'updatedAt']
     })
         .then((user: userTypes) => {
             if (user === null) {
@@ -35,12 +35,11 @@ const getUserById = (req : Request, res : Response) => {
             res.json(user);
         })
         .catch((error: ApiException) => {
-            const message = "Cannot find user.";
-            res.status(500).json({ message, data: error });
+            res.status(500).json(error);
         });
 };
 
-const createUser = async (req : Request, res : Response) => {
+const createUser = async (req: Request, res: Response) => {
     if (!req.body.password)
         return res.status(400).json({
             passwordRequired: true,
@@ -50,8 +49,7 @@ const createUser = async (req : Request, res : Response) => {
     let hashedPassword = await bcrypt.hash(req.body.password, 10);
     User.create({ ...req.body, password: hashedPassword })
         .then((user: userTypes) => {
-            const message: string = `User ${user.mail} successfully created.`;
-            res.json({ message, data: user });
+            res.json(user);
         })
         .catch((error: ApiException) => {
             if (error instanceof ValidationError) {
@@ -59,20 +57,18 @@ const createUser = async (req : Request, res : Response) => {
                     .status(400)
                     .json({ message: error.message, data: error });
             }
-            const message = `Could not create new user.`;
-            res.status(500).json({ message, data: error });
+            res.status(500).json(error);
         });
 };
-
-const updateUser = async (req : Request , res : Response) => {
+const updateUser = async (req: Request, res: Response) => {
     const id = req.params.id;
 
     if (req.body.password) {
         let hashedPassword = await bcrypt.hash(req.body.password, 10);
-        req.body = {...req.body, password: hashedPassword}
+        req.body = { ...req.body, password: hashedPassword }
     }
 
-    User.update(req.body , {where: { user_id: id }}
+    User.update(req.body, { where: { user_id: id } }
     )
         .then(() => {
             return User.findByPk(id).then((user: userTypes) => {
@@ -95,7 +91,7 @@ const updateUser = async (req : Request , res : Response) => {
         });
 };
 
-const deleteUser = (req : Request, res : Response) => {
+const deleteUser = (req: Request, res: Response) => {
     User.findByPk(req.params.id)
         .then((user: userTypes) => {
             if (user === null) {
