@@ -231,20 +231,7 @@ const users = [
         is_pending: false,
         role: "candidat",
         avatar: '///'
-    },
-    {
-        mail: "test15@n.fr",
-        password:
-            "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
-        zip_code: "62200",
-        city: "Boulogne sur merde",
-        phone_number: "0123456789",
-        address: "9 rue Test de la chaudière",
-        is_active: false,
-        is_pending: false,
-        role: "candidat",
-        avatar: '///'
-    },
+    }
 ];
 
 module.exports = users;
