@@ -1,6 +1,6 @@
 const candidates = [
     {
-        user_id: 2,
+        user_id: 1,
         lastname: 'FERRO',
         firstname: 'Luc',
         birthdate: '1997-05-15T19:30:00.000Z',
