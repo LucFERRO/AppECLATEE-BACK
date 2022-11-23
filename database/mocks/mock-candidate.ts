@@ -83,13 +83,6 @@ const candidates = [
         firstname: 'Test',
         birthdate: '2000-10-25T15:15:15.000Z',
         availabilities: ['Noël']
-    },
-    {
-        user_id: 19,
-        lastname: '4',
-        firstname: 'Test',
-        birthdate: '2000-10-25T15:15:15.000Z',
-        availabilities: ['Noël']
     }
 ];
 
