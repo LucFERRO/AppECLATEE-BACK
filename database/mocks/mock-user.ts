@@ -1,5 +1,6 @@
 const users = [
     {
+        user_id: 1,
         mail: "luc@f.fr",
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
@@ -14,6 +15,7 @@ const users = [
         avatar: '///'
     },
     {
+        user_id: 2,
         mail: "remy@c.fr",
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
@@ -28,6 +30,7 @@ const users = [
         avatar: '///'
     },
     {
+        user_id: 3,
         mail: "pending@n.fr",
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
