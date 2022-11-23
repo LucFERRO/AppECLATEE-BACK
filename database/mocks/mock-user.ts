@@ -230,7 +230,7 @@ const users = [
         is_active: false,
         is_pending: false,
         role: "candidat",
-        avatar: '///'
+        avatar: '////'
     }
 ];
 
