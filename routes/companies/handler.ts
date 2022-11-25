@@ -65,8 +65,12 @@ const createCompany = async (req: Request, res: Response) => {
             const newCompany = await Company.create(companyInfo, { transaction: t })
             return res.status(200).json(newCompany)
         })
-    } catch (error) {
-        res.status(500).json(error)
+    } catch (error: any) {
+        let message = 'ERROR 500'
+        if (error.errors[0].path == 'mail') message = 'Email invalide.'
+        if (error.errors[0].path == 'phone_number') message = 'Numéro de téléphone invalide.'
+        if (error.errors[0].path == 'zip_code') message = 'Code postal invalide.'
+        return res.status(500).json({ message, error });
     }
 }
 
@@ -91,7 +95,7 @@ const updateCompany = async (req: Request, res: Response) => {
             const updatedCompany: any = await Company.update(
                 companyInfo,
                 {
-                    where: { user_id : id },
+                    where: { user_id: id },
                     returning: true,
                     plain: true,
                     transaction: t,
@@ -99,15 +103,19 @@ const updateCompany = async (req: Request, res: Response) => {
             );
 
             await User.update(userInfo, {
-                where: { user_id : updatedCompany[1].user_id },
+                where: { user_id: updatedCompany[1].user_id },
                 returning: true,
                 plain: true,
                 transaction: t,
             });
             return res.status(200).json(updatedCompany[1]);
         });
-    } catch (error) {
-        return res.status(500).json({message: "ERROR 500", error});
+    } catch (error: any) {
+        let message = 'ERROR 500'
+        if (error.errors[0].path == 'mail') message = 'Email invalide.'
+        if (error.errors[0].path == 'phone_number') message = 'Numéro de téléphone invalide.'
+        if (error.errors[0].path == 'zip_code') message = 'Code postal invalide.'
+        return res.status(500).json({ message, error });
     }
 }
 
@@ -131,7 +139,6 @@ const deleteCompany = (req: Request, res: Response) => {
             res.status(500).json({ message: 'ERROR 500', error });
         });
 }
-
 
 export const handlerCompany = {
     getAllCompanies,

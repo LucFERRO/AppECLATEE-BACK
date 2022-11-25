@@ -66,8 +66,12 @@ const createCandidate = async (req: Request, res: Response) => {
             const newCandidate = await Candidate.create(candidateInfo, { transaction: t })
             return res.status(200).json(newCandidate)
         })
-    } catch (error) {
-        res.status(500).json({ message: 'ERROR 500', error })
+    } catch (error : any) {
+        let message = 'ERROR 500'
+        if (error.errors[0].path == 'mail') message = 'Email invalide.'
+        if (error.errors[0].path == 'phone_number') message = 'Numéro de téléphone invalide.'
+        if (error.errors[0].path == 'zip_code') message = 'Code postal invalide.'
+        return res.status(500).json({ message, error });
     }
 }
 
@@ -109,8 +113,12 @@ const updateCandidate = async (req: Request, res: Response) => {
             return res.status(200).json(updatedCandidate[1]);
 
         });
-    } catch (error) {
-        return res.status(500).json({ message: 'ERROR 500', error });
+    } catch (error : any) {
+        let message = 'ERROR 500'
+        if (error.errors[0].path == 'mail') message = 'Email invalide.'
+        if (error.errors[0].path == 'phone_number') message = 'Numéro de téléphone invalide.'
+        if (error.errors[0].path == 'zip_code') message = 'Code postal invalide.'
+        return res.status(500).json({ message, error });
     }
 }
 

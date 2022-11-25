@@ -5,7 +5,7 @@ const users = [
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
-        city: "Boulogne sur merde",
+        city: "Boulogne sur mer",
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: true,
@@ -20,7 +20,7 @@ const users = [
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
-        city: "Boulogne sur merde",
+        city: "Boulogne sur mer",
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: true,
@@ -35,7 +35,7 @@ const users = [
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
-        city: "Boulogne sur merde",
+        city: "Boulogne sur mer",
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: false,
@@ -49,7 +49,7 @@ const users = [
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
-        city: "Boulogne sur merde",
+        city: "Boulogne sur mer",
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: false,
@@ -64,7 +64,7 @@ const users = [
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
-        city: "Boulogne sur merde",
+        city: "Boulogne sur mer",
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: false,
@@ -77,7 +77,7 @@ const users = [
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
-        city: "Boulogne sur merde",
+        city: "Boulogne sur mer",
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: true,
@@ -90,7 +90,7 @@ const users = [
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
-        city: "Boulogne sur merde",
+        city: "Boulogne sur mer",
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: false,
@@ -103,7 +103,7 @@ const users = [
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
-        city: "Boulogne sur merde",
+        city: "Boulogne sur mer",
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: false,
@@ -116,7 +116,7 @@ const users = [
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
-        city: "Boulogne sur merde",
+        city: "Boulogne sur mer",
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: false,
@@ -130,7 +130,7 @@ const users = [
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
-        city: "Boulogne sur merde",
+        city: "Boulogne sur mer",
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: false,
@@ -144,7 +144,7 @@ const users = [
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
-        city: "Boulogne sur merde",
+        city: "Boulogne sur mer",
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: false,
@@ -158,7 +158,7 @@ const users = [
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
-        city: "Boulogne sur merde",
+        city: "Boulogne sur mer",
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: false,
@@ -172,7 +172,7 @@ const users = [
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
-        city: "Boulogne sur merde",
+        city: "Boulogne sur mer",
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: false,
@@ -186,7 +186,7 @@ const users = [
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
-        city: "Boulogne sur merde",
+        city: "Boulogne sur mer",
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: false,
@@ -200,7 +200,7 @@ const users = [
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
-        city: "Boulogne sur merde",
+        city: "Boulogne sur mer",
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: false,
@@ -214,7 +214,7 @@ const users = [
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
-        city: "Boulogne sur merde",
+        city: "Boulogne sur mer",
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: false,
@@ -228,7 +228,7 @@ const users = [
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
-        city: "Boulogne sur merde",
+        city: "Boulogne sur mer",
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: false,
@@ -242,7 +242,7 @@ const users = [
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
         zip_code: "62200",
-        city: "Boulogne sur merde",
+        city: "Boulogne sur mer",
         phone_number: "0123456789",
         address: "9 rue Test de la chaudière",
         is_active: false,
