@@ -68,9 +68,9 @@ const createCandidate = async (req: Request, res: Response) => {
         })
     } catch (error : any) {
         let message = 'ERROR 500'
-        if (error.errors[0].path == 'mail') message = 'Email invalide.'
-        if (error.errors[0].path == 'phone_number') message = 'Numéro de téléphone invalide.'
-        if (error.errors[0].path == 'zip_code') message = 'Code postal invalide.'
+        if (error.errors[0].path == 'mail') message = 'Email invalide'
+        if (error.errors[0].path == 'phone_number') message = 'Numéro de téléphone invalide'
+        if (error.errors[0].path == 'zip_code') message = 'Code postal invalide'
         return res.status(500).json({ message, error });
     }
 }
@@ -115,9 +115,9 @@ const updateCandidate = async (req: Request, res: Response) => {
         });
     } catch (error : any) {
         let message = 'ERROR 500'
-        if (error.errors[0].path == 'mail') message = 'Email invalide.'
-        if (error.errors[0].path == 'phone_number') message = 'Numéro de téléphone invalide.'
-        if (error.errors[0].path == 'zip_code') message = 'Code postal invalide.'
+        if (error.errors[0].path == 'mail') message = 'Email invalide'
+        if (error.errors[0].path == 'phone_number') message = 'Numéro de téléphone invalide'
+        if (error.errors[0].path == 'zip_code') message = 'Code postal invalide'
         return res.status(500).json({ message, error });
     }
 }
