@@ -44,6 +44,7 @@ const users = [
         avatar: '///'
     },
     {
+        user_id: 4,
         mail: "ghedeon@n.fr",
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
@@ -58,6 +59,7 @@ const users = [
         avatar: '///'
     },
     {
+        user_id: 5,
         mail: "test1@n.fr",
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
@@ -70,6 +72,7 @@ const users = [
         role: "entreprise",
     },
     {
+        user_id: 6,
         mail: "test2@n.fr",
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
@@ -82,6 +85,7 @@ const users = [
         role: "admin",
     },
     {
+        user_id: 7,
         mail: "test3@n.fr",
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
@@ -94,6 +98,7 @@ const users = [
         role: "candidat",
     },
     {
+        user_id: 8,
         mail: "test4@n.fr",
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
@@ -106,6 +111,7 @@ const users = [
         role: "candidat",
     },
     {
+        user_id: 9,
         mail: "test5@n.fr",
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
@@ -119,6 +125,7 @@ const users = [
         avatar: '///'
     },
     {
+        user_id: 10,
         mail: "test6@n.fr",
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
@@ -132,6 +139,7 @@ const users = [
         avatar: '///'
     },
     {
+        user_id: 11,
         mail: "test7@n.fr",
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
@@ -145,6 +153,7 @@ const users = [
         avatar: '///'
     },
     {
+        user_id: 12,
         mail: "test8@n.fr",
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
@@ -158,6 +167,7 @@ const users = [
         avatar: '///'
     },
     {
+        user_id: 13,
         mail: "test9@n.fr",
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
@@ -171,6 +181,7 @@ const users = [
         avatar: '///'
     },
     {
+        user_id: 14,
         mail: "test10@n.fr",
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
@@ -184,6 +195,7 @@ const users = [
         avatar: '///'
     },
     {
+        user_id: 15,
         mail: "test11@n.fr",
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
@@ -197,6 +209,7 @@ const users = [
         avatar: '///'
     },
     {
+        user_id: 16,
         mail: "test12@n.fr",
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
@@ -210,6 +223,7 @@ const users = [
         avatar: '///'
     },
     {
+        user_id: 17,
         mail: "test13@n.fr",
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
@@ -223,6 +237,7 @@ const users = [
         avatar: '///'
     },
     {
+        user_id: 18,
         mail: "test14@n.fr",
         password:
             "$2b$10$6ntskVqohGuZOXkdwvyz1.iXi8MeWEG2MIbWoz4aEvgByyJEbM7Pe",
