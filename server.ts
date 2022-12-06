@@ -40,7 +40,7 @@ const swaggerOptions = {
     swaggerDefinition: {
         info: {
             title: 'API APP CSE',
-            description: 'SWAGGER',
+            description: 'SWAGGER v.1.1',
             contact: {
                 name: ''
             },
