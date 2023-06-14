@@ -4,7 +4,7 @@ import { DataTypes, Sequelize } from "sequelize"
 module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
 
     const concatRequiredMessage = (data: string) => {
-        return `Le champ ${data} est requis.`
+        return `Le champ ${data} est requis`
     }
 
     return sequelize.define('User', {
@@ -22,8 +22,6 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
                 isEmail: true,
                 notNull: { msg: concatRequiredMessage('Email') },
                 notEmpty: { msg: concatRequiredMessage('Email') }
-
-
             }
         },
         password: {
@@ -47,7 +45,8 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
             allowNull: false,
             validate: {
                 notNull: { msg: concatRequiredMessage('Code postal') },
-                notEmpty: { msg: concatRequiredMessage('Code postal') }
+                notEmpty: { msg: concatRequiredMessage('Code postal') },
+                is: /^[0-9]{5}$/g
             }
         },
         address: {
@@ -60,9 +59,10 @@ module.exports = (sequelize: Sequelize, dataTypes: typeof DataTypes) => {
         },
         phone_number: {
             type: dataTypes.STRING,
+            allowNull: true,
             validate: {
-                isNumeric: { msg: 'Format de numéro de téléphone invalide.' }
-            }
+                is: /^$|^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/g
+            },
         },
         is_active: {
             type: dataTypes.BOOLEAN,

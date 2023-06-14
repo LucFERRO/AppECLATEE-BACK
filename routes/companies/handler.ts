@@ -3,6 +3,7 @@ import { ApiException } from "../../types/exception";
 import { companyTypes } from "../../types/company";
 import sequelize from "../../database/sequelize";
 const bcrypt = require("bcrypt");
+var siretValidate = require("siret")
 
 const { Company, User } = require("../../database/connect");
 
@@ -44,7 +45,10 @@ const createCompany = async (req: Request, res: Response) => {
             message: "Veuillez renseigner un mot de passe.",
         });
 
+
     const { name, siret, password, mail, city, zip_code, address, avatar, description, availabilities, degrees, phone_number, is_active, is_pending } = req.body;
+
+    if (!siretValidate.isSIRET(siret)) return res.status(400).json({message: 'SIRET invalide'})
 
     let role = 'entreprise'
 
@@ -65,8 +69,12 @@ const createCompany = async (req: Request, res: Response) => {
             const newCompany = await Company.create(companyInfo, { transaction: t })
             return res.status(200).json(newCompany)
         })
-    } catch (error) {
-        res.status(500).json(error)
+    } catch (error: any) {
+        let message = 'ERROR 500'
+        if (error.errors[0].path == 'mail') message = 'Email invalide'
+        if (error.errors[0].path == 'phone_number') message = 'Numéro de téléphone invalide'
+        if (error.errors[0].path == 'zip_code') message = 'Code postal invalide'
+        return res.status(500).json({ message, error });
     }
 }
 
@@ -74,6 +82,8 @@ const updateCompany = async (req: Request, res: Response) => {
     const id = req.params.id;
 
     const { name, siret, mail, city, zip_code, address, avatar, description, availabilities, phone_number, is_active, is_pending, role } = req.body;
+
+    if (!siretValidate.isSIRET(siret)) return res.status(400).json({message: 'SIRET invalide'})
 
     let companyInfo = { name, siret, availabilities };
     let userInfo = { mail, city, zip_code, address, avatar, phone_number, is_active, is_pending, role };
@@ -91,7 +101,7 @@ const updateCompany = async (req: Request, res: Response) => {
             const updatedCompany: any = await Company.update(
                 companyInfo,
                 {
-                    where: { user_id : id },
+                    where: { user_id: id },
                     returning: true,
                     plain: true,
                     transaction: t,
@@ -99,15 +109,19 @@ const updateCompany = async (req: Request, res: Response) => {
             );
 
             await User.update(userInfo, {
-                where: { user_id : updatedCompany[1].user_id },
+                where: { user_id: updatedCompany[1].user_id },
                 returning: true,
                 plain: true,
                 transaction: t,
             });
             return res.status(200).json(updatedCompany[1]);
         });
-    } catch (error) {
-        return res.status(500).json({message: "ERROR 500", error});
+    } catch (error: any) {
+        let message = 'ERROR 500'
+        if (error.errors[0].path == 'mail') message = 'Email invalide'
+        if (error.errors[0].path == 'phone_number') message = 'Numéro de téléphone invalide'
+        if (error.errors[0].path == 'zip_code') message = 'Code postal invalide'
+        return res.status(500).json({ message, error });
     }
 }
 
@@ -131,7 +145,6 @@ const deleteCompany = (req: Request, res: Response) => {
             res.status(500).json({ message: 'ERROR 500', error });
         });
 }
-
 
 export const handlerCompany = {
     getAllCompanies,

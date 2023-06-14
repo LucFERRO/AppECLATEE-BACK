@@ -108,7 +108,7 @@ INSERT INTO "availability" (id, availability) VALUES (13, 'sunday');
 
 
 -- Candidat 1
-INSERT INTO "user" (mail, password, active, role, zip_code, city, phone_number, created_at, updated_at) VALUES ('user1@user.fr', 'user', true, 'candidate', 62200, 'Boulogne sur merde', '0783616435', '2022-10-12', '2022-10-12');
+INSERT INTO "user" (mail, password, active, role, zip_code, city, phone_number, created_at, updated_at) VALUES ('user1@user.fr', 'user', true, 'candidate', 62200, 'Boulogne sur mer', '0783616435', '2022-10-12', '2022-10-12');
 INSERT INTO "token" (id, token) VALUES (1, 'qsldklqskdazldsqldkqsmd');
 INSERT INTO "user_availability" (id_user, id_availability) VALUES (1, 6);
 INSERT INTO "user_availability" (id_user, id_availability) VALUES (1, 8);
@@ -117,7 +117,7 @@ INSERT INTO "degree" (id, bafa, bafa_ongoing, internship, bpjeps) VALUES (1, tru
 INSERT INTO "candidate_degree" (id_candidate, id_degree) VALUES (1, 1);
 
 -- Candidat 2
-INSERT INTO "user" (mail, password, active, role, zip_code, city, phone_number, created_at, updated_at) VALUES ('user2@user.fr', 'user', false, 'candidate', 62200, 'Boulogne sur merde', '0783616435', '2022-10-12', '2022-10-12');
+INSERT INTO "user" (mail, password, active, role, zip_code, city, phone_number, created_at, updated_at) VALUES ('user2@user.fr', 'user', false, 'candidate', 62200, 'Boulogne sur mer', '0783616435', '2022-10-12', '2022-10-12');
 INSERT INTO "token" (id, token) VALUES (2, 'qsldklqskdazldsqlqsdqsddkqsmd');
 INSERT INTO "user_availability" (id_user, id_availability) VALUES (2, 6);
 INSERT INTO "user_availability" (id_user, id_availability) VALUES (2, 9);
@@ -126,7 +126,7 @@ INSERT INTO "degree" (id, bafa, bafa_ongoing, internship, bpjeps) VALUES (2, fal
 INSERT INTO "candidate_degree" (id_candidate, id_degree) VALUES (2, 2);
 
 -- Company 1
-INSERT INTO "user" (mail, password, active, role, zip_code, city, phone_number, created_at, updated_at) VALUES ('com1@com.fr', 'comp', true, 'company', 62200, 'Boulogne sur merde', '0783616435', '2022-10-12', '2022-10-12');
+INSERT INTO "user" (mail, password, active, role, zip_code, city, phone_number, created_at, updated_at) VALUES ('com1@com.fr', 'comp', true, 'company', 62200, 'Boulogne sur mer', '0783616435', '2022-10-12', '2022-10-12');
 INSERT INTO company (id, name, siret) VALUES (3, 'Company1', 123456789);
 INSERT INTO "user_availability" (id_user, id_availability) VALUES (3, 6);
 INSERT INTO "user_availability" (id_user, id_availability) VALUES (3, 9);
