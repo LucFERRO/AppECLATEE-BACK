@@ -1,10 +1,10 @@
 const { Router } = require('express')
 
-import { handlerCompany } from './handler'
 import { authenticateToken } from '../../middleware/authenticate'
-import { authorization } from '../../middleware/authorizations';
+import { authorization } from '../../middleware/authorizations'
+import { handlerCompany } from './handler'
 
-export const companyRouter = Router();
+export const companyRouter = Router()
 
 /**
  * @swagger

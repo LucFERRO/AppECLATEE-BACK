@@ -1,7 +1,6 @@
 import { Application } from "express"
-import { Error } from "sequelize"
-import { ApiException } from "../../types/exception"
 import { availabilityTypes } from "../../types/availability"
+import { ApiException } from "../../types/exception"
 
 const { Availability } = require('../../database/connect')
 

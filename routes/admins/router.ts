@@ -2,7 +2,7 @@ const { Router } = require('express')
 
 import { handlerAdmin } from './handler'
 
-export const adminRouter = Router();
+export const adminRouter = Router()
 
 /**
  * @swagger

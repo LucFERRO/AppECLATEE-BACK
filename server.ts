@@ -25,7 +25,7 @@ import { adminRouter } from './routes/admins/router'
 import { authentificationRouter } from './routes/authentification/router'
 
 // To reset database, comment otherwise.
-sequelize.initDb()
+// sequelize.initDb()
 
 const port = process.env.PORT || 5000
 app.listen(port, () => {

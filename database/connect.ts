@@ -1,6 +1,4 @@
 import { DataTypes } from "sequelize"
-const { Sequelize } = require('sequelize')
-
 import { userTypes } from "../types/user"
 let users = require('../database/mocks/mock-user')
 const UserModel = require('../models/users')

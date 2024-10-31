@@ -1,10 +1,10 @@
 const { Router } = require('express')
 
-import { handlerUser } from './handler'
 import { authenticateToken } from '../../middleware/authenticate'
-import { authorization } from '../../middleware/authorizations';
+import { authorization } from '../../middleware/authorizations'
+import { handlerUser } from './handler'
 
-export const userRouter = Router();
+export const userRouter = Router()
 
 /**
  * @swagger
@@ -42,8 +42,8 @@ userRouter.get('/', handlerUser.getAllUsers)
  *          description: Get user of given id.
  */
 userRouter.get('/:id'
-, authenticateToken
-, handlerUser.getUserById)
+    , authenticateToken
+    , handlerUser.getUserById)
 
 /**
  * @openapi

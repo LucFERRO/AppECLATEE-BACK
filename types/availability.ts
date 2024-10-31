@@ -1,4 +1,4 @@
 export interface availabilityTypes {
-    id: number;
-    availability: string;
+    id: number
+    availability: string
 }
